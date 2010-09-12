@@ -10,13 +10,14 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QLineEdit>
-#include "kanjidicdb.h"
-#include "kanji.h"
+#include <QScrollArea>
+#include "../JapaneseDB/kanjidb.h"
+#include "../JapaneseDB/kanji.h"
+#include "kanjidetails.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     createWidgets();
-    setCentralWidget(kanjidic);
 
     createActions();
     createMenus();
@@ -24,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     statusBar()->showMessage(tr("Ready"));
 
     setWindowTitle(tr("Kanjidic tool"));
-    resize(480, 320);
+    resize(680, 400);
 }
 
 void MainWindow::open(const QString &fileName)
@@ -75,7 +76,7 @@ void MainWindow::createMenus()
 
 void MainWindow::createWidgets()
 {
-    kanjidic = new KanjidicDB;
+    kanjidic = new KanjiDB;
 
     unicodeLabel = new QLabel(tr("&Unicode (hex):"));
     unicodeField = new QLineEdit;
@@ -134,15 +135,15 @@ void MainWindow::createWidgets()
     QHBoxLayout *searchCodeLayout = new QHBoxLayout();
     searchCodeLayout->addWidget(searchCodeButton, 0, Qt::AlignRight);
 
-    QHBoxLayout *strokeLayout = new QHBoxLayout();
-    strokeLayout->addWidget(strokeLabel);
-    strokeLayout->addWidget(strokeField);
-    strokeLayout->addWidget(jlptLabel);
-    strokeLayout->addWidget(jlptField);
-    strokeLayout->addWidget(gradeLabel);
-    strokeLayout->addWidget(gradeField);
-    strokeLayout->addWidget(radicalLabel);
-    strokeLayout->addWidget(radicalField);
+    QHBoxLayout *characteristicsLayout = new QHBoxLayout();
+    characteristicsLayout->addWidget(strokeLabel);
+    characteristicsLayout->addWidget(strokeField);
+    characteristicsLayout->addWidget(jlptLabel);
+    characteristicsLayout->addWidget(jlptField);
+    characteristicsLayout->addWidget(gradeLabel);
+    characteristicsLayout->addWidget(gradeField);
+    characteristicsLayout->addWidget(radicalLabel);
+    characteristicsLayout->addWidget(radicalField);
 
     QHBoxLayout *searchLayout = new QHBoxLayout();
     searchLayout->addWidget(searchButton, 0, Qt::AlignRight);
@@ -150,16 +151,22 @@ void MainWindow::createWidgets()
     resultWidgets.append(new QLabel("none"));
 
     resultLayout = new QVBoxLayout();
+    resultLayout->setSizeConstraint(QLayout::SetMinAndMaxSize);
     resultLayout->addWidget(resultWidgets.at(0), 0, Qt::AlignTop);
+    QScrollArea *area = new QScrollArea();
+    QWidget *widget = new QWidget();
+    widget->setLayout(resultLayout);
+    area->setWidget(widget);
 
     QVBoxLayout *mainLayout = new QVBoxLayout();
+    mainLayout->addLayout(characteristicsLayout);
+    mainLayout->addLayout(searchLayout);
     mainLayout->addLayout(codesLayout);
     mainLayout->addLayout(searchCodeLayout);
-    mainLayout->addLayout(strokeLayout);
-    mainLayout->addLayout(searchLayout);
-    mainLayout->addLayout(resultLayout);
-    kanjidic->setLayout(mainLayout);
-
+    mainLayout->addWidget(area);
+    QWidget *centralWidget = new QWidget;
+    centralWidget->setLayout(mainLayout);
+    setCentralWidget(centralWidget);
 }
 
 void MainWindow::clearOtherFields()
@@ -249,18 +256,11 @@ void MainWindow::searchJIS213()
 void MainWindow::showSearchResults(const QSet<Kanji *> &results)
 {
     if(results.size() > 0)
-    {
         foreach(Kanji *k, results)
-        {
-            resultWidgets.append(new QLabel(k->getLiteral()));
-        }
-    } else
-    {
+            resultWidgets.append(new KanjiDetails(this, k, kanjidic));
+    else
         resultWidgets.append(new QLabel("none"));
-    }
 
     foreach(QWidget *resultWidget, resultWidgets)
-    {
         resultLayout->addWidget(resultWidget, 0, Qt::AlignTop);
-    }
 }

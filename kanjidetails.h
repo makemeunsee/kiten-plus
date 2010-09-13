@@ -23,7 +23,7 @@ protected:
 
 private:
     void hideWidget(QWidget *w);
-    void updateLabel(QLabel *l, QString &s);
+    void updateLabel(QLabel *l, QString s);
     Ui::KanjiDetails *ui;
 };
 

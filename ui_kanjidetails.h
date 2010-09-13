@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'kanjidetails.ui'
 **
-** Created: Sun Sep 12 16:15:47 2010
+** Created: Mon Sep 13 06:09:58 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -15,6 +15,7 @@
 #include <QtGui/QApplication>
 #include <QtGui/QButtonGroup>
 #include <QtGui/QFrame>
+#include <QtGui/QGridLayout>
 #include <QtGui/QHBoxLayout>
 #include <QtGui/QHeaderView>
 #include <QtGui/QLabel>
@@ -27,393 +28,398 @@ QT_BEGIN_NAMESPACE
 class Ui_KanjiDetails
 {
 public:
-    QWidget *verticalLayoutWidget_2;
-    QVBoxLayout *verticalLayout_1;
-    QHBoxLayout *horizontalLayout;
+    QGridLayout *gridLayout;
+    QLabel *literalLabel;
+    QVBoxLayout *leftColumnLayout;
+    QHBoxLayout *strokeLayout;
     QLabel *strokeCountLabel;
     QLabel *staticStrokeCountLabel;
     QHBoxLayout *horizontalLayout_2;
     QLabel *staticGradeLabel;
     QLabel *staticGradeLabel2;
     QLabel *gradeLabel;
-    QHBoxLayout *horizontalLayout_3;
+    QHBoxLayout *jlptLayout;
     QLabel *staticJlptLabel;
     QLabel *jlptLabel;
-    QHBoxLayout *horizontalLayout_4;
+    QHBoxLayout *freqLayout;
     QLabel *freqLabel;
     QLabel *staticFreqLabel;
-    QHBoxLayout *horizontalLayout_5;
+    QHBoxLayout *radClasLayout;
     QLabel *staticClasRadLabel;
     QLabel *radClasLabel;
-    QHBoxLayout *horizontalLayout_6;
+    QHBoxLayout *radNelsLayout;
     QLabel *staticNelsonRadLabel;
     QLabel *radNelsonLabel;
-    QSpacerItem *verticalSpacer;
-    QWidget *verticalLayoutWidget_3;
-    QVBoxLayout *verticalLayout_2;
-    QHBoxLayout *horizontalLayout_7;
+    QSpacerItem *leftColumnSpacer;
+    QVBoxLayout *rightColumnLayout;
+    QHBoxLayout *variantsLayout;
     QLabel *staticVariantsLabel;
     QLabel *variantsLabel;
-    QHBoxLayout *horizontalLayout_8;
+    QHBoxLayout *nameRadLayout;
     QLabel *staticNameRadLabel;
     QLabel *nameRadLabel;
-    QHBoxLayout *horizontalLayout_9;
+    QHBoxLayout *unicodeLayout;
     QLabel *staticUnicodeLabel;
     QLabel *ucsLabel;
-    QHBoxLayout *horizontalLayout_10;
+    QHBoxLayout *jis208Layout;
     QLabel *staticJIS208Label;
     QLabel *jis208Label;
-    QHBoxLayout *horizontalLayout_11;
+    QHBoxLayout *jis212Layout;
     QLabel *staticJIS212Label;
     QLabel *jis212Label;
-    QHBoxLayout *horizontalLayout_12;
+    QHBoxLayout *jis213Layout;
     QLabel *staticJIS213Label;
     QLabel *jis213Label;
-    QSpacerItem *verticalSpacer_3;
-    QLabel *literalLabel;
-    QWidget *verticalLayoutWidget;
+    QSpacerItem *rightColumnSpacer;
     QVBoxLayout *readMeanLayout;
-    QWidget *verticalLayoutWidget_4;
     QVBoxLayout *nanoriLayout;
     QLabel *nanoriLabel;
-    QSpacerItem *verticalSpacer_2;
+    QSpacerItem *nanoriSpacer;
     QFrame *line;
 
     void setupUi(QWidget *KanjiDetails)
     {
         if (KanjiDetails->objectName().isEmpty())
             KanjiDetails->setObjectName(QString::fromUtf8("KanjiDetails"));
-        KanjiDetails->resize(640, 261);
+        KanjiDetails->resize(620, 220);
         QSizePolicy sizePolicy(QSizePolicy::Preferred, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(KanjiDetails->sizePolicy().hasHeightForWidth());
         KanjiDetails->setSizePolicy(sizePolicy);
-        KanjiDetails->setMinimumSize(QSize(640, 261));
+        KanjiDetails->setMinimumSize(QSize(620, 220));
         KanjiDetails->setMaximumSize(QSize(16777215, 16777215));
-        verticalLayoutWidget_2 = new QWidget(KanjiDetails);
-        verticalLayoutWidget_2->setObjectName(QString::fromUtf8("verticalLayoutWidget_2"));
-        verticalLayoutWidget_2->setGeometry(QRect(150, 20, 281, 131));
-        verticalLayout_1 = new QVBoxLayout(verticalLayoutWidget_2);
-        verticalLayout_1->setObjectName(QString::fromUtf8("verticalLayout_1"));
-        verticalLayout_1->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout = new QHBoxLayout();
-        horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-        horizontalLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
-        strokeCountLabel = new QLabel(verticalLayoutWidget_2);
+        gridLayout = new QGridLayout(KanjiDetails);
+        gridLayout->setObjectName(QString::fromUtf8("gridLayout"));
+        gridLayout->setSizeConstraint(QLayout::SetMinAndMaxSize);
+        literalLabel = new QLabel(KanjiDetails);
+        literalLabel->setObjectName(QString::fromUtf8("literalLabel"));
+        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        sizePolicy1.setHorizontalStretch(120);
+        sizePolicy1.setVerticalStretch(120);
+        sizePolicy1.setHeightForWidth(literalLabel->sizePolicy().hasHeightForWidth());
+        literalLabel->setSizePolicy(sizePolicy1);
+        literalLabel->setMinimumSize(QSize(120, 120));
+        literalLabel->setMaximumSize(QSize(120, 120));
+        QFont font;
+        font.setPointSize(80);
+        literalLabel->setFont(font);
+        literalLabel->setAlignment(Qt::AlignCenter);
+
+        gridLayout->addWidget(literalLabel, 0, 0, 1, 1);
+
+        leftColumnLayout = new QVBoxLayout();
+        leftColumnLayout->setObjectName(QString::fromUtf8("leftColumnLayout"));
+        strokeLayout = new QHBoxLayout();
+        strokeLayout->setObjectName(QString::fromUtf8("strokeLayout"));
+        strokeLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        strokeCountLabel = new QLabel(KanjiDetails);
         strokeCountLabel->setObjectName(QString::fromUtf8("strokeCountLabel"));
         sizePolicy.setHeightForWidth(strokeCountLabel->sizePolicy().hasHeightForWidth());
         strokeCountLabel->setSizePolicy(sizePolicy);
-        QFont font;
-        font.setBold(true);
-        font.setWeight(75);
-        strokeCountLabel->setFont(font);
+        QFont font1;
+        font1.setBold(true);
+        font1.setWeight(75);
+        strokeCountLabel->setFont(font1);
 
-        horizontalLayout->addWidget(strokeCountLabel);
+        strokeLayout->addWidget(strokeCountLabel);
 
-        staticStrokeCountLabel = new QLabel(verticalLayoutWidget_2);
+        staticStrokeCountLabel = new QLabel(KanjiDetails);
         staticStrokeCountLabel->setObjectName(QString::fromUtf8("staticStrokeCountLabel"));
-        QSizePolicy sizePolicy1(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
-        sizePolicy1.setHorizontalStretch(0);
-        sizePolicy1.setVerticalStretch(0);
-        sizePolicy1.setHeightForWidth(staticStrokeCountLabel->sizePolicy().hasHeightForWidth());
-        staticStrokeCountLabel->setSizePolicy(sizePolicy1);
+        QSizePolicy sizePolicy2(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
+        sizePolicy2.setHorizontalStretch(0);
+        sizePolicy2.setVerticalStretch(0);
+        sizePolicy2.setHeightForWidth(staticStrokeCountLabel->sizePolicy().hasHeightForWidth());
+        staticStrokeCountLabel->setSizePolicy(sizePolicy2);
 
-        horizontalLayout->addWidget(staticStrokeCountLabel);
+        strokeLayout->addWidget(staticStrokeCountLabel);
 
 
-        verticalLayout_1->addLayout(horizontalLayout);
+        leftColumnLayout->addLayout(strokeLayout);
 
         horizontalLayout_2 = new QHBoxLayout();
         horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
         horizontalLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
-        staticGradeLabel = new QLabel(verticalLayoutWidget_2);
+        staticGradeLabel = new QLabel(KanjiDetails);
         staticGradeLabel->setObjectName(QString::fromUtf8("staticGradeLabel"));
         sizePolicy.setHeightForWidth(staticGradeLabel->sizePolicy().hasHeightForWidth());
         staticGradeLabel->setSizePolicy(sizePolicy);
 
         horizontalLayout_2->addWidget(staticGradeLabel);
 
-        staticGradeLabel2 = new QLabel(verticalLayoutWidget_2);
+        staticGradeLabel2 = new QLabel(KanjiDetails);
         staticGradeLabel2->setObjectName(QString::fromUtf8("staticGradeLabel2"));
         sizePolicy.setHeightForWidth(staticGradeLabel2->sizePolicy().hasHeightForWidth());
         staticGradeLabel2->setSizePolicy(sizePolicy);
-        staticGradeLabel2->setFont(font);
+        staticGradeLabel2->setFont(font1);
 
         horizontalLayout_2->addWidget(staticGradeLabel2);
 
-        gradeLabel = new QLabel(verticalLayoutWidget_2);
+        gradeLabel = new QLabel(KanjiDetails);
         gradeLabel->setObjectName(QString::fromUtf8("gradeLabel"));
-        sizePolicy1.setHeightForWidth(gradeLabel->sizePolicy().hasHeightForWidth());
-        gradeLabel->setSizePolicy(sizePolicy1);
-        gradeLabel->setFont(font);
+        sizePolicy2.setHeightForWidth(gradeLabel->sizePolicy().hasHeightForWidth());
+        gradeLabel->setSizePolicy(sizePolicy2);
+        gradeLabel->setFont(font1);
 
         horizontalLayout_2->addWidget(gradeLabel);
 
 
-        verticalLayout_1->addLayout(horizontalLayout_2);
+        leftColumnLayout->addLayout(horizontalLayout_2);
 
-        horizontalLayout_3 = new QHBoxLayout();
-        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
-        horizontalLayout_3->setSizeConstraint(QLayout::SetDefaultConstraint);
-        staticJlptLabel = new QLabel(verticalLayoutWidget_2);
+        jlptLayout = new QHBoxLayout();
+        jlptLayout->setObjectName(QString::fromUtf8("jlptLayout"));
+        jlptLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        staticJlptLabel = new QLabel(KanjiDetails);
         staticJlptLabel->setObjectName(QString::fromUtf8("staticJlptLabel"));
         sizePolicy.setHeightForWidth(staticJlptLabel->sizePolicy().hasHeightForWidth());
         staticJlptLabel->setSizePolicy(sizePolicy);
 
-        horizontalLayout_3->addWidget(staticJlptLabel);
+        jlptLayout->addWidget(staticJlptLabel);
 
-        jlptLabel = new QLabel(verticalLayoutWidget_2);
+        jlptLabel = new QLabel(KanjiDetails);
         jlptLabel->setObjectName(QString::fromUtf8("jlptLabel"));
-        sizePolicy1.setHeightForWidth(jlptLabel->sizePolicy().hasHeightForWidth());
-        jlptLabel->setSizePolicy(sizePolicy1);
-        jlptLabel->setFont(font);
+        sizePolicy2.setHeightForWidth(jlptLabel->sizePolicy().hasHeightForWidth());
+        jlptLabel->setSizePolicy(sizePolicy2);
+        jlptLabel->setFont(font1);
 
-        horizontalLayout_3->addWidget(jlptLabel);
+        jlptLayout->addWidget(jlptLabel);
 
 
-        verticalLayout_1->addLayout(horizontalLayout_3);
+        leftColumnLayout->addLayout(jlptLayout);
 
-        horizontalLayout_4 = new QHBoxLayout();
-        horizontalLayout_4->setObjectName(QString::fromUtf8("horizontalLayout_4"));
-        horizontalLayout_4->setSizeConstraint(QLayout::SetDefaultConstraint);
-        freqLabel = new QLabel(verticalLayoutWidget_2);
+        freqLayout = new QHBoxLayout();
+        freqLayout->setObjectName(QString::fromUtf8("freqLayout"));
+        freqLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        freqLabel = new QLabel(KanjiDetails);
         freqLabel->setObjectName(QString::fromUtf8("freqLabel"));
         sizePolicy.setHeightForWidth(freqLabel->sizePolicy().hasHeightForWidth());
         freqLabel->setSizePolicy(sizePolicy);
-        freqLabel->setFont(font);
+        freqLabel->setFont(font1);
 
-        horizontalLayout_4->addWidget(freqLabel);
+        freqLayout->addWidget(freqLabel);
 
-        staticFreqLabel = new QLabel(verticalLayoutWidget_2);
+        staticFreqLabel = new QLabel(KanjiDetails);
         staticFreqLabel->setObjectName(QString::fromUtf8("staticFreqLabel"));
-        sizePolicy1.setHeightForWidth(staticFreqLabel->sizePolicy().hasHeightForWidth());
-        staticFreqLabel->setSizePolicy(sizePolicy1);
-        QFont font1;
-        font1.setPointSize(8);
-        staticFreqLabel->setFont(font1);
+        sizePolicy2.setHeightForWidth(staticFreqLabel->sizePolicy().hasHeightForWidth());
+        staticFreqLabel->setSizePolicy(sizePolicy2);
+        QFont font2;
+        font2.setPointSize(8);
+        staticFreqLabel->setFont(font2);
         staticFreqLabel->setAlignment(Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft);
 
-        horizontalLayout_4->addWidget(staticFreqLabel);
+        freqLayout->addWidget(staticFreqLabel);
 
 
-        verticalLayout_1->addLayout(horizontalLayout_4);
+        leftColumnLayout->addLayout(freqLayout);
 
-        horizontalLayout_5 = new QHBoxLayout();
-        horizontalLayout_5->setObjectName(QString::fromUtf8("horizontalLayout_5"));
-        horizontalLayout_5->setSizeConstraint(QLayout::SetDefaultConstraint);
-        staticClasRadLabel = new QLabel(verticalLayoutWidget_2);
+        radClasLayout = new QHBoxLayout();
+        radClasLayout->setObjectName(QString::fromUtf8("radClasLayout"));
+        radClasLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        staticClasRadLabel = new QLabel(KanjiDetails);
         staticClasRadLabel->setObjectName(QString::fromUtf8("staticClasRadLabel"));
         sizePolicy.setHeightForWidth(staticClasRadLabel->sizePolicy().hasHeightForWidth());
         staticClasRadLabel->setSizePolicy(sizePolicy);
 
-        horizontalLayout_5->addWidget(staticClasRadLabel);
+        radClasLayout->addWidget(staticClasRadLabel);
 
-        radClasLabel = new QLabel(verticalLayoutWidget_2);
+        radClasLabel = new QLabel(KanjiDetails);
         radClasLabel->setObjectName(QString::fromUtf8("radClasLabel"));
-        sizePolicy1.setHeightForWidth(radClasLabel->sizePolicy().hasHeightForWidth());
-        radClasLabel->setSizePolicy(sizePolicy1);
-        radClasLabel->setFont(font);
+        sizePolicy2.setHeightForWidth(radClasLabel->sizePolicy().hasHeightForWidth());
+        radClasLabel->setSizePolicy(sizePolicy2);
+        radClasLabel->setFont(font1);
 
-        horizontalLayout_5->addWidget(radClasLabel);
+        radClasLayout->addWidget(radClasLabel);
 
 
-        verticalLayout_1->addLayout(horizontalLayout_5);
+        leftColumnLayout->addLayout(radClasLayout);
 
-        horizontalLayout_6 = new QHBoxLayout();
-        horizontalLayout_6->setObjectName(QString::fromUtf8("horizontalLayout_6"));
-        horizontalLayout_6->setSizeConstraint(QLayout::SetDefaultConstraint);
-        staticNelsonRadLabel = new QLabel(verticalLayoutWidget_2);
+        radNelsLayout = new QHBoxLayout();
+        radNelsLayout->setObjectName(QString::fromUtf8("radNelsLayout"));
+        radNelsLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        staticNelsonRadLabel = new QLabel(KanjiDetails);
         staticNelsonRadLabel->setObjectName(QString::fromUtf8("staticNelsonRadLabel"));
         sizePolicy.setHeightForWidth(staticNelsonRadLabel->sizePolicy().hasHeightForWidth());
         staticNelsonRadLabel->setSizePolicy(sizePolicy);
 
-        horizontalLayout_6->addWidget(staticNelsonRadLabel);
+        radNelsLayout->addWidget(staticNelsonRadLabel);
 
-        radNelsonLabel = new QLabel(verticalLayoutWidget_2);
+        radNelsonLabel = new QLabel(KanjiDetails);
         radNelsonLabel->setObjectName(QString::fromUtf8("radNelsonLabel"));
-        sizePolicy1.setHeightForWidth(radNelsonLabel->sizePolicy().hasHeightForWidth());
-        radNelsonLabel->setSizePolicy(sizePolicy1);
-        radNelsonLabel->setFont(font);
+        sizePolicy2.setHeightForWidth(radNelsonLabel->sizePolicy().hasHeightForWidth());
+        radNelsonLabel->setSizePolicy(sizePolicy2);
+        radNelsonLabel->setFont(font1);
 
-        horizontalLayout_6->addWidget(radNelsonLabel);
+        radNelsLayout->addWidget(radNelsonLabel);
 
 
-        verticalLayout_1->addLayout(horizontalLayout_6);
+        leftColumnLayout->addLayout(radNelsLayout);
 
-        verticalSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        leftColumnSpacer = new QSpacerItem(280, 12, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        verticalLayout_1->addItem(verticalSpacer);
+        leftColumnLayout->addItem(leftColumnSpacer);
 
-        verticalLayoutWidget_3 = new QWidget(KanjiDetails);
-        verticalLayoutWidget_3->setObjectName(QString::fromUtf8("verticalLayoutWidget_3"));
-        verticalLayoutWidget_3->setGeometry(QRect(440, 20, 191, 131));
-        verticalLayout_2 = new QVBoxLayout(verticalLayoutWidget_3);
-        verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
-        verticalLayout_2->setSizeConstraint(QLayout::SetDefaultConstraint);
-        verticalLayout_2->setContentsMargins(0, 0, 0, 0);
-        horizontalLayout_7 = new QHBoxLayout();
-        horizontalLayout_7->setObjectName(QString::fromUtf8("horizontalLayout_7"));
-        staticVariantsLabel = new QLabel(verticalLayoutWidget_3);
+
+        gridLayout->addLayout(leftColumnLayout, 0, 1, 1, 2);
+
+        rightColumnLayout = new QVBoxLayout();
+        rightColumnLayout->setObjectName(QString::fromUtf8("rightColumnLayout"));
+        rightColumnLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        variantsLayout = new QHBoxLayout();
+        variantsLayout->setObjectName(QString::fromUtf8("variantsLayout"));
+        staticVariantsLabel = new QLabel(KanjiDetails);
         staticVariantsLabel->setObjectName(QString::fromUtf8("staticVariantsLabel"));
-        staticVariantsLabel->setFont(font);
+        staticVariantsLabel->setFont(font1);
 
-        horizontalLayout_7->addWidget(staticVariantsLabel);
+        variantsLayout->addWidget(staticVariantsLabel);
 
-        variantsLabel = new QLabel(verticalLayoutWidget_3);
+        variantsLabel = new QLabel(KanjiDetails);
         variantsLabel->setObjectName(QString::fromUtf8("variantsLabel"));
-        sizePolicy1.setHeightForWidth(variantsLabel->sizePolicy().hasHeightForWidth());
-        variantsLabel->setSizePolicy(sizePolicy1);
-        QFont font2;
-        font2.setBold(false);
-        font2.setWeight(50);
-        variantsLabel->setFont(font2);
-
-        horizontalLayout_7->addWidget(variantsLabel);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_7);
-
-        horizontalLayout_8 = new QHBoxLayout();
-        horizontalLayout_8->setObjectName(QString::fromUtf8("horizontalLayout_8"));
-        horizontalLayout_8->setSizeConstraint(QLayout::SetDefaultConstraint);
-        staticNameRadLabel = new QLabel(verticalLayoutWidget_3);
-        staticNameRadLabel->setObjectName(QString::fromUtf8("staticNameRadLabel"));
-        staticNameRadLabel->setFont(font);
-
-        horizontalLayout_8->addWidget(staticNameRadLabel);
-
-        nameRadLabel = new QLabel(verticalLayoutWidget_3);
-        nameRadLabel->setObjectName(QString::fromUtf8("nameRadLabel"));
-        sizePolicy1.setHeightForWidth(nameRadLabel->sizePolicy().hasHeightForWidth());
-        nameRadLabel->setSizePolicy(sizePolicy1);
-        nameRadLabel->setFont(font2);
-
-        horizontalLayout_8->addWidget(nameRadLabel);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_8);
-
-        horizontalLayout_9 = new QHBoxLayout();
-        horizontalLayout_9->setObjectName(QString::fromUtf8("horizontalLayout_9"));
-        staticUnicodeLabel = new QLabel(verticalLayoutWidget_3);
-        staticUnicodeLabel->setObjectName(QString::fromUtf8("staticUnicodeLabel"));
-        staticUnicodeLabel->setFont(font);
-
-        horizontalLayout_9->addWidget(staticUnicodeLabel);
-
-        ucsLabel = new QLabel(verticalLayoutWidget_3);
-        ucsLabel->setObjectName(QString::fromUtf8("ucsLabel"));
-        sizePolicy1.setHeightForWidth(ucsLabel->sizePolicy().hasHeightForWidth());
-        ucsLabel->setSizePolicy(sizePolicy1);
-        ucsLabel->setFont(font2);
-
-        horizontalLayout_9->addWidget(ucsLabel);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_9);
-
-        horizontalLayout_10 = new QHBoxLayout();
-        horizontalLayout_10->setObjectName(QString::fromUtf8("horizontalLayout_10"));
-        staticJIS208Label = new QLabel(verticalLayoutWidget_3);
-        staticJIS208Label->setObjectName(QString::fromUtf8("staticJIS208Label"));
-        staticJIS208Label->setFont(font);
-
-        horizontalLayout_10->addWidget(staticJIS208Label);
-
-        jis208Label = new QLabel(verticalLayoutWidget_3);
-        jis208Label->setObjectName(QString::fromUtf8("jis208Label"));
-        sizePolicy1.setHeightForWidth(jis208Label->sizePolicy().hasHeightForWidth());
-        jis208Label->setSizePolicy(sizePolicy1);
-        jis208Label->setFont(font2);
-
-        horizontalLayout_10->addWidget(jis208Label);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_10);
-
-        horizontalLayout_11 = new QHBoxLayout();
-        horizontalLayout_11->setObjectName(QString::fromUtf8("horizontalLayout_11"));
-        staticJIS212Label = new QLabel(verticalLayoutWidget_3);
-        staticJIS212Label->setObjectName(QString::fromUtf8("staticJIS212Label"));
-        staticJIS212Label->setFont(font);
-
-        horizontalLayout_11->addWidget(staticJIS212Label);
-
-        jis212Label = new QLabel(verticalLayoutWidget_3);
-        jis212Label->setObjectName(QString::fromUtf8("jis212Label"));
-        sizePolicy1.setHeightForWidth(jis212Label->sizePolicy().hasHeightForWidth());
-        jis212Label->setSizePolicy(sizePolicy1);
-        jis212Label->setFont(font2);
-
-        horizontalLayout_11->addWidget(jis212Label);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_11);
-
-        horizontalLayout_12 = new QHBoxLayout();
-        horizontalLayout_12->setObjectName(QString::fromUtf8("horizontalLayout_12"));
-        staticJIS213Label = new QLabel(verticalLayoutWidget_3);
-        staticJIS213Label->setObjectName(QString::fromUtf8("staticJIS213Label"));
-        staticJIS213Label->setFont(font);
-
-        horizontalLayout_12->addWidget(staticJIS213Label);
-
-        jis213Label = new QLabel(verticalLayoutWidget_3);
-        jis213Label->setObjectName(QString::fromUtf8("jis213Label"));
-        sizePolicy1.setHeightForWidth(jis213Label->sizePolicy().hasHeightForWidth());
-        jis213Label->setSizePolicy(sizePolicy1);
-        jis213Label->setFont(font2);
-
-        horizontalLayout_12->addWidget(jis213Label);
-
-
-        verticalLayout_2->addLayout(horizontalLayout_12);
-
-        verticalSpacer_3 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        verticalLayout_2->addItem(verticalSpacer_3);
-
-        literalLabel = new QLabel(KanjiDetails);
-        literalLabel->setObjectName(QString::fromUtf8("literalLabel"));
-        literalLabel->setGeometry(QRect(10, 10, 120, 120));
-        QSizePolicy sizePolicy2(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        sizePolicy2.setHorizontalStretch(120);
-        sizePolicy2.setVerticalStretch(120);
-        sizePolicy2.setHeightForWidth(literalLabel->sizePolicy().hasHeightForWidth());
-        literalLabel->setSizePolicy(sizePolicy2);
-        literalLabel->setMinimumSize(QSize(120, 120));
-        literalLabel->setMaximumSize(QSize(120, 120));
+        sizePolicy2.setHeightForWidth(variantsLabel->sizePolicy().hasHeightForWidth());
+        variantsLabel->setSizePolicy(sizePolicy2);
         QFont font3;
-        font3.setPointSize(80);
-        literalLabel->setFont(font3);
-        literalLabel->setAlignment(Qt::AlignCenter);
-        verticalLayoutWidget = new QWidget(KanjiDetails);
-        verticalLayoutWidget->setObjectName(QString::fromUtf8("verticalLayoutWidget"));
-        verticalLayoutWidget->setGeometry(QRect(10, 160, 231, 71));
-        readMeanLayout = new QVBoxLayout(verticalLayoutWidget);
+        font3.setBold(false);
+        font3.setWeight(50);
+        variantsLabel->setFont(font3);
+
+        variantsLayout->addWidget(variantsLabel);
+
+
+        rightColumnLayout->addLayout(variantsLayout);
+
+        nameRadLayout = new QHBoxLayout();
+        nameRadLayout->setObjectName(QString::fromUtf8("nameRadLayout"));
+        nameRadLayout->setSizeConstraint(QLayout::SetDefaultConstraint);
+        staticNameRadLabel = new QLabel(KanjiDetails);
+        staticNameRadLabel->setObjectName(QString::fromUtf8("staticNameRadLabel"));
+        staticNameRadLabel->setFont(font1);
+
+        nameRadLayout->addWidget(staticNameRadLabel);
+
+        nameRadLabel = new QLabel(KanjiDetails);
+        nameRadLabel->setObjectName(QString::fromUtf8("nameRadLabel"));
+        sizePolicy2.setHeightForWidth(nameRadLabel->sizePolicy().hasHeightForWidth());
+        nameRadLabel->setSizePolicy(sizePolicy2);
+        nameRadLabel->setFont(font3);
+
+        nameRadLayout->addWidget(nameRadLabel);
+
+
+        rightColumnLayout->addLayout(nameRadLayout);
+
+        unicodeLayout = new QHBoxLayout();
+        unicodeLayout->setObjectName(QString::fromUtf8("unicodeLayout"));
+        staticUnicodeLabel = new QLabel(KanjiDetails);
+        staticUnicodeLabel->setObjectName(QString::fromUtf8("staticUnicodeLabel"));
+        staticUnicodeLabel->setFont(font1);
+
+        unicodeLayout->addWidget(staticUnicodeLabel);
+
+        ucsLabel = new QLabel(KanjiDetails);
+        ucsLabel->setObjectName(QString::fromUtf8("ucsLabel"));
+        sizePolicy2.setHeightForWidth(ucsLabel->sizePolicy().hasHeightForWidth());
+        ucsLabel->setSizePolicy(sizePolicy2);
+        ucsLabel->setFont(font3);
+
+        unicodeLayout->addWidget(ucsLabel);
+
+
+        rightColumnLayout->addLayout(unicodeLayout);
+
+        jis208Layout = new QHBoxLayout();
+        jis208Layout->setObjectName(QString::fromUtf8("jis208Layout"));
+        staticJIS208Label = new QLabel(KanjiDetails);
+        staticJIS208Label->setObjectName(QString::fromUtf8("staticJIS208Label"));
+        staticJIS208Label->setFont(font1);
+
+        jis208Layout->addWidget(staticJIS208Label);
+
+        jis208Label = new QLabel(KanjiDetails);
+        jis208Label->setObjectName(QString::fromUtf8("jis208Label"));
+        sizePolicy2.setHeightForWidth(jis208Label->sizePolicy().hasHeightForWidth());
+        jis208Label->setSizePolicy(sizePolicy2);
+        jis208Label->setFont(font3);
+
+        jis208Layout->addWidget(jis208Label);
+
+
+        rightColumnLayout->addLayout(jis208Layout);
+
+        jis212Layout = new QHBoxLayout();
+        jis212Layout->setObjectName(QString::fromUtf8("jis212Layout"));
+        staticJIS212Label = new QLabel(KanjiDetails);
+        staticJIS212Label->setObjectName(QString::fromUtf8("staticJIS212Label"));
+        staticJIS212Label->setFont(font1);
+
+        jis212Layout->addWidget(staticJIS212Label);
+
+        jis212Label = new QLabel(KanjiDetails);
+        jis212Label->setObjectName(QString::fromUtf8("jis212Label"));
+        sizePolicy2.setHeightForWidth(jis212Label->sizePolicy().hasHeightForWidth());
+        jis212Label->setSizePolicy(sizePolicy2);
+        jis212Label->setFont(font3);
+
+        jis212Layout->addWidget(jis212Label);
+
+
+        rightColumnLayout->addLayout(jis212Layout);
+
+        jis213Layout = new QHBoxLayout();
+        jis213Layout->setObjectName(QString::fromUtf8("jis213Layout"));
+        staticJIS213Label = new QLabel(KanjiDetails);
+        staticJIS213Label->setObjectName(QString::fromUtf8("staticJIS213Label"));
+        staticJIS213Label->setFont(font1);
+
+        jis213Layout->addWidget(staticJIS213Label);
+
+        jis213Label = new QLabel(KanjiDetails);
+        jis213Label->setObjectName(QString::fromUtf8("jis213Label"));
+        sizePolicy2.setHeightForWidth(jis213Label->sizePolicy().hasHeightForWidth());
+        jis213Label->setSizePolicy(sizePolicy2);
+        jis213Label->setFont(font3);
+
+        jis213Layout->addWidget(jis213Label);
+
+
+        rightColumnLayout->addLayout(jis213Layout);
+
+        rightColumnSpacer = new QSpacerItem(20, 12, QSizePolicy::Minimum, QSizePolicy::Expanding);
+
+        rightColumnLayout->addItem(rightColumnSpacer);
+
+
+        gridLayout->addLayout(rightColumnLayout, 0, 3, 1, 1);
+
+        readMeanLayout = new QVBoxLayout();
         readMeanLayout->setObjectName(QString::fromUtf8("readMeanLayout"));
-        readMeanLayout->setContentsMargins(0, 0, 0, 0);
-        verticalLayoutWidget_4 = new QWidget(KanjiDetails);
-        verticalLayoutWidget_4->setObjectName(QString::fromUtf8("verticalLayoutWidget_4"));
-        verticalLayoutWidget_4->setGeometry(QRect(240, 160, 231, 71));
-        nanoriLayout = new QVBoxLayout(verticalLayoutWidget_4);
+
+        gridLayout->addLayout(readMeanLayout, 1, 0, 1, 2);
+
+        nanoriLayout = new QVBoxLayout();
         nanoriLayout->setObjectName(QString::fromUtf8("nanoriLayout"));
-        nanoriLayout->setContentsMargins(0, 0, 0, 0);
-        nanoriLabel = new QLabel(verticalLayoutWidget_4);
+        nanoriLabel = new QLabel(KanjiDetails);
         nanoriLabel->setObjectName(QString::fromUtf8("nanoriLabel"));
 
         nanoriLayout->addWidget(nanoriLabel);
 
-        verticalSpacer_2 = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
+        nanoriSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
 
-        nanoriLayout->addItem(verticalSpacer_2);
+        nanoriLayout->addItem(nanoriSpacer);
+
+
+        gridLayout->addLayout(nanoriLayout, 1, 2, 1, 2);
 
         line = new QFrame(KanjiDetails);
         line->setObjectName(QString::fromUtf8("line"));
-        line->setGeometry(QRect(10, 250, 601, 21));
+        QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Fixed);
+        sizePolicy3.setHorizontalStretch(0);
+        sizePolicy3.setVerticalStretch(0);
+        sizePolicy3.setHeightForWidth(line->sizePolicy().hasHeightForWidth());
+        line->setSizePolicy(sizePolicy3);
         line->setFrameShape(QFrame::HLine);
         line->setFrameShadow(QFrame::Sunken);
+
+        gridLayout->addWidget(line, 2, 0, 1, 4);
+
 
         retranslateUi(KanjiDetails);
 
@@ -423,6 +429,7 @@ public:
     void retranslateUi(QWidget *KanjiDetails)
     {
         KanjiDetails->setWindowTitle(QApplication::translate("KanjiDetails", "Form", 0, QApplication::UnicodeUTF8));
+        literalLabel->setText(QApplication::translate("KanjiDetails", "\343\203\266", 0, QApplication::UnicodeUTF8));
         strokeCountLabel->setText(QApplication::translate("KanjiDetails", "[stroke count]", 0, QApplication::UnicodeUTF8));
         staticStrokeCountLabel->setText(QApplication::translate("KanjiDetails", "strokes", 0, QApplication::UnicodeUTF8));
         staticGradeLabel->setText(QApplication::translate("KanjiDetails", "Taught in", 0, QApplication::UnicodeUTF8));
@@ -448,7 +455,6 @@ public:
         jis212Label->setText(QApplication::translate("KanjiDetails", "[jis212]", 0, QApplication::UnicodeUTF8));
         staticJIS213Label->setText(QApplication::translate("KanjiDetails", "JIS213", 0, QApplication::UnicodeUTF8));
         jis213Label->setText(QApplication::translate("KanjiDetails", "[jis213]", 0, QApplication::UnicodeUTF8));
-        literalLabel->setText(QApplication::translate("KanjiDetails", "\343\203\266", 0, QApplication::UnicodeUTF8));
         nanoriLabel->setText(QApplication::translate("KanjiDetails", "[nanori]", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 

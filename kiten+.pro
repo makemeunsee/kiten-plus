@@ -5,8 +5,11 @@ QT += xml
 TARGET = kiten+
 SOURCES += main.cpp \
     mainwindow.cpp \
-    kanjidicdb.cpp \
-    kanji.cpp
+    kanjidetails.cpp \
+    tests/kanjidetailsscrollareatestwindow.cpp
 HEADERS += mainwindow.h \
-    kanjidicdb.h \
-    kanji.h
+    kanjidetails.h \
+    tests/kanjidetailsscrollareatestwindow.h
+FORMS += kanjidetails.ui
+LIBS += -L../JapaneseDB \
+    -lJapaneseDB

@@ -24,7 +24,7 @@ KanjiDetailsScrollAreaTestWindow::KanjiDetailsScrollAreaTestWindow(QWidget *pare
     editLayout->addWidget(buttonTen);
     editLayout->addWidget(buttonVrac);
     QScrollArea *scrollArea = new QScrollArea;
-    QWidget *scrollWidget = new QWidget;
+    scrollWidget = new QWidget;
     scrollLayout = new QVBoxLayout;
     scrollLayout->setSizeConstraint(QLayout::SetMinAndMaxSize);
     scrollWidget->setLayout(scrollLayout);
@@ -61,28 +61,32 @@ void KanjiDetailsScrollAreaTestWindow::createKanjis()
     ten->setNelsonRadical(5);
 
     vrac = new Kanji(QString::fromUtf8("重"));
-    vrac->addNameAsRadical("VRACAFKHDFJHSDJGHSDJHGSLJFHG");
+    vrac->addNameAsRadical("VRACAFKHDFJHSDJGHSDJHGSLJdakfnsajghkszhkzfshgkz,fsglkszgfkzsldgfzsjFHG");
     vrac->setStrokeCount(18);
     vrac->setUnicode(666);
     vrac->setClassicalRadical(0);
-    vrac->setFrequency(0);
+    vrac->setFrequency(1000);
     vrac->setGrade(0);
     vrac->setJLPT(0);
     vrac->setNelsonRadical(0);
 }
 
-void KanjiDetailsScrollAreaTestWindow::setTen()
+void KanjiDetailsScrollAreaTestWindow::setKanji(Kanji *k)
 {
     scrollLayout->removeWidget(kanjiDetails);
     delete kanjiDetails;
-    kanjiDetails = new KanjiDetails(0, ten, kanjiDB);
+    kanjiDetails = new KanjiDetails(0, k, kanjiDB);
+    kanjiDetails->adjustSize();
     scrollLayout->addWidget(kanjiDetails);
+    scrollWidget->adjustSize();
+}
+
+void KanjiDetailsScrollAreaTestWindow::setTen()
+{
+    setKanji(ten);
 }
 
 void KanjiDetailsScrollAreaTestWindow::setVrac()
 {
-    scrollLayout->removeWidget(kanjiDetails);
-    delete kanjiDetails;
-    kanjiDetails = new KanjiDetails(0, vrac, kanjiDB);
-    scrollLayout->addWidget(kanjiDetails);
+    setKanji(vrac);
 }

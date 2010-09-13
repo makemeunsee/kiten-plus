@@ -3,6 +3,8 @@
 #include "../JapaneseDB/kanji.h"
 #include "../JapaneseDB/kanjidb.h"
 
+#include <iostream>
+
 KanjiDetails::KanjiDetails(QWidget *parent, Kanji *k, KanjiDB *kanjiDB) :
     QWidget(parent),
     ui(new Ui::KanjiDetails)
@@ -11,7 +13,7 @@ KanjiDetails::KanjiDetails(QWidget *parent, Kanji *k, KanjiDB *kanjiDB) :
     ui->literalLabel->setText(k->getLiteral());
     ui->strokeCountLabel->setText(QString::number(k->getStrokeCount()));
     if(k->getGrade() > 0)
-        ui->gradeLabel->setText(QString::number(k->getGrade()));
+        updateLabel(ui->gradeLabel, QString::number(k->getGrade()));
     else
     {
         hideWidget(ui->gradeLabel);
@@ -19,28 +21,28 @@ KanjiDetails::KanjiDetails(QWidget *parent, Kanji *k, KanjiDB *kanjiDB) :
         hideWidget(ui->staticGradeLabel2);
     }
     if(k->getJLPT() > 0)
-        ui->jlptLabel->setText(QString::number(k->getJLPT()));
+        updateLabel(ui->jlptLabel, QString::number(k->getJLPT()));
     else
     {
         hideWidget(ui->jlptLabel);
         hideWidget(ui->staticJlptLabel);
     }
     if(k->getFrequency() > 0)
-        ui->freqLabel->setText(QString::number(k->getFrequency()));
+        updateLabel(ui->freqLabel, QString::number(k->getFrequency()));
     else
     {
         hideWidget(ui->freqLabel);
         hideWidget(ui->staticFreqLabel);
     }
     if(k->getClassicalRadical() > 0)
-        ui->radClasLabel->setText(QString::number(k->getClassicalRadical()));
+        updateLabel(ui->radClasLabel, QString::number(k->getClassicalRadical()));
     else
     {
         hideWidget(ui->radClasLabel);
         hideWidget(ui->staticClasRadLabel);
     }
     if(k->getNelsonRadical() > 0)
-        ui->radNelsonLabel->setText(QString::number(k->getNelsonRadical()));
+        updateLabel(ui->radNelsonLabel, QString::number(k->getNelsonRadical()));
     else
     {
         hideWidget(ui->radNelsonLabel);
@@ -72,7 +74,7 @@ KanjiDetails::KanjiDetails(QWidget *parent, Kanji *k, KanjiDB *kanjiDB) :
         QString s_variants;
         foreach(Kanji *k, variants)
             s_variants.append(k->getLiteral());
-        ui->variantsLabel->setText(s_variants);
+        updateLabel(ui->variantsLabel, s_variants);
     }
 
     if(k->getNamesAsRadical().isEmpty())
@@ -91,7 +93,7 @@ KanjiDetails::KanjiDetails(QWidget *parent, Kanji *k, KanjiDB *kanjiDB) :
         updateLabel(ui->nameRadLabel, s_names);
     }
 
-    ui->ucsLabel->setText(QString::number(k->getUnicode(), 16));
+    updateLabel(ui->ucsLabel, QString::number(k->getUnicode(), 16));
     if(!k->getJis208().isEmpty())
         ui->jis208Label->setText(k->getJis208());
     else
@@ -100,14 +102,14 @@ KanjiDetails::KanjiDetails(QWidget *parent, Kanji *k, KanjiDB *kanjiDB) :
         hideWidget(ui->staticJIS208Label);
     }
     if(!k->getJis212().isEmpty())
-        ui->jis212Label->setText(k->getJis212());
+        updateLabel(ui->jis212Label, k->getJis212());
     else
     {
         hideWidget(ui->jis212Label);
         hideWidget(ui->staticJIS212Label);
     }
     if(!k->getJis213().isEmpty())
-        ui->jis208Label->setText(k->getJis213());
+        updateLabel(ui->jis208Label, k->getJis213());
     else
     {
         hideWidget(ui->jis213Label);
@@ -138,8 +140,7 @@ void KanjiDetails::hideWidget(QWidget *w)
     w->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
 }
 
-void KanjiDetails::updateLabel(QLabel *l, QString &text)
+void KanjiDetails::updateLabel(QLabel *l, QString text)
 {
     l->setText(text);
-    l->adjustSize();
 }

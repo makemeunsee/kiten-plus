@@ -22,7 +22,9 @@ public slots:
     void setVrac();
 
 private:
+    void setKanji(Kanji *k);
     void createKanjis();
+    QWidget *scrollWidget;
     QVBoxLayout *scrollLayout;
     KanjiDB *kanjiDB;
     Kanji *ten;

@@ -1,7 +1,10 @@
 #include "kanjidetails.h"
 #include "ui_kanjidetails.h"
+#include "readingmeaninggroupwidget.h"
+#include "ui_readingmeaninggroupwidget.h"
 #include "../JapaneseDB/kanji.h"
 #include "../JapaneseDB/kanjidb.h"
+#include "../JapaneseDB/readingmeaninggroup.h"
 
 #include <iostream>
 
@@ -114,6 +117,27 @@ KanjiDetails::KanjiDetails(QWidget *parent, Kanji *k, KanjiDB *kanjiDB) :
     {
         hideWidget(ui->jis213Label);
         hideWidget(ui->staticJIS213Label);
+    }
+    foreach(ReadingMeaningGroup *rmGroup, k->getReadingMeaningGroups())
+    {
+        ReadingMeaningGroupWidget *rmWidget = new ReadingMeaningGroupWidget();
+        foreach(QString s, rmGroup->getEnglishMeanings())
+        {
+            rmWidget->addEnglishMeaning(s);
+        }
+        foreach(QString s, rmGroup->getFrenchMeanings())
+        {
+            rmWidget->addFrenchMeaning(s);
+        }
+        foreach(QString s, rmGroup->getKunReadings())
+        {
+            rmWidget->addKunReading(s);
+        }
+        foreach(QString s, rmGroup->getOnReadings())
+        {
+            rmWidget->addOnReading(s);
+        }
+        ui->readMeanLayout->addWidget(rmWidget);
     }
 }
 

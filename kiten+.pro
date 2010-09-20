@@ -6,10 +6,14 @@ TARGET = kiten+
 SOURCES += main.cpp \
     mainwindow.cpp \
     kanjidetails.cpp \
-    tests/kanjidetailsscrollareatestwindow.cpp
+    tests/kanjidetailsscrollareatestwindow.cpp \
+    readingmeaninggroupwidget.cpp
 HEADERS += mainwindow.h \
     kanjidetails.h \
-    tests/kanjidetailsscrollareatestwindow.h
-FORMS += kanjidetails.ui
+    tests/kanjidetailsscrollareatestwindow.h \
+    readingmeaninggroupwidget.h
+FORMS += kanjidetails.ui \
+    readingmeaninggroupwidget.ui
 LIBS += -L../JapaneseDB \
     -lJapaneseDB
+OTHER_FILES += TODOs.txt

@@ -1,0 +1,13 @@
+Global:
+indexing -> file
+logging / exception handling
+word panel/tab
+
+Kanji part:
+ui improvement (lighter search bar)
+meanings widget
+radicals search/selection, radical display
+components? (kiten radical file)
+kana/romaji conversion
+variants as clickables
+kanjis, radicals & codes as selectables

@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'kanjidetails.ui'
 **
-** Created: Mon Sep 13 06:09:58 2010
+** Created: Mon Sep 20 09:21:09 2010
 **      by: Qt User Interface Compiler version 4.6.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
@@ -71,11 +71,8 @@ public:
     QLabel *staticJIS213Label;
     QLabel *jis213Label;
     QSpacerItem *rightColumnSpacer;
-    QVBoxLayout *readMeanLayout;
-    QVBoxLayout *nanoriLayout;
-    QLabel *nanoriLabel;
-    QSpacerItem *nanoriSpacer;
     QFrame *line;
+    QVBoxLayout *readMeanLayout;
 
     void setupUi(QWidget *KanjiDetails)
     {
@@ -389,25 +386,6 @@ public:
 
         gridLayout->addLayout(rightColumnLayout, 0, 3, 1, 1);
 
-        readMeanLayout = new QVBoxLayout();
-        readMeanLayout->setObjectName(QString::fromUtf8("readMeanLayout"));
-
-        gridLayout->addLayout(readMeanLayout, 1, 0, 1, 2);
-
-        nanoriLayout = new QVBoxLayout();
-        nanoriLayout->setObjectName(QString::fromUtf8("nanoriLayout"));
-        nanoriLabel = new QLabel(KanjiDetails);
-        nanoriLabel->setObjectName(QString::fromUtf8("nanoriLabel"));
-
-        nanoriLayout->addWidget(nanoriLabel);
-
-        nanoriSpacer = new QSpacerItem(20, 40, QSizePolicy::Minimum, QSizePolicy::Expanding);
-
-        nanoriLayout->addItem(nanoriSpacer);
-
-
-        gridLayout->addLayout(nanoriLayout, 1, 2, 1, 2);
-
         line = new QFrame(KanjiDetails);
         line->setObjectName(QString::fromUtf8("line"));
         QSizePolicy sizePolicy3(QSizePolicy::Preferred, QSizePolicy::Fixed);
@@ -418,7 +396,12 @@ public:
         line->setFrameShape(QFrame::HLine);
         line->setFrameShadow(QFrame::Sunken);
 
-        gridLayout->addWidget(line, 2, 0, 1, 4);
+        gridLayout->addWidget(line, 3, 0, 1, 4);
+
+        readMeanLayout = new QVBoxLayout();
+        readMeanLayout->setObjectName(QString::fromUtf8("readMeanLayout"));
+
+        gridLayout->addLayout(readMeanLayout, 1, 1, 1, 2);
 
 
         retranslateUi(KanjiDetails);
@@ -455,7 +438,6 @@ public:
         jis212Label->setText(QApplication::translate("KanjiDetails", "[jis212]", 0, QApplication::UnicodeUTF8));
         staticJIS213Label->setText(QApplication::translate("KanjiDetails", "JIS213", 0, QApplication::UnicodeUTF8));
         jis213Label->setText(QApplication::translate("KanjiDetails", "[jis213]", 0, QApplication::UnicodeUTF8));
-        nanoriLabel->setText(QApplication::translate("KanjiDetails", "[nanori]", 0, QApplication::UnicodeUTF8));
     } // retranslateUi
 
 };

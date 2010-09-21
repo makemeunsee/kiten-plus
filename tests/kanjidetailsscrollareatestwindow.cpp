@@ -2,6 +2,7 @@
 #include "../kanjidetails.h"
 #include "../../JapaneseDB/kanjidb.h"
 #include "../../JapaneseDB/kanji.h"
+#include "../../JapaneseDB/readingmeaninggroup.h"
 #include <QScrollArea>
 #include <QLabel>
 #include <QHBoxLayout>
@@ -50,6 +51,11 @@ KanjiDetailsScrollAreaTestWindow::~KanjiDetailsScrollAreaTestWindow()
 
 void KanjiDetailsScrollAreaTestWindow::createKanjis()
 {
+    ReadingMeaningGroup *tenGroup = new ReadingMeaningGroup;
+    tenGroup->addEnglishMeaning("heaven");
+    tenGroup->addFrenchMeaning("ciel");
+    tenGroup->addKunReading(QString::fromUtf8("あめ"));
+    tenGroup->addOnReading(QString::fromUtf8("テン"));
     ten = new Kanji(QString::fromUtf8("天"));
     ten->addNameAsRadical("ten");
     ten->setStrokeCount(4);
@@ -59,7 +65,18 @@ void KanjiDetailsScrollAreaTestWindow::createKanjis()
     ten->setGrade(1);
     ten->setJLPT(3);
     ten->setNelsonRadical(5);
+    ten->addReadingMeaningGroup(tenGroup);
 
+    ReadingMeaningGroup *vracGroup = new ReadingMeaningGroup;
+    vracGroup->addEnglishMeaning("random");
+    vracGroup->addEnglishMeaning("random2");
+    vracGroup->addEnglishMeaning("random3");
+    vracGroup->addFrenchMeaning("bidule");
+    vracGroup->addFrenchMeaning("bidule2");
+    vracGroup->addFrenchMeaning("bidule3");
+    vracGroup->addKunReading("capouet");
+    vracGroup->addOnReading("dalalalalala");
+    vracGroup->addOnReading("veryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTry,Right?");
     vrac = new Kanji(QString::fromUtf8("重"));
     vrac->addNameAsRadical("VRACAFKHDFJHSDJGHSDJHGSLJdakfnsajghkszhkzfshgkz,fsglkszgfkzsldgfzsjFHG");
     vrac->setStrokeCount(18);
@@ -69,6 +86,8 @@ void KanjiDetailsScrollAreaTestWindow::createKanjis()
     vrac->setGrade(0);
     vrac->setJLPT(0);
     vrac->setNelsonRadical(0);
+    vrac->addReadingMeaningGroup(vracGroup);
+    vrac->addReadingMeaningGroup(vracGroup);
 }
 
 void KanjiDetailsScrollAreaTestWindow::setKanji(Kanji *k)

@@ -137,8 +137,10 @@ KanjiDetails::KanjiDetails(QWidget *parent, Kanji *k, KanjiDB *kanjiDB) :
         {
             rmWidget->addOnReading(s);
         }
+        rmWidget->adjustSize();
         ui->readMeanLayout->addWidget(rmWidget);
     }
+    adjustSize();
 }
 
 KanjiDetails::~KanjiDetails()

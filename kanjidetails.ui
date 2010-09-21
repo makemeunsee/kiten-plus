@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>620</width>
-    <height>220</height>
+    <width>600</width>
+    <height>150</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -18,8 +18,8 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>620</width>
-    <height>220</height>
+    <width>600</width>
+    <height>150</height>
    </size>
   </property>
   <property name="maximumSize">
@@ -36,40 +36,63 @@
     <enum>QLayout::SetMinAndMaxSize</enum>
    </property>
    <item row="0" column="0">
-    <widget class="QLabel" name="literalLabel">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>120</horstretch>
-       <verstretch>120</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>120</width>
-       <height>120</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>120</width>
-       <height>120</height>
-      </size>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>80</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>ヶ</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignCenter</set>
-     </property>
-    </widget>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="literalLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+         <horstretch>120</horstretch>
+         <verstretch>120</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>120</width>
+         <height>120</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>120</width>
+         <height>120</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>80</pointsize>
+        </font>
+       </property>
+       <property name="text">
+        <string>ヶ</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+       <property name="textInteractionFlags">
+        <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
    </item>
-   <item row="0" column="1" colspan="2">
+   <item row="0" column="1">
     <layout class="QVBoxLayout" name="leftColumnLayout">
+     <property name="leftMargin">
+      <number>5</number>
+     </property>
      <item>
       <layout class="QHBoxLayout" name="strokeLayout">
        <property name="sizeConstraint">
@@ -346,7 +369,7 @@
      </item>
     </layout>
    </item>
-   <item row="0" column="3">
+   <item row="0" column="2">
     <layout class="QVBoxLayout" name="rightColumnLayout">
      <property name="sizeConstraint">
       <enum>QLayout::SetDefaultConstraint</enum>
@@ -382,6 +405,9 @@
          </property>
          <property name="text">
           <string>[variants]</string>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
          </property>
         </widget>
        </item>
@@ -422,6 +448,9 @@
          <property name="text">
           <string>[name]</string>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
         </widget>
        </item>
       </layout>
@@ -457,6 +486,9 @@
          </property>
          <property name="text">
           <string>[unicode]</string>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
          </property>
         </widget>
        </item>
@@ -494,6 +526,9 @@
          <property name="text">
           <string>[jis208]</string>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
         </widget>
        </item>
       </layout>
@@ -529,6 +564,9 @@
          </property>
          <property name="text">
           <string>[jis212]</string>
+         </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
          </property>
         </widget>
        </item>
@@ -566,6 +604,9 @@
          <property name="text">
           <string>[jis213]</string>
          </property>
+         <property name="textInteractionFlags">
+          <set>Qt::LinksAccessibleByMouse|Qt::TextSelectableByMouse</set>
+         </property>
         </widget>
        </item>
       </layout>
@@ -585,7 +626,7 @@
      </item>
     </layout>
    </item>
-   <item row="3" column="0" colspan="4">
+   <item row="2" column="0" colspan="3">
     <widget class="Line" name="line">
      <property name="sizePolicy">
       <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -599,7 +640,11 @@
     </widget>
    </item>
    <item row="1" column="1" colspan="2">
-    <layout class="QVBoxLayout" name="readMeanLayout"/>
+    <layout class="QVBoxLayout" name="readMeanLayout">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetDefaultConstraint</enum>
+     </property>
+    </layout>
    </item>
   </layout>
  </widget>

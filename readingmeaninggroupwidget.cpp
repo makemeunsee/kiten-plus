@@ -27,20 +27,28 @@ void ReadingMeaningGroupWidget::changeEvent(QEvent *e)
 
 void ReadingMeaningGroupWidget::addEnglishMeaning(QString &s)
 {
-    ui->englishMeaningsLayout->addWidget(new QLabel(s));
+    QLabel *l = new QLabel(s);
+    l->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
+    ui->englishMeaningsLayout->addWidget(l, Qt::AlignLeft);
 }
 
 void ReadingMeaningGroupWidget::addFrenchMeaning(QString &s)
 {
-    ui->frenchMeaningsLayout->addWidget(new QLabel(s));
+    QLabel *l = new QLabel(s);
+    l->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
+    ui->frenchMeaningsLayout->addWidget(l, Qt::AlignLeft);
 }
 
 void ReadingMeaningGroupWidget::addKunReading(QString &s)
 {
-    ui->kunReadingsLayout->addWidget(new QLabel(s));
+    QLabel *l = new QLabel(s);
+    l->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
+    ui->kunReadingsLayout->addWidget(l, Qt::AlignLeft);
 }
 
 void ReadingMeaningGroupWidget::addOnReading(QString &s)
 {
-    ui->onReadingsLayout->addWidget(new QLabel(s));
+    QLabel *l = new QLabel(s);
+    l->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::Preferred);
+    ui->onReadingsLayout->addWidget(l, Qt::AlignLeft);
 }

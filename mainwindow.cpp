@@ -262,9 +262,6 @@ void MainWindow::showSearchResults(const QSet<Kanji *> &results)
         resultWidgets.append(new QLabel("none"));
 
     foreach(QWidget *resultWidget, resultWidgets)
-    {
-        resultWidget->adjustSize();
         resultLayout->addWidget(resultWidget, 0, Qt::AlignTop);
-    }
     resultLayout->parentWidget()->adjustSize();
 }

@@ -2,6 +2,7 @@
 #define READINGMEANINGGROUPWIDGET_H
 
 #include <QWidget>
+#include <QSet>
 
 namespace Ui {
     class ReadingMeaningGroupWidget;
@@ -14,8 +15,8 @@ public:
     ~ReadingMeaningGroupWidget();
     void addEnglishMeaning(QString &s);
     void addFrenchMeaning(QString &s);
-    void addOnReading(QString &s);
-    void addKunReading(QString &s);
+    void addOnReadings(const QSet<QString> &s);
+    void addKunReadings(const QSet<QString> &s);
 
 protected:
     void changeEvent(QEvent *e);

@@ -76,7 +76,7 @@ void KanjiDetailsScrollAreaTestWindow::createKanjis()
     vracGroup->addFrenchMeaning("bidule3");
     vracGroup->addKunReading("capouet");
     vracGroup->addOnReading("dalalalalala");
-    vracGroup->addOnReading("veryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTry,Right?");
+    vracGroup->addOnReading("veryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTryveryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTryveryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTryveryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTryveryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTryveryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTryveryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTry,Right?");
     vrac = new Kanji(QString::fromUtf8("重"));
     vrac->addNameAsRadical("VRACAFKHDFJHSDJGHSDJHGSLJdakfnsajghkszhkzfshgkz,fsglkszgfkzsldgfzsjFHG");
     vrac->setStrokeCount(18);

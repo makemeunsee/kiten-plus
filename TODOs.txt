@@ -2,12 +2,12 @@ Global:
 indexing -> file
 logging / exception handling
 word panel/tab
+i18n
 
 Kanji part:
 ui improvement (lighter search bar)
-meanings widget
+copy paste search
+variants links (ucs: 570d)
 radicals search/selection, radical display
 components? (kiten radical file)
-kana/romaji conversion
-variants as clickables
-kanjis, radicals & codes as selectables
+kana/romaji conversion (search bar)

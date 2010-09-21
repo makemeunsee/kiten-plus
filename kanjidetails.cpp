@@ -129,14 +129,8 @@ KanjiDetails::KanjiDetails(QWidget *parent, Kanji *k, KanjiDB *kanjiDB) :
         {
             rmWidget->addFrenchMeaning(s);
         }
-        foreach(QString s, rmGroup->getKunReadings())
-        {
-            rmWidget->addKunReading(s);
-        }
-        foreach(QString s, rmGroup->getOnReadings())
-        {
-            rmWidget->addOnReading(s);
-        }
+        rmWidget->addKunReadings(rmGroup->getKunReadings());
+        rmWidget->addOnReadings(rmGroup->getOnReadings());
         rmWidget->adjustSize();
         ui->readMeanLayout->addWidget(rmWidget);
     }

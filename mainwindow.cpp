@@ -193,6 +193,14 @@ void MainWindow::clearPreviousSearch()
     resultWidgets.clear();
 }
 
+void MainWindow::search(const QString &s)
+{
+    clearPreviousSearch();
+    QSet<Kanji *> results;
+    kanjidic->search(s, results);
+    showSearchResults(results);
+}
+
 void MainWindow::search()
 {
     clearPreviousSearch();

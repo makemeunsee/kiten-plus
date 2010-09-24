@@ -22,6 +22,7 @@ public:
 public slots:
     void open();
     void open(const QString &);
+    void search(const QString &);
     void search();
     void searchCode();
     void searchUCS();

@@ -7,11 +7,13 @@ SOURCES += main.cpp \
     mainwindow.cpp \
     kanjidetails.cpp \
     tests/kanjidetailsscrollareatestwindow.cpp \
-    readingmeaninggroupwidget.cpp
+    readingmeaninggroupwidget.cpp \
+    searchablelabel.cpp
 HEADERS += mainwindow.h \
     kanjidetails.h \
     tests/kanjidetailsscrollareatestwindow.h \
-    readingmeaninggroupwidget.h
+    readingmeaninggroupwidget.h \
+    searchablelabel.h
 FORMS += kanjidetails.ui \
     readingmeaninggroupwidget.ui
 LIBS += -L../JapaneseDB \

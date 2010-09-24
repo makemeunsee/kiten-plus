@@ -1,3 +1,7 @@
+C++ knowledge:
+destructors behavior
+static and friend modifiers
+
 Global:
 indexing -> file
 logging / exception handling

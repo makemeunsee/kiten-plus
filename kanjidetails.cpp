@@ -1,18 +1,21 @@
 #include "kanjidetails.h"
+#include "mainwindow.h"
 #include "ui_kanjidetails.h"
 #include "readingmeaninggroupwidget.h"
 #include "ui_readingmeaninggroupwidget.h"
 #include "../JapaneseDB/kanji.h"
 #include "../JapaneseDB/kanjidb.h"
 #include "../JapaneseDB/readingmeaninggroup.h"
+#include "searchablelabel.h"
 
 #include <iostream>
 
-KanjiDetails::KanjiDetails(QWidget *parent, Kanji *k, KanjiDB *kanjiDB) :
+KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB *kanjiDB) :
     QWidget(parent),
     ui(new Ui::KanjiDetails)
 {
     ui->setupUi(this);
+    searchWindow = parent;
     ui->literalLabel->setText(k->getLiteral());
     ui->strokeCountLabel->setText(QString::number(k->getStrokeCount()));
     if(k->getGrade() > 0)
@@ -70,14 +73,18 @@ KanjiDetails::KanjiDetails(QWidget *parent, Kanji *k, KanjiDB *kanjiDB) :
     }
     if(variants.isEmpty())
     {
-        hideWidget(ui->variantsLabel);
+        //hideWidget(ui->variantsLabel);
         hideWidget(ui->staticVariantsLabel);
     } else
     {
         QString s_variants;
         foreach(Kanji *k, variants)
-            s_variants.append(k->getLiteral());
-        updateLabel(ui->variantsLabel, s_variants);
+        {
+            SearchableLabel *l = new SearchableLabel(k->getLiteral());
+            l->setTextInteractionFlags(Qt::TextSelectableByMouse | Qt::LinksAccessibleByMouse);
+            connect(l, SIGNAL(mouseClicked(const QString &)), this, SLOT(search(const QString &)));
+            ui->variantsLayout2->addWidget(l);
+        }
     }
 
     if(k->getNamesAsRadical().isEmpty())
@@ -140,6 +147,11 @@ KanjiDetails::KanjiDetails(QWidget *parent, Kanji *k, KanjiDB *kanjiDB) :
 KanjiDetails::~KanjiDetails()
 {
     delete ui;
+}
+
+void KanjiDetails::search(const QString &s)
+{
+    searchWindow->search(s);
 }
 
 void KanjiDetails::changeEvent(QEvent *e)

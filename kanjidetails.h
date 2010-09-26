@@ -16,7 +16,7 @@ namespace Ui {
 class KanjiDetails : public QWidget {
     Q_OBJECT
 public:
-    KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB *kanjiDB);
+    KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB &kanjiDB);
     ~KanjiDetails();
 
 public slots:

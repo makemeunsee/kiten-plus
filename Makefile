@@ -48,11 +48,13 @@ SOURCES       = main.cpp \
 		kanjidetails.cpp \
 		tests/kanjidetailsscrollareatestwindow.cpp \
 		readingmeaninggroupwidget.cpp \
+		resultsbuffer.cpp \
 		searchablelabel.cpp \
 		searchbar.cpp moc_mainwindow.cpp \
 		moc_kanjidetails.cpp \
 		moc_kanjidetailsscrollareatestwindow.cpp \
 		moc_readingmeaninggroupwidget.cpp \
+		moc_resultsbuffer.cpp \
 		moc_searchablelabel.cpp \
 		moc_searchbar.cpp
 OBJECTS       = main.o \
@@ -60,12 +62,14 @@ OBJECTS       = main.o \
 		kanjidetails.o \
 		kanjidetailsscrollareatestwindow.o \
 		readingmeaninggroupwidget.o \
+		resultsbuffer.o \
 		searchablelabel.o \
 		searchbar.o \
 		moc_mainwindow.o \
 		moc_kanjidetails.o \
 		moc_kanjidetailsscrollareatestwindow.o \
 		moc_readingmeaninggroupwidget.o \
+		moc_resultsbuffer.o \
 		moc_searchablelabel.o \
 		moc_searchbar.o
 DIST          = /usr/share/qt4/mkspecs/common/g++.conf \
@@ -187,9 +191,9 @@ mocclean: compiler_moc_header_clean compiler_moc_source_clean
 
 mocables: compiler_moc_header_make_all compiler_moc_source_make_all
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_kanjidetails.cpp moc_kanjidetailsscrollareatestwindow.cpp moc_readingmeaninggroupwidget.cpp moc_searchablelabel.cpp moc_searchbar.cpp
+compiler_moc_header_make_all: moc_mainwindow.cpp moc_kanjidetails.cpp moc_kanjidetailsscrollareatestwindow.cpp moc_readingmeaninggroupwidget.cpp moc_resultsbuffer.cpp moc_searchablelabel.cpp moc_searchbar.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_mainwindow.cpp moc_kanjidetails.cpp moc_kanjidetailsscrollareatestwindow.cpp moc_readingmeaninggroupwidget.cpp moc_searchablelabel.cpp moc_searchbar.cpp
+	-$(DEL_FILE) moc_mainwindow.cpp moc_kanjidetails.cpp moc_kanjidetailsscrollareatestwindow.cpp moc_readingmeaninggroupwidget.cpp moc_resultsbuffer.cpp moc_searchablelabel.cpp moc_searchbar.cpp
 moc_mainwindow.cpp: mainwindow.h
 	/usr/bin/moc-qt4 $(DEFINES) $(INCPATH) mainwindow.h -o moc_mainwindow.cpp
 
@@ -201,6 +205,9 @@ moc_kanjidetailsscrollareatestwindow.cpp: tests/kanjidetailsscrollareatestwindow
 
 moc_readingmeaninggroupwidget.cpp: readingmeaninggroupwidget.h
 	/usr/bin/moc-qt4 $(DEFINES) $(INCPATH) readingmeaninggroupwidget.h -o moc_readingmeaninggroupwidget.cpp
+
+moc_resultsbuffer.cpp: resultsbuffer.h
+	/usr/bin/moc-qt4 $(DEFINES) $(INCPATH) resultsbuffer.h -o moc_resultsbuffer.cpp
 
 moc_searchablelabel.cpp: searchablelabel.h
 	/usr/bin/moc-qt4 $(DEFINES) $(INCPATH) searchablelabel.h -o moc_searchablelabel.cpp
@@ -244,6 +251,7 @@ mainwindow.o: mainwindow.cpp mainwindow.h \
 		../JapaneseDB/kanjidb.h \
 		../JapaneseDB/kanji.h \
 		kanjidetails.h \
+		resultsbuffer.h \
 		searchbar.h \
 		ui_searchbar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o mainwindow.cpp
@@ -274,6 +282,7 @@ searchablelabel.o: searchablelabel.cpp searchablelabel.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o searchablelabel.o searchablelabel.cpp
 
 searchbar.o: searchbar.cpp searchbar.h \
+		resultsbuffer.h \
 		ui_searchbar.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o searchbar.o searchbar.cpp
 
@@ -288,6 +297,9 @@ moc_kanjidetailsscrollareatestwindow.o: moc_kanjidetailsscrollareatestwindow.cpp
 
 moc_readingmeaninggroupwidget.o: moc_readingmeaninggroupwidget.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_readingmeaninggroupwidget.o moc_readingmeaninggroupwidget.cpp
+
+moc_resultsbuffer.o: moc_resultsbuffer.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_resultsbuffer.o moc_resultsbuffer.cpp
 
 moc_searchablelabel.o: moc_searchablelabel.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_searchablelabel.o moc_searchablelabel.cpp

@@ -10,7 +10,7 @@
 
 #include <iostream>
 
-KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB *kanjiDB) :
+KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB &kanjiDB) :
     QWidget(parent),
     ui(new Ui::KanjiDetails)
 {
@@ -55,7 +55,7 @@ KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB *kanjiDB) :
         hideWidget(ui->staticNelsonRadLabel);
     }
     QSet<Kanji *> variants;
-    kanjiDB->findVariants(k, variants);
+    kanjiDB.findVariants(k, variants);
     if(variants.isEmpty())
     {
         //hideWidget(ui->variantsLabel);

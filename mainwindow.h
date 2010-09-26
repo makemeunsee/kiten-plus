@@ -4,9 +4,10 @@
 #include <QMainWindow>
 #include <QQueue>
 #include <QSet>
+#include <resultsbuffer.h>
+#include <../JapaneseDB/kanjidb.h>
 
 class Kanji;
-class KanjiDB;
 class SearchBar;
 class QLabel;
 class QPushButton;
@@ -19,20 +20,25 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = 0);
+    const ResultsBuffer *resultsBuffer() const;
+    ResultsBuffer *resultsBuffer();
 
 public slots:
+    void back();
+    void forth();
     void open();
     void open(const QString &);
     void search(const QString &);
 
 private:
     void clearPreviousSearch();
-    void showSearchResults(const QSet<Kanji *> &);
+    void showSearchResults(const QString &, const QSet<Kanji *> &);
     void createActions();
     void createMenus();
     void createWidgets();
 
-    KanjiDB *kanjidic;
+    KanjiDB kanjidic;
+    ResultsBuffer *buffer;
 
     QMenu *fileMenu;
     QAction *openAct;

@@ -13,12 +13,14 @@
 #include <QScrollArea>
 #include "../JapaneseDB/kanjidb.h"
 #include "../JapaneseDB/kanji.h"
+#include "resultsbuffer.h"
 #include "kanjidetails.h"
 #include "searchbar.h"
 #include "ui_searchbar.h"
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
+    buffer = new ResultsBuffer;
     createWidgets();
     createActions();
     createMenus();
@@ -39,7 +41,7 @@ void MainWindow::open(const QString &fileName)
         return;
     }
 
-    if (kanjidic->read(&file))
+    if (kanjidic.read(&file))
         statusBar()->showMessage(tr("File loaded"), 2000);
 }
 
@@ -64,6 +66,8 @@ void MainWindow::createActions()
     exitAct = new QAction(tr("E&xit"), this);
     exitAct->setShortcuts(QKeySequence::Quit);
     connect(exitAct, SIGNAL(triggered()), this, SLOT(close()));
+
+    connect(buffer, SIGNAL(changed()), searchBar, SLOT(updateBackAndForth()));
 }
 
 void MainWindow::createMenus()
@@ -75,8 +79,6 @@ void MainWindow::createMenus()
 
 void MainWindow::createWidgets()
 {
-    kanjidic = new KanjiDB;
-
     resultWidgets.append(new QLabel("-"));
     resultLayout = new QVBoxLayout();
     resultLayout->setSizeConstraint(QLayout::SetMinAndMaxSize);
@@ -109,14 +111,17 @@ void MainWindow::clearPreviousSearch()
 
 void MainWindow::search(const QString &s)
 {
-    clearPreviousSearch();
     QSet<Kanji *> results;
-    kanjidic->search(s, results);
-    showSearchResults(results);
+    kanjidic.search(s, results);
+    showSearchResults(s, results);
+    buffer->newRequestAndResult(s, results);
 }
 
-void MainWindow::showSearchResults(const QSet<Kanji *> &results)
+void MainWindow::showSearchResults(const QString &request, const QSet<Kanji *> &results)
 {
+    clearPreviousSearch();
+    searchBar->setText(request);
+
     bool found = false;
     if(results.size() > 0)
     {
@@ -134,4 +139,27 @@ void MainWindow::showSearchResults(const QSet<Kanji *> &results)
         resultWidgets.at(0)->setFocus();
     else
         searchBar->setFocus();
+}
+
+void MainWindow::back()
+{
+    buffer->previous();
+    showSearchResults(buffer->getCurrentRequest(), buffer->getCurrentResults());
+}
+
+void MainWindow::forth()
+{
+    buffer->next();
+    showSearchResults(buffer->getCurrentRequest(), buffer->getCurrentResults());
+}
+
+
+ResultsBuffer *MainWindow::resultsBuffer()
+{
+    return buffer;
+}
+
+const ResultsBuffer *MainWindow::resultsBuffer() const
+{
+    return buffer;
 }

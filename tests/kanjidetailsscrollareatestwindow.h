@@ -2,12 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QtGui/QMainWindow>
+#include "../../JapaneseDB/kanjidb.h"
 
 class KanjiDetails;
 class QPushButton;
 class QVBoxLayout;
-class Kanji;
-class KanjiDB;
 
 class KanjiDetailsScrollAreaTestWindow : public QMainWindow
 {
@@ -26,7 +25,7 @@ private:
     void createKanjis();
     QWidget *scrollWidget;
     QVBoxLayout *scrollLayout;
-    KanjiDB *kanjiDB;
+    KanjiDB kanjiDB;
     Kanji *ten;
     Kanji *vrac;
     QPushButton *buttonTen;

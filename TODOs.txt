@@ -10,7 +10,6 @@ i18n
 
 Kanji part:
 search bar
-    keywords (ucs, jis208, jis212, jis213, jlpt=, strokes[<>=], grade=, ',', ' ')
     back&forth
     stop search
     icons

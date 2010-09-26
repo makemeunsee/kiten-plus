@@ -9,13 +9,17 @@ SOURCES += main.cpp \
     tests/kanjidetailsscrollareatestwindow.cpp \
     readingmeaninggroupwidget.cpp \
     searchablelabel.cpp \
-    searchbar.cpp
+    searchbar.cpp \
+    history.cpp \
+    resultsbuffer.cpp
 HEADERS += mainwindow.h \
     kanjidetails.h \
     tests/kanjidetailsscrollareatestwindow.h \
     readingmeaninggroupwidget.h \
     searchablelabel.h \
-    searchbar.h
+    searchbar.h \
+    history.h \
+    resultsbuffer.h
 FORMS += kanjidetails.ui \
     readingmeaninggroupwidget.ui \
     searchbar.ui

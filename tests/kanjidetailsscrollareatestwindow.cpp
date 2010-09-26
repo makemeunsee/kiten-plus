@@ -1,6 +1,5 @@
 #include "kanjidetailsscrollareatestwindow.h"
 #include "../kanjidetails.h"
-#include "../../JapaneseDB/kanjidb.h"
 #include "../../JapaneseDB/kanji.h"
 #include "../../JapaneseDB/readingmeaninggroup.h"
 #include <QScrollArea>
@@ -17,7 +16,6 @@ KanjiDetailsScrollAreaTestWindow::KanjiDetailsScrollAreaTestWindow(QWidget *pare
     QWidget *centralWidget = new QWidget;
     QHBoxLayout *centralLayout = new QHBoxLayout;
     centralWidget->setLayout(centralLayout);
-    kanjiDB = new KanjiDB;
     kanjiDetails = new KanjiDetails(0, ten, kanjiDB);
     buttonTen = new QPushButton(QString::fromUtf8("天"));
     buttonVrac = new QPushButton("Vrac");

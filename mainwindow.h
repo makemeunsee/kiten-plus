@@ -7,6 +7,7 @@
 
 class Kanji;
 class KanjiDB;
+class SearchBar;
 class QLabel;
 class QPushButton;
 class QLineEdit;
@@ -23,13 +24,6 @@ public slots:
     void open();
     void open(const QString &);
     void search(const QString &);
-    void search();
-    void searchCode();
-    void searchUCS();
-    void searchJIS208();
-    void searchJIS212();
-    void searchJIS213();
-    void clearOtherFields();
 
 private:
     void clearPreviousSearch();
@@ -44,29 +38,9 @@ private:
     QAction *openAct;
     QAction *exitAct;
 
+    SearchBar *searchBar;
     QQueue<QWidget *> resultWidgets;
     QVBoxLayout *resultLayout;
-
-    QLabel *unicodeLabel;
-    QLineEdit *unicodeField;
-    QLabel *jis208Label;
-    QLineEdit *jis208Field;
-    QLabel *jis212Label;
-    QLineEdit *jis212Field;
-    QLabel *jis213Label;
-    QLineEdit *jis213Field;
-    QPushButton *searchCodeButton;
-
-    QLabel *strokeLabel;
-    QLineEdit *strokeField;
-    QLabel *jlptLabel;
-    QLineEdit *jlptField;
-    QLabel *gradeLabel;
-    QLineEdit *gradeField;
-    QLabel *radicalLabel;
-    QLineEdit *radicalField;
-    QPushButton *searchButton;
-
  };
 
 #endif // MAINWINDOW_H

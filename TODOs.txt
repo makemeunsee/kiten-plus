@@ -9,9 +9,15 @@ word panel/tab
 i18n
 
 Kanji part:
-ui improvement (lighter search bar)
-copy paste search
-variants links (ucs: 570d)
+search bar
+    keywords (ucs, jis208, jis212, jis213, jlpt=, strokes[<>=], grade=, ',', ' ')
+    back&forth
+    stop search
+    icons
+    completion
+        keywords
+        history
+history
 radicals search/selection, radical display
 components? (kiten radical file)
-kana/romaji conversion (search bar)
+kana/romaji conversion (search bar)?

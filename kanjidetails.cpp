@@ -55,22 +55,7 @@ KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB *kanjiDB) :
         hideWidget(ui->staticNelsonRadLabel);
     }
     QSet<Kanji *> variants;
-    foreach(int i, k->getUnicodeVariants())
-    {
-        kanjiDB->searchByUnicode(i, variants);
-    }
-    foreach(QString s, k->getJis208Variants())
-    {
-        kanjiDB->searchByJIS208(s, variants);
-    }
-    foreach(QString s, k->getJis212Variants())
-    {
-        kanjiDB->searchByJIS212(s, variants);
-    }
-    foreach(QString s, k->getJis213Variants())
-    {
-        kanjiDB->searchByJIS213(s, variants);
-    }
+    kanjiDB->findVariants(k, variants);
     if(variants.isEmpty())
     {
         //hideWidget(ui->variantsLabel);

@@ -9,14 +9,13 @@ word panel/tab
 i18n
 
 Kanji part:
+history
 search bar
-    back&forth
     stop search
     icons
     completion
         keywords
         history
-history
 radicals search/selection, radical display
 components? (kiten radical file)
 kana/romaji conversion (search bar)?

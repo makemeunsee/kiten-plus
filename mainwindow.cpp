@@ -2,8 +2,6 @@
 #include <QFileDialog>
 #include <QApplication>
 #include <QMessageBox>
-#include <QAction>
-#include <QMenuBar>
 #include <QStatusBar>
 #include <QVBoxLayout>
 #include <QHBoxLayout>
@@ -22,8 +20,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     buffer = new ResultsBuffer;
     createWidgets();
-    createActions();
-    createMenus();
     setWindowTitle(tr("Kiten+"));
     resize(680, 400);
     statusBar()->showMessage(tr("Ready"));
@@ -57,29 +53,9 @@ void MainWindow::open()
     open(fileName);
 }
 
-void MainWindow::createActions()
-{
-    openAct = new QAction(tr("&Open..."), this);
-    openAct->setShortcuts(QKeySequence::Open);
-    connect(openAct, SIGNAL(triggered()), this, SLOT(open()));
-
-    exitAct = new QAction(tr("E&xit"), this);
-    exitAct->setShortcuts(QKeySequence::Quit);
-    connect(exitAct, SIGNAL(triggered()), this, SLOT(close()));
-
-    connect(buffer, SIGNAL(changed()), searchBar, SLOT(updateBackAndForth()));
-}
-
-void MainWindow::createMenus()
-{
-    fileMenu = menuBar()->addMenu(tr("&File"));
-    fileMenu->addAction(openAct);
-    fileMenu->addAction(exitAct);
-}
-
 void MainWindow::createWidgets()
 {
-    resultWidgets.append(new QLabel("-"));
+    resultWidgets.append(new QLabel(""));
     resultLayout = new QVBoxLayout();
     resultLayout->setSizeConstraint(QLayout::SetMinAndMaxSize);
     resultLayout->addWidget(resultWidgets.at(0), 0, Qt::AlignTop);
@@ -89,6 +65,7 @@ void MainWindow::createWidgets()
     area->setWidget(widget);
 
     searchBar = new SearchBar(this);
+    connect(buffer, SIGNAL(changed()), searchBar, SLOT(updateBackAndForth()));
 
     QVBoxLayout *mainLayout = new QVBoxLayout();
     mainLayout->addWidget(searchBar);
@@ -112,7 +89,13 @@ void MainWindow::clearPreviousSearch()
 void MainWindow::search(const QString &s)
 {
     QSet<Kanji *> results;
+
+    // deactivate all widgets except stop button
+    // execute search in separate thread
+    // listen to stop button (connect thread to clicked of stop button)
     kanjidic.search(s, results);
+    // reactivate all widgets
+
     showSearchResults(s, results);
     buffer->newRequestAndResult(s, results);
 }

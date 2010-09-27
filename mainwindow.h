@@ -33,16 +33,10 @@ public slots:
 private:
     void clearPreviousSearch();
     void showSearchResults(const QString &, const QSet<Kanji *> &);
-    void createActions();
-    void createMenus();
     void createWidgets();
 
     KanjiDB kanjidic;
     ResultsBuffer *buffer;
-
-    QMenu *fileMenu;
-    QAction *openAct;
-    QAction *exitAct;
 
     SearchBar *searchBar;
     QQueue<QWidget *> resultWidgets;

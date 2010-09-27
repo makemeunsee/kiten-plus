@@ -23,6 +23,17 @@ HEADERS += mainwindow.h \
 FORMS += kanjidetails.ui \
     readingmeaninggroupwidget.ui \
     searchbar.ui
-LIBS += -L../JapaneseDB \
-    -lJapaneseDB
+win32 {
+    debug {
+        LIBS += -L../JapaneseDB/debug \
+        -lJapaneseDB
+    } else {
+        LIBS += -L../JapaneseDB/release \
+        -lJapaneseDB
+    }
+}
+unix {
+    LIBS += -L../JapaneseDB \
+        -lJapaneseDB
+}
 OTHER_FILES += TODOs.txt

@@ -15,14 +15,23 @@
 #include "kanjidetails.h"
 #include "searchbar.h"
 #include "ui_searchbar.h"
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     buffer = new ResultsBuffer;
     createWidgets();
     setWindowTitle(tr("Kiten+"));
-    resize(680, 400);
+    resize(600, 400);
     statusBar()->showMessage(tr("Ready"));
+    searchThread = new SearchThread;
+    // listen to end of search to display results
+    qRegisterMetaType<KanjiSet*>("KanjiSet*");
+    connect(searchThread, SIGNAL(searchFinished(const QString &, KanjiSet *)), this, SLOT(searchFinished(const QString &, KanjiSet *)));
+    // listen to stop button (connect thread to clicked of stop button)
+    connect(searchBar->stopButton(), SIGNAL(clicked()), searchThread, SLOT(killSearch()));
+    // debug popup info
+    connect(searchThread, SIGNAL(threadInfo(QString)), this, SLOT(popUpInfo(QString)));
     searchBar->setFocus();
 }
 
@@ -88,16 +97,34 @@ void MainWindow::clearPreviousSearch()
 
 void MainWindow::search(const QString &s)
 {
-    QSet<Kanji *> results;
-
+    QSet<Kanji *> *results = new QSet<Kanji *>;
+    QString *searchString = new QString(s);
     // deactivate all widgets except stop button
+    lockGui(true);
     // execute search in separate thread
-    // listen to stop button (connect thread to clicked of stop button)
-    kanjidic.search(s, results);
-    // reactivate all widgets
+    searchThread->search(&kanjidic, searchString, results);
+}
 
-    showSearchResults(s, results);
-    buffer->newRequestAndResult(s, results);
+void MainWindow::popUpInfo(QString s)
+{
+    QMessageBox b;
+    b.setText(s);
+    b.exec();
+}
+
+void MainWindow::searchFinished(const QString &s, KanjiSet *results)
+{
+    // reactivate all widgets, deactivate stop button
+    lockGui(false);
+
+    showSearchResults(s, *results);
+    buffer->newRequestAndResult(s, *results);
+}
+
+void MainWindow::lockGui(bool lock)
+{
+    searchBar->lock(lock);
+    resultLayout->setEnabled(!lock);
 }
 
 void MainWindow::showSearchResults(const QString &request, const QSet<Kanji *> &results)

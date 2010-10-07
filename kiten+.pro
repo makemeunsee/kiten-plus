@@ -11,7 +11,8 @@ SOURCES += main.cpp \
     searchablelabel.cpp \
     searchbar.cpp \
     history.cpp \
-    resultsbuffer.cpp
+    resultsbuffer.cpp \
+    searchthread.cpp
 HEADERS += mainwindow.h \
     kanjidetails.h \
     tests/kanjidetailsscrollareatestwindow.h \
@@ -19,21 +20,17 @@ HEADERS += mainwindow.h \
     searchablelabel.h \
     searchbar.h \
     history.h \
-    resultsbuffer.h
+    resultsbuffer.h \
+    searchthread.h
 FORMS += kanjidetails.ui \
     readingmeaninggroupwidget.ui \
     searchbar.ui
-win32 {
-    debug {
-        LIBS += -L../JapaneseDB/debug \
+win32 { 
+    debug:LIBS += -L../JapaneseDB/debug \
         -lJapaneseDB
-    } else {
-        LIBS += -L../JapaneseDB/release \
-        -lJapaneseDB
-    }
-}
-unix {
-    LIBS += -L../JapaneseDB \
+    else:LIBS += -L../JapaneseDB/release \
         -lJapaneseDB
 }
+unix:LIBS += -L../JapaneseDB \
+    -lJapaneseDB
 OTHER_FILES += TODOs.txt

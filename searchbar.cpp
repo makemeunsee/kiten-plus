@@ -61,3 +61,16 @@ void SearchBar::updateBackAndForth()
     else
         ui->backButton->setEnabled(false);
 }
+
+void SearchBar::lock(bool lock)
+{
+    ui->backButton->setEnabled(!lock);
+    ui->forthButton->setEnabled(!lock);
+    ui->searchLine->setEnabled(!lock);
+    ui->stopButton->setEnabled(lock);
+}
+
+const QPushButton *SearchBar::stopButton()
+{
+    return ui->stopButton;
+}

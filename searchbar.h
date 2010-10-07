@@ -2,6 +2,7 @@
 #define SEARCHBAR_H
 
 #include <QWidget>
+#include <QPushButton>
 
 namespace Ui {
     class SearchBar;
@@ -17,6 +18,8 @@ public:
     virtual void setFocus();
     QString text() const;
     void setText(const QString &);
+    const QPushButton *stopButton();
+    void lock(bool);
 
 public slots:
     void search();

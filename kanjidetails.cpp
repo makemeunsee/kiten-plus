@@ -8,8 +8,6 @@
 #include "../JapaneseDB/readingmeaninggroup.h"
 #include "searchablelabel.h"
 
-#include <iostream>
-
 KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB &kanjiDB) :
     QWidget(parent),
     ui(new Ui::KanjiDetails)
@@ -104,7 +102,7 @@ KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB &kanjiDB) :
         hideWidget(ui->staticJIS212Label);
     }
     if(!k->getJis213().isEmpty())
-        updateLabel(ui->jis208Label, k->getJis213());
+        updateLabel(ui->jis213Label, k->getJis213());
     else
     {
         hideWidget(ui->jis213Label);

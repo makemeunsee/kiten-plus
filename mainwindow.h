@@ -6,6 +6,7 @@
 #include <QSet>
 #include <resultsbuffer.h>
 #include <../JapaneseDB/kanjidb.h>
+#include "searchthread.h"
 
 class Kanji;
 class SearchBar;
@@ -29,15 +30,19 @@ public slots:
     void open();
     void open(const QString &);
     void search(const QString &);
+    void searchFinished(const QString &, KanjiSet *);
+    void popUpInfo(QString);
 
 private:
     void clearPreviousSearch();
     void showSearchResults(const QString &, const QSet<Kanji *> &);
     void createWidgets();
+    void lockGui(bool);
 
     KanjiDB kanjidic;
     ResultsBuffer *buffer;
 
+    SearchThread *searchThread;
     SearchBar *searchBar;
     QQueue<QWidget *> resultWidgets;
     QVBoxLayout *resultLayout;

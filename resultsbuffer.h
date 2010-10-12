@@ -16,8 +16,8 @@ public:
     ResultsBuffer();
     const QSet<Kanji *> &getCurrentResults() const;
     const QString &getCurrentRequest() const;
-    bool hasPrevious();
-    bool hasNext();
+    bool hasPrevious() const;
+    bool hasNext() const;
     void previous();
     void next();
     void newRequestAndResult(QString, QSet<Kanji *>);

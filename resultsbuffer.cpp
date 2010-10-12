@@ -49,12 +49,12 @@ void ResultsBuffer::next()
     emit changed();
 }
 
-bool ResultsBuffer::hasNext()
+bool ResultsBuffer::hasNext() const
 {
     return !nextRequests.isEmpty();
 }
 
-bool ResultsBuffer::hasPrevious()
+bool ResultsBuffer::hasPrevious() const
 {
     return !previousRequests.isEmpty();
 }

@@ -2,6 +2,7 @@
 # Project created by QtCreator 2010-08-18T10:31:57
 # -------------------------------------------------
 QT += xml
+#CONFIG += console
 TARGET = kiten+
 SOURCES += main.cpp \
     mainwindow.cpp \

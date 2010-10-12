@@ -24,7 +24,6 @@ void SearchThread::killSearch()
 {
     if(isRunning())
     {
-        emit threadInfo(QString("thread killed"));
         terminate();
         wait();
         resultSet->clear();

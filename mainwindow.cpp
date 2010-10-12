@@ -16,6 +16,10 @@
 #include "searchbar.h"
 #include "ui_searchbar.h"
 #include <QMessageBox>
+#include <QDataStream>
+
+
+const int MainWindow::searchLimit = 20;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
@@ -27,18 +31,33 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     searchThread = new SearchThread;
     // listen to end of search to display results
     qRegisterMetaType<KanjiSet*>("KanjiSet*");
-    connect(searchThread, SIGNAL(searchFinished(const QString &, KanjiSet *)), this, SLOT(searchFinished(const QString &, KanjiSet *)));
+    connect(searchThread, SIGNAL(searchFinished(const QString &, KanjiSet *)), this, SLOT(done(const QString &, KanjiSet *)));
     // listen to stop button (connect thread to clicked of stop button)
-    connect(searchBar->stopButton(), SIGNAL(clicked()), searchThread, SLOT(killSearch()));
+    //connect(searchBar->stopButton(), SIGNAL(clicked()), searchThread, SLOT(killSearch()));
     // debug popup info
-    connect(searchThread, SIGNAL(threadInfo(QString)), this, SLOT(popUpInfo(QString)));
+    //connect(searchThread, SIGNAL(threadInfo(QString)), this, SLOT(popUpInfo(QString)));
     searchBar->setFocus();
 }
 
 void MainWindow::open(const QString &fileName)
 {
+    QString indexName = fileName + ".index";
+    QFile index(indexName);
+    if (index.open(QIODevice::ReadOnly)) {
+        if(kanjidic.readIndex(&index))
+            return;
+        else
+        {
+            //TODO log: index unreadable
+        }
+        index.close();
+    } else
+    {
+        //TODO log: no index found
+    }
+
     QFile file(fileName);
-    if (!file.open(QFile::Text | QFile::ReadOnly)) {
+    if (!file.open(QIODevice::Text | QIODevice::ReadOnly)) {
         QMessageBox::warning(this, tr("Kanjidic file"),
                           tr("Cannot read file %1:\n%2.")
                           .arg(fileName)
@@ -46,20 +65,24 @@ void MainWindow::open(const QString &fileName)
         return;
     }
 
-    if (kanjidic.read(&file))
+    if (kanjidic.readKanjiDic(&file))
+    {
         statusBar()->showMessage(tr("File loaded"), 2000);
-}
-
-void MainWindow::open()
-{
-    QString fileName =
-        QFileDialog::getOpenFileName(this, tr("Open Kanjidic file"),
-                                      QDir::currentPath(),
-                                      tr("XML Kanjidic file (*.xml)"));
-    if (fileName.isEmpty())
-        return;
-
-    open(fileName);
+        if(!index.open(QIODevice::WriteOnly))
+        {
+            //TODO log: no index could be written
+        } else
+        {
+            kanjidic.writeIndex(&index);
+            index.close();
+        }
+    }
+    else
+        QMessageBox::warning(this, tr("Kanjidic file"),
+                          tr("Cannot read kanjidic file %1:\n%2.")
+                          .arg(fileName)
+                          .arg(kanjidic.errorString()));
+    file.close();
 }
 
 void MainWindow::createWidgets()
@@ -112,7 +135,7 @@ void MainWindow::popUpInfo(QString s)
     b.exec();
 }
 
-void MainWindow::searchFinished(const QString &s, KanjiSet *results)
+void MainWindow::done(const QString &s, KanjiSet *results)
 {
     // reactivate all widgets, deactivate stop button
     lockGui(false);
@@ -133,13 +156,27 @@ void MainWindow::showSearchResults(const QString &request, const QSet<Kanji *> &
     searchBar->setText(request);
 
     bool found = false;
-    if(results.size() > 0)
+    int size = results.size();
+    if(size > 0)
     {
+        if(size > searchLimit)
+            statusBar()->showMessage(tr("Too many results, displaying only %1 first results of %2").arg(searchLimit).arg(size));
+        else
+            statusBar()->showMessage(tr("%1 results").arg(size));
+        int count = 0;
         foreach(Kanji *k, results)
+        {
+            if(count == searchLimit)
+                break;
             resultWidgets.append(new KanjiDetails(this, k, kanjidic));
+            ++count;
+        }
         found = true;
     } else
-        resultWidgets.append(new QLabel(QString("Request \"") + searchBar->text() + "\" yielded no result."));
+    {
+        statusBar()->showMessage(tr("No result").arg(size));
+        resultWidgets.append(new QLabel(tr("Request \"%1\" yielded no result.").arg(searchBar->text())));
+    }
 
     foreach(QWidget *resultWidget, resultWidgets)
         resultLayout->addWidget(resultWidget, 0, Qt::AlignTop);

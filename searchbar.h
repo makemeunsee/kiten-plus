@@ -18,7 +18,7 @@ public:
     virtual void setFocus();
     QString text() const;
     void setText(const QString &);
-    const QPushButton *stopButton();
+//    const QPushButton *stopButton();
     void lock(bool);
 
 public slots:

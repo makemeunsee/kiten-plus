@@ -1,17 +1,20 @@
 C++ knowledge:
 destructors behavior
-static and friend modifiers
 
 Global:
+portable version
 indexing -> file
 logging / exception handling
 word panel/tab
 i18n
-
+preferences
+    result limit
+    clear history
 Kanji part:
+indexing
 history
 search bar
-    stop search
+    sort search results
     icons
     completion
         keywords

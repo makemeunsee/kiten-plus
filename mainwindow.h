@@ -23,14 +23,13 @@ public:
     MainWindow(QWidget *parent = 0);
     const ResultsBuffer *resultsBuffer() const;
     ResultsBuffer *resultsBuffer();
+    void open(const QString &);
 
 public slots:
     void back();
     void forth();
-    void open();
-    void open(const QString &);
     void search(const QString &);
-    void searchFinished(const QString &, KanjiSet *);
+    void done(const QString &, KanjiSet *);
     void popUpInfo(QString);
 
 private:
@@ -46,6 +45,8 @@ private:
     SearchBar *searchBar;
     QQueue<QWidget *> resultWidgets;
     QVBoxLayout *resultLayout;
- };
+
+    static const int searchLimit;
+};
 
 #endif // MAINWINDOW_H

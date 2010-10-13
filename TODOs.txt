@@ -13,8 +13,8 @@ preferences
 Kanji part:
 indexing
 history
+sort search results
 search bar
-    sort search results
     icons
     completion
         keywords

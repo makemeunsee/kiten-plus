@@ -10,8 +10,8 @@ i18n
 preferences
     result limit
     clear history
+
 Kanji part:
-indexing
 history
 search bar
     sort search results
@@ -22,3 +22,6 @@ search bar
 radicals search/selection, radical display
 components? (kiten radical file)
 kana/romaji conversion (search bar)?
+
+Test:
+   build index, reload index, redo -> check mem

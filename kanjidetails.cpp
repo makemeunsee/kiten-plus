@@ -56,11 +56,9 @@ KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB &kanjiDB) :
     kanjiDB.findVariants(k, variants);
     if(variants.isEmpty())
     {
-        //hideWidget(ui->variantsLabel);
         hideWidget(ui->staticVariantsLabel);
     } else
     {
-        QString s_variants;
         foreach(Kanji *k, variants)
         {
             SearchableLabel *l = new SearchableLabel(k->getLiteral());

@@ -34,7 +34,7 @@ public slots:
 
 private:
     void clearPreviousSearch();
-    void showSearchResults(const QString &, const QSet<Kanji *> &);
+    void showSearchResults(const QString &, const KanjiSet &);
     void createWidgets();
     void lockGui(bool);
 

@@ -14,7 +14,6 @@ preferences
 Kanji part:
 history
 search bar
-    sort search results
     icons
     completion
         keywords
@@ -24,4 +23,3 @@ components? (kiten radical file)
 kana/romaji conversion (search bar)?
 
 Test:
-   build index, reload index, redo -> check mem

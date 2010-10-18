@@ -1,8 +1,5 @@
 #include "resultsbuffer.h"
 
-#include <QString>
-#include "../JapaneseDB/kanji.h"
-
 ResultsBuffer::ResultsBuffer()
 {
 }
@@ -12,12 +9,12 @@ const QString &ResultsBuffer::getCurrentRequest() const
     return currentRequest;
 }
 
-const QSet<Kanji *> &ResultsBuffer::getCurrentResults() const
+const KanjiSet &ResultsBuffer::getCurrentResults() const
 {
     return currentResults;
 }
 
-void ResultsBuffer::newRequestAndResult(QString request, QSet<Kanji *> results)
+void ResultsBuffer::newRequestAndResult(QString request, KanjiSet results)
 {
     nextRequests.clear();
     nextResults.clear();

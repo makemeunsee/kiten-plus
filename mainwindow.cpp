@@ -120,7 +120,7 @@ void MainWindow::clearPreviousSearch()
 
 void MainWindow::search(const QString &s)
 {
-    QSet<Kanji *> *results = new QSet<Kanji *>;
+    KanjiSet *results = new KanjiSet;
     QString *searchString = new QString(s);
     // deactivate all widgets except stop button
     lockGui(true);
@@ -150,7 +150,7 @@ void MainWindow::lockGui(bool lock)
     resultLayout->setEnabled(!lock);
 }
 
-void MainWindow::showSearchResults(const QString &request, const QSet<Kanji *> &results)
+void MainWindow::showSearchResults(const QString &request, const KanjiSet &results)
 {
     clearPreviousSearch();
     searchBar->setText(request);

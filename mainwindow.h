@@ -7,6 +7,7 @@
 #include <resultsbuffer.h>
 #include <../JapaneseDB/kanjidb.h>
 #include "searchthread.h"
+#include "history.h"
 
 class Kanji;
 class SearchBar;
@@ -29,8 +30,11 @@ public slots:
     void back();
     void forth();
     void search(const QString &);
-    void done(const QString &, KanjiSet *);
+    void done(QString *, KanjiSet *);
     void popUpInfo(QString);
+
+protected:
+    virtual void closeEvent(QCloseEvent *event);
 
 private:
     void clearPreviousSearch();
@@ -40,6 +44,8 @@ private:
 
     KanjiDB kanjidic;
     ResultsBuffer *buffer;
+    History history;
+    QString historyFilename;
 
     SearchThread *searchThread;
     SearchBar *searchBar;

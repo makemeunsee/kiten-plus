@@ -23,7 +23,7 @@ const int MainWindow::searchLimit = 20;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
-    buffer = new ResultsBuffer;
+    buffer = new ResultsBuffer(history);
     createWidgets();
     setWindowTitle(tr("Kiten+"));
     resize(600, 400);
@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     searchThread = new SearchThread;
     // listen to end of search to display results
     qRegisterMetaType<KanjiSet*>("KanjiSet*");
-    connect(searchThread, SIGNAL(searchFinished(const QString &, KanjiSet *)), this, SLOT(done(const QString &, KanjiSet *)));
+    connect(searchThread, SIGNAL(searchFinished(QString *, KanjiSet *)), this, SLOT(done(QString *, KanjiSet *)));
     // listen to stop button (connect thread to clicked of stop button)
     //connect(searchBar->stopButton(), SIGNAL(clicked()), searchThread, SLOT(killSearch()));
     // debug popup info
@@ -39,13 +39,27 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     searchBar->setFocus();
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+ {
+    QFile historyFile(historyFilename);
+    if (historyFile.open(QIODevice::WriteOnly)) {
+        history.write(historyFile);
+        historyFile.close();
+    } else
+    {
+        //TODO log: history unwritable
+    }
+    QMainWindow::closeEvent(event);
+ }
+
 void MainWindow::open(const QString &fileName)
 {
+    bool dataRead = false;
     QString indexName = fileName + ".index";
     QFile index(indexName);
     if (index.open(QIODevice::ReadOnly)) {
         if(kanjidic.readIndex(&index))
-            return;
+            dataRead = true;
         else
         {
             //TODO log: index unreadable
@@ -56,33 +70,47 @@ void MainWindow::open(const QString &fileName)
         //TODO log: no index found
     }
 
-    QFile file(fileName);
-    if (!file.open(QIODevice::Text | QIODevice::ReadOnly)) {
-        QMessageBox::warning(this, tr("Kanjidic file"),
-                          tr("Cannot read file %1:\n%2.")
-                          .arg(fileName)
-                          .arg(file.errorString()));
-        return;
+    if(!dataRead)
+    {
+        QFile file(fileName);
+        if (!file.open(QIODevice::Text | QIODevice::ReadOnly)) {
+            QMessageBox::warning(this, tr("Kanjidic file"),
+                              tr("Cannot read file %1:\n%2.")
+                              .arg(fileName)
+                              .arg(file.errorString()));
+            return;
+        }
+
+        if (kanjidic.readKanjiDic(&file))
+        {
+            statusBar()->showMessage(tr("File loaded"), 2000);
+            if(!index.open(QIODevice::WriteOnly))
+            {
+                //TODO log: no index could be written
+            } else
+            {
+                kanjidic.writeIndex(&index);
+                index.close();
+            }
+        }
+        else
+            QMessageBox::warning(this, tr("Kanjidic file"),
+                              tr("Cannot read kanjidic file %1:\n%2.")
+                              .arg(fileName)
+                              .arg(kanjidic.errorString()));
+        file.close();
     }
 
-    if (kanjidic.readKanjiDic(&file))
+    historyFilename = fileName + ".history";
+    QFile historyFile(historyFilename);
+    if (historyFile.open(QIODevice::ReadOnly)) {
+        history.read(historyFile);
+        historyFile.close();
+    } else
     {
-        statusBar()->showMessage(tr("File loaded"), 2000);
-        if(!index.open(QIODevice::WriteOnly))
-        {
-            //TODO log: no index could be written
-        } else
-        {
-            kanjidic.writeIndex(&index);
-            index.close();
-        }
+        //TODO log: no history found
     }
-    else
-        QMessageBox::warning(this, tr("Kanjidic file"),
-                          tr("Cannot read kanjidic file %1:\n%2.")
-                          .arg(fileName)
-                          .arg(kanjidic.errorString()));
-    file.close();
+
 }
 
 void MainWindow::createWidgets()
@@ -135,13 +163,13 @@ void MainWindow::popUpInfo(QString s)
     b.exec();
 }
 
-void MainWindow::done(const QString &s, KanjiSet *results)
+void MainWindow::done(QString *s, KanjiSet *results)
 {
     // reactivate all widgets, deactivate stop button
     lockGui(false);
 
-    showSearchResults(s, *results);
-    buffer->newRequestAndResult(s, *results);
+    showSearchResults(*s, *results);
+    buffer->newRequestAndResult(s, results);
 }
 
 void MainWindow::lockGui(bool lock)
@@ -191,13 +219,13 @@ void MainWindow::showSearchResults(const QString &request, const KanjiSet &resul
 void MainWindow::back()
 {
     buffer->previous();
-    showSearchResults(buffer->getCurrentRequest(), buffer->getCurrentResults());
+    showSearchResults(*buffer->getCurrentRequest(), *buffer->getCurrentResults());
 }
 
 void MainWindow::forth()
 {
     buffer->next();
-    showSearchResults(buffer->getCurrentRequest(), buffer->getCurrentResults());
+    showSearchResults(*buffer->getCurrentRequest(), *buffer->getCurrentResults());
 }
 
 

@@ -3,8 +3,6 @@
 #include "ui_kanjidetails.h"
 #include "readingmeaninggroupwidget.h"
 #include "ui_readingmeaninggroupwidget.h"
-#include "../JapaneseDB/kanji.h"
-#include "../JapaneseDB/kanjidb.h"
 #include "../JapaneseDB/readingmeaninggroup.h"
 #include "searchablelabel.h"
 
@@ -52,15 +50,13 @@ KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB &kanjiDB) :
         hideWidget(ui->radNelsonLabel);
         hideWidget(ui->staticNelsonRadLabel);
     }
-    QSet<Kanji *> variants;
+    KanjiSet variants;
     kanjiDB.findVariants(k, variants);
     if(variants.isEmpty())
     {
-        //hideWidget(ui->variantsLabel);
         hideWidget(ui->staticVariantsLabel);
     } else
     {
-        QString s_variants;
         foreach(Kanji *k, variants)
         {
             SearchableLabel *l = new SearchableLabel(k->getLiteral());

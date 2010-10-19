@@ -4,34 +4,35 @@
 #include <QObject>
 #include <QStack>
 #include <QSet>
-
-class Kanji;
-class QString;
+#include <QString>
+#include "../JapaneseDB/kanji.h"
+#include "history.h"
 
 class ResultsBuffer : public QObject
 {
     Q_OBJECT
 
 public:
-    ResultsBuffer();
-    const QSet<Kanji *> &getCurrentResults() const;
-    const QString &getCurrentRequest() const;
+    ResultsBuffer(History &h);
+    const KanjiSet *getCurrentResults() const;
+    const QString *getCurrentRequest() const;
     bool hasPrevious() const;
     bool hasNext() const;
     void previous();
     void next();
-    void newRequestAndResult(QString, QSet<Kanji *>);
+    void newRequestAndResult(QString *, KanjiSet *);
 
 signals:
     void changed();
 
 private:
-    QSet<Kanji *> currentResults;
-    QString currentRequest;
-    QStack<QSet<Kanji *> > previousResults;
-    QStack<QSet<Kanji *> > nextResults;
-    QStack<QString> previousRequests;
-    QStack<QString> nextRequests;
+    History &history;
+    KanjiSet *currentResults;
+    QString *currentRequest;
+    QStack<KanjiSet *> previousResults;
+    QStack<KanjiSet *> nextResults;
+    QStack<QString *> previousRequests;
+    QStack<QString *> nextRequests;
 };
 
 #endif // RESULTSBUFFER_H

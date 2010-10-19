@@ -5,7 +5,7 @@ SearchThread::SearchThread(QObject *parent) :
 {
 }
 
-void SearchThread::search(const KanjiDB *dic, const QString *s, KanjiSet *results)
+void SearchThread::search(const KanjiDB *dic, QString *s, KanjiSet *results)
 {
     QMutexLocker locker(&mutex);
 
@@ -27,12 +27,12 @@ void SearchThread::killSearch()
         terminate();
         wait();
         resultSet->clear();
-        emit searchFinished(*searchString, resultSet);
+        emit searchFinished(searchString, resultSet);
     }
 }
 
 void SearchThread::run()
 {
     kanjiDic->search(*searchString, *resultSet);
-    emit searchFinished(*searchString, resultSet);
+    emit searchFinished(searchString, resultSet);
 }

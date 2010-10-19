@@ -1,27 +1,31 @@
 #include "resultsbuffer.h"
 
-#include <QString>
-#include "../JapaneseDB/kanji.h"
-
-ResultsBuffer::ResultsBuffer()
+ResultsBuffer::ResultsBuffer(History &h) : history(h)
 {
+    currentRequest = 0;
 }
 
-const QString &ResultsBuffer::getCurrentRequest() const
+const QString *ResultsBuffer::getCurrentRequest() const
 {
     return currentRequest;
 }
 
-const QSet<Kanji *> &ResultsBuffer::getCurrentResults() const
+const KanjiSet *ResultsBuffer::getCurrentResults() const
 {
     return currentResults;
 }
 
-void ResultsBuffer::newRequestAndResult(QString request, QSet<Kanji *> results)
+void ResultsBuffer::newRequestAndResult(QString *request, KanjiSet *results)
 {
+    history.add(*request);
+
+    foreach(QString *s, nextRequests)
+        delete s;
     nextRequests.clear();
+    foreach(KanjiSet *s, nextResults)
+        delete s;
     nextResults.clear();
-    if(!currentRequest.isNull())
+    if(currentRequest != 0)
     {
         previousRequests.push(currentRequest);
         previousResults.push(currentResults);

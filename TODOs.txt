@@ -24,4 +24,3 @@ components? (kiten radical file)
 kana/romaji conversion (search bar)?
 
 Test:
-   build index, reload index, redo -> check mem

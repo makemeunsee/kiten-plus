@@ -2,9 +2,8 @@
 #define KANJIDETAILS_H
 
 #include <QWidget>
+#include "../JapaneseDB/kanjidb.h"
 
-class Kanji;
-class KanjiDB;
 class MainWindow;
 class QString;
 class QLabel;

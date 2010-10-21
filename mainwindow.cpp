@@ -32,8 +32,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     // listen to end of search to display results
     qRegisterMetaType<KanjiSet*>("KanjiSet*");
     connect(searchThread, SIGNAL(searchFinished(QString *, KanjiSet *)), this, SLOT(done(QString *, KanjiSet *)));
-    // listen to stop button (connect thread to clicked of stop button)
-    //connect(searchBar->stopButton(), SIGNAL(clicked()), searchThread, SLOT(killSearch()));
     // debug popup info
     //connect(searchThread, SIGNAL(threadInfo(QString)), this, SLOT(popUpInfo(QString)));
     searchBar->setFocus();
@@ -188,7 +186,7 @@ void MainWindow::showSearchResults(const QString &request, const KanjiSet &resul
     if(size > 0)
     {
         if(size > searchLimit)
-            statusBar()->showMessage(tr("Too many results, displaying only %1 first results of %2").arg(searchLimit).arg(size));
+            statusBar()->showMessage(tr("Displaying %1 results of %2 found").arg(searchLimit).arg(size));
         else
             statusBar()->showMessage(tr("%1 results").arg(size));
         int count = 0;

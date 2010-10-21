@@ -13,6 +13,7 @@ preferences
 
 Kanji part:
 history
+sort search results
 search bar
     icons
     completion

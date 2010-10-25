@@ -3,10 +3,12 @@ destructors behavior
 
 Global:
 portable version
-indexing -> file
+licenses
+packaging
 logging / exception handling
 word panel/tab
 i18n
+back with alt arrow, backspace, forth with alt arrow
 preferences
     result limit
     clear history

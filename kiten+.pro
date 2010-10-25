@@ -13,7 +13,8 @@ SOURCES += main.cpp \
     searchbar.cpp \
     history.cpp \
     resultsbuffer.cpp \
-    searchthread.cpp
+    searchthread.cpp \
+    searchcompleter.cpp
 HEADERS += mainwindow.h \
     kanjidetails.h \
     tests/kanjidetailsscrollareatestwindow.h \
@@ -22,7 +23,8 @@ HEADERS += mainwindow.h \
     searchbar.h \
     history.h \
     resultsbuffer.h \
-    searchthread.h
+    searchthread.h \
+    searchcompleter.h
 FORMS += kanjidetails.ui \
     readingmeaninggroupwidget.ui \
     searchbar.ui
@@ -34,4 +36,7 @@ win32 {
 }
 unix:LIBS += -L../JapaneseDB \
     -lJapaneseDB
-OTHER_FILES += TODOs.txt
+OTHER_FILES += TODOs.txt \
+    icons/right.png \
+    icons/left.png \
+    icons/katen.png

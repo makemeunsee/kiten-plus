@@ -2,7 +2,7 @@
 #include "ui_searchbar.h"
 #include "mainwindow.h"
 
-SearchBar::SearchBar(MainWindow *parent) :
+SearchBar::SearchBar(History &h, MainWindow *parent) :
     QWidget(parent),
     ui(new Ui::SearchBar)
 {
@@ -11,6 +11,14 @@ SearchBar::SearchBar(MainWindow *parent) :
     connect(ui->searchLine, SIGNAL(returnPressed()), this, SLOT(search()));
     connect(ui->backButton, SIGNAL(clicked()), searchWindow, SLOT(back()));
     connect(ui->forthButton, SIGNAL(clicked()), searchWindow, SLOT(forth()));
+    ui->backButton->setShortcut(QKeySequence(Qt::ALT + Qt::Key_Left));
+    ui->forthButton->setShortcut(QKeySequence(Qt::ALT + Qt::Key_Right));
+    backIcon = QIcon("icons/left.png");
+    forthIcon = QIcon("icons/right.png");
+    ui->backButton->setIcon(backIcon);
+    ui->forthButton->setIcon(forthIcon);
+    completer = new SearchCompleter(h);
+    ui->searchLine->setCompleter(completer);
 }
 
 SearchBar::~SearchBar()

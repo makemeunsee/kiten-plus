@@ -3,6 +3,9 @@
 
 #include <QWidget>
 #include <QPushButton>
+#include <QShortcut>
+#include "searchcompleter.h"
+#include "history.h"
 
 namespace Ui {
     class SearchBar;
@@ -13,7 +16,7 @@ class MainWindow;
 class SearchBar : public QWidget {
     Q_OBJECT
 public:
-    SearchBar(MainWindow *parent);
+    SearchBar(History &h, MainWindow *parent);
     ~SearchBar();
     virtual void setFocus();
     QString text() const;
@@ -31,6 +34,10 @@ protected:
 private:
     Ui::SearchBar *ui;
     MainWindow *searchWindow;
+    QShortcut *back;
+    QShortcut *forth;
+    SearchCompleter *completer;
+    QIcon backIcon, forthIcon;
 };
 
 #endif // SEARCHBAR_H

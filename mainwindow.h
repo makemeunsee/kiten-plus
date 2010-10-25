@@ -52,6 +52,8 @@ private:
     QQueue<QWidget *> resultWidgets;
     QVBoxLayout *resultLayout;
 
+    QIcon icon;
+
     static const int searchLimit;
 };
 

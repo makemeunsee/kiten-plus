@@ -23,6 +23,8 @@ const int MainWindow::searchLimit = 20;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
+    icon = QIcon("icons/katen.png");
+    setWindowIcon(icon);
     buffer = new ResultsBuffer(history);
     createWidgets();
     setWindowTitle(tr("Kiten+"));
@@ -122,7 +124,7 @@ void MainWindow::createWidgets()
     widget->setLayout(resultLayout);
     area->setWidget(widget);
 
-    searchBar = new SearchBar(this);
+    searchBar = new SearchBar(history, this);
     connect(buffer, SIGNAL(changed()), searchBar, SLOT(updateBackAndForth()));
 
     QVBoxLayout *mainLayout = new QVBoxLayout();
@@ -200,7 +202,7 @@ void MainWindow::showSearchResults(const QString &request, const KanjiSet &resul
         found = true;
     } else
     {
-        statusBar()->showMessage(tr("No result").arg(size));
+        statusBar()->showMessage(tr("No result"));
         resultWidgets.append(new QLabel(tr("Request \"%1\" yielded no result.").arg(searchBar->text())));
     }
 

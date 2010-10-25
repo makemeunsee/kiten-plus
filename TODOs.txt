@@ -12,13 +12,10 @@ preferences
     clear history
 
 Kanji part:
-history
-sort search results
 search bar
     icons
     completion
         keywords
-        history
 radicals search/selection, radical display
 components? (kiten radical file)
 kana/romaji conversion (search bar)?

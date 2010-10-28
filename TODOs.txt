@@ -5,17 +5,15 @@ Global:
 portable version
 licenses
 packaging
-logging / exception handling
-word panel/tab
+logging
+word (JDic) panel/tab
 i18n
-back with alt arrow, backspace, forth with alt arrow
 preferences
     result limit
     clear history
 
 Kanji part:
 search bar
-    icons
     completion
         keywords
 radicals search/selection, radical display

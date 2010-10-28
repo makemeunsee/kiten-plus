@@ -5,7 +5,7 @@
 #include <QQueue>
 #include <QSet>
 #include <resultsbuffer.h>
-#include <../JapaneseDB/kanjidb.h>
+#include "../JapaneseDB/kanjidb.h"
 #include "searchthread.h"
 #include "history.h"
 

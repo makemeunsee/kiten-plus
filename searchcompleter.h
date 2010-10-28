@@ -2,18 +2,24 @@
 #define SEARCHCOMPLETER_H
 
 #include <QCompleter>
-#include "history.h"
+#include <QStringListModel>
+#include <QRegExp>
 
 class SearchCompleter : public QCompleter
 {
     Q_OBJECT
 public:
-    explicit SearchCompleter(History &h, QObject *parent = 0);
+    explicit SearchCompleter(QObject *parent = 0);
+    void update(const QString &text);
+    bool isCorrect(const QString &text);
 
 signals:
 
 public slots:
 
+private:
+    QStringListModel model;
+    QRegExp completionRegexp;
 };
 
 #endif // SEARCHCOMPLETER_H

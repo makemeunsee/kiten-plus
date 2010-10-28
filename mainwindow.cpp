@@ -18,7 +18,6 @@
 #include <QMessageBox>
 #include <QDataStream>
 
-
 const int MainWindow::searchLimit = 20;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)

@@ -14,10 +14,12 @@ preferences
 Kanji part:
 search bar
     icons
-    completion
-        keywords
 radicals search/selection, radical display
 components? (kiten radical file)
 kana/romaji conversion (search bar)?
 
 Test:
+    ucs=570d+strokes=13 -> empty
+
+Outer bugs
+    ucs=3468: no font

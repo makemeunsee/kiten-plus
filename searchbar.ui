@@ -89,7 +89,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="searchLine">
+    <widget class="SearchLineEdit" name="searchLine">
      <property name="minimumSize">
       <size>
        <width>0</width>
@@ -111,6 +111,13 @@
    </item>
   </layout>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SearchLineEdit</class>
+   <extends>QLineEdit</extends>
+   <header>searchlineedit.h</header>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections/>
 </ui>

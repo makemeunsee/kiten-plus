@@ -1,25 +1,22 @@
 C++ knowledge:
-destructors behavior
+
 
 Global:
-portable version
-indexing -> file
-logging / exception handling
-word panel/tab
-i18n
-preferences
-    result limit
-    clear history
+    proper versioning
+    portable version (including kanjidic2, edict (zipped?), licenses)
+    logging handling
+    edict panel/tab
+    i18n
+    preferences button/panel
+        icon
+        result limit
+        clear history
 
 Kanji part:
-search bar
-    icons
-radicals search/selection, radical display
-components? (kiten radical file)
-kana/romaji conversion (search bar)?
+    radicals search/selection, radical display
+    components? (kiten radical file)
+    kana/romaji conversion (search bar)?
+    links to words containing/starting with/ending with
 
 Test:
-    ucs=570d+strokes=13 -> empty
-
-Outer bugs
-    ucs=3468: no font
+    ucs=3468: no font (on windows) (external bug?)

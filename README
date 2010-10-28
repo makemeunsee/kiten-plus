@@ -1,0 +1,41 @@
+Introduction
+============
+
+Kiten+ is a Japanese dictionary, based on kanjidic2 and edict. It's inspired by both Kiten from the KDE project and jisho.org.
+
+Usage
+=====
+
+The kanjidic2 xml file is needed (or any xml kanji dictionary following the same schema).
+kanjidic2.xml can be placed in ~/.kiten+/ or in the same folder as kiten+ itself (for portable mode).
+
+Paste Japanese text in the search bar to get the details of each kanji.
+Browse your search history by pressing down arrow in the search bar.
+Use the technical autocompletion by pressing up arrow in the search bar.
+The technical autocompletion allows you to search using theses keywords:
+	ucs=		look up a kanji by its unicode value (hexadecimal)
+	jis208=		look up a kanji by its JIS208 value
+	jis212=		look up a kanji by its JIS212 value
+	jis213=		look up a kanji by its JIS213 value
+	grade=		find all kanji of this grade (official Japanese school system grade, 1-6 are real grade, 8 means the kanji is part of the kanji taught in junior high school, 9-10 indicates a kanji used in names)
+	jlpt=		find all kanji of this Japanese Language Proficiency Test level (1-4)
+	strokes[=><]find all kanji with (at least/at most/exactly) this stroke count
+Search results can be combined using searches separator: '&' for intersecting the search results, ',' for uniting them (both are left associative operators).
+e.g. strokes>12;grade=6&jlpt=1 will return kanji of the 1st JLPT level, and of the 6th grade or with more then 12 strokes.
+
+Navigate between next and previous searches by clicking on the left hand top corner arrows or pressing ALT+[left arrow|right arrow].
+Click on a kanji variants to display them fully.
+
+
+Building
+========
+
+Qt 4 SDK required.
+JapaneseDB required (https://makemeunsee@github.com/makemeunsee/JapaneseDB.git).
+Usual qmake and make...
+
+	
+License
+=======
+
+Licensed under the GPL license version 2 or later.

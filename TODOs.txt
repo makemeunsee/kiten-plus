@@ -1,23 +1,24 @@
 C++ knowledge:
-destructors behavior
+
 
 Global:
-portable version
-licenses
-packaging
-logging
-word (JDic) panel/tab
-i18n
-preferences
-    result limit
-    clear history
+    proper versioning
+    portable version (including kanjidic2, edict (zipped?), licenses)
+    logging handling
+    edict panel/tab
+    i18n
+    preferences button/panel
+        icon
+        result limit
+        clear history
+		export history
 
 Kanji part:
-search bar
-    completion
-        keywords
-radicals search/selection, radical display
-components? (kiten radical file)
-kana/romaji conversion (search bar)?
+    use RADKFILE/KRADFILE?
+    radicals search/selection, radical display
+    components? (kiten radical file)
+    kana/romaji conversion (search bar)?
+    links to words containing/starting with/ending with
 
 Test:
+    ucs=3468 (and many more): no font (on windows) (external bug?)

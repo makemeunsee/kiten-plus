@@ -17,8 +17,9 @@ SearchBar::SearchBar(History &h, MainWindow *parent) :
     forthIcon = QIcon("icons/right.png");
     ui->backButton->setIcon(backIcon);
     ui->forthButton->setIcon(forthIcon);
-    completer = new SearchCompleter(h);
-    ui->searchLine->setCompleter(completer);
+    completer = new SearchCompleter(this);
+    ui->searchLine->setKeywordCompleter(completer);
+    ui->searchLine->setHistoryCompleter(new QCompleter(&h.getModel(), this));
 }
 
 SearchBar::~SearchBar()

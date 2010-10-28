@@ -54,7 +54,8 @@ void KanjiDetailsScrollAreaTestWindow::createKanjis()
     tenGroup->addFrenchMeaning("ciel");
     tenGroup->addKunReading(QString::fromUtf8("あめ"));
     tenGroup->addOnReading(QString::fromUtf8("テン"));
-    ten = new Kanji(QString::fromUtf8("天"));
+    ten = new Kanji();
+    ten->setLiteral(QString::fromUtf8("天"));
     ten->addNameAsRadical("ten");
     ten->setStrokeCount(4);
     ten->setUnicode(9873);
@@ -75,7 +76,8 @@ void KanjiDetailsScrollAreaTestWindow::createKanjis()
     vracGroup->addKunReading("capouet");
     vracGroup->addOnReading("dalalalalala");
     vracGroup->addOnReading("veryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTryveryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTryveryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTryveryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTryveryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTryveryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTryveryLongOnPronunciationIDoubtIWillEverSeeItsEndButIHaveToTry,Right?");
-    vrac = new Kanji(QString::fromUtf8("重"));
+    vrac = new Kanji();
+    vrac->setLiteral(QString::fromUtf8("重"));
     vrac->addNameAsRadical("VRACAFKHDFJHSDJGHSDJHGSLJdakfnsajghkszhkzfshgkz,fsglkszgfkzsldgfzsjFHG");
     vrac->setStrokeCount(18);
     vrac->setUnicode(666);

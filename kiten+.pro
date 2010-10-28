@@ -14,7 +14,8 @@ SOURCES += main.cpp \
     history.cpp \
     resultsbuffer.cpp \
     searchthread.cpp \
-    searchcompleter.cpp
+    searchcompleter.cpp \
+    searchlineedit.cpp
 HEADERS += mainwindow.h \
     kanjidetails.h \
     tests/kanjidetailsscrollareatestwindow.h \
@@ -24,7 +25,8 @@ HEADERS += mainwindow.h \
     history.h \
     resultsbuffer.h \
     searchthread.h \
-    searchcompleter.h
+    searchcompleter.h \
+    searchlineedit.h
 FORMS += kanjidetails.ui \
     readingmeaninggroupwidget.ui \
     searchbar.ui

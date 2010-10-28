@@ -11,6 +11,7 @@ Global:
         icon
         result limit
         clear history
+		export history
 
 Kanji part:
     radicals search/selection, radical display
@@ -19,4 +20,4 @@ Kanji part:
     links to words containing/starting with/ending with
 
 Test:
-    ucs=3468: no font (on windows) (external bug?)
+    ucs=3468 (and many more): no font (on windows) (external bug?)

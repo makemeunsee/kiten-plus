@@ -1,6 +1,10 @@
 #include "searchablelabel.h"
 #include <QMouseEvent>
 
+SearchableLabel::SearchableLabel(QWidget *parent) : QLabel(parent)
+{
+}
+
 SearchableLabel::SearchableLabel(const QString &s, QWidget *parent) : QLabel(s, parent)
 {
 }

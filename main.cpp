@@ -6,6 +6,7 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
+
     QString kanjidic2File("kanjidic2.xml");
     QDir dir = QDir::currentPath();
     QString kanjidic2Path = dir.path() + "/" + kanjidic2File;

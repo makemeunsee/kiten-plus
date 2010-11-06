@@ -41,4 +41,5 @@ unix:LIBS += -L../JapaneseDB \
 OTHER_FILES += TODOs.txt \
     icons/right.png \
     icons/left.png \
-    icons/katen.png
+    icons/katen.png \
+    README

@@ -8,6 +8,7 @@ class SearchableLabel : public QLabel
     Q_OBJECT
 
 public:
+    SearchableLabel(QWidget *parent=0);
     SearchableLabel(const QString &s, QWidget *parent=0);
 
 signals:

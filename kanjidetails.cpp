@@ -7,13 +7,22 @@
 #include "searchablelabel.h"
 
 KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB &kanjiDB) :
-    QWidget(parent),
-    ui(new Ui::KanjiDetails)
+    QWidget(parent), ui(new Ui::KanjiDetails)
 {
     ui->setupUi(this);
     searchWindow = parent;
+
+    //TODO: depends on prefs
+    const QFont &f = ui->literalLabel->font();
+    hanazono = QFont("HanaMin", f.pointSize(), f.Normal, f.italic());
+    ui->literalLabel->setFont(hanazono);
+    //std::cout << QFontInfo(ui->literalLabel->font()).exactMatch() << std::endl;
+
+    bool radicals = kanjiDB.getRadicalsMap().size() > 0;
+
     ui->literalLabel->setText(k->getLiteral());
     ui->strokeCountLabel->setText(QString::number(k->getStrokeCount()));
+
     if(k->getGrade() > 0)
         updateLabel(ui->gradeLabel, QString::number(k->getGrade()));
     else
@@ -37,7 +46,16 @@ KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB &kanjiDB) :
         hideWidget(ui->staticFreqLabel);
     }
     if(k->getClassicalRadical() > 0)
-        updateLabel(ui->radClasLabel, QString::number(k->getClassicalRadical()));
+    {
+        unsigned char classRad = k->getClassicalRadical();
+        QString s;
+        if(radicals)
+            s = kanjiDB.getRadicalsMap()[classRad]->getLiteral();
+        else
+            s = QString::number(classRad);
+        updateLabel(ui->radClasLabel, s);
+        connect(ui->radClasLabel, SIGNAL(mouseClicked(const QString &)), this, SLOT(searchRadical(const QString &)));
+    }
     else
     {
         hideWidget(ui->radClasLabel);
@@ -131,6 +149,11 @@ KanjiDetails::~KanjiDetails()
 void KanjiDetails::search(const QString &s)
 {
     searchWindow->search(s);
+}
+
+void KanjiDetails::searchRadical(const QString &s)
+{
+    searchWindow->search(QString("radical=")+s);
 }
 
 void KanjiDetails::changeEvent(QEvent *e)

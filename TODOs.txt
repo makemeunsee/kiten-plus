@@ -11,14 +11,14 @@ Global:
         icon
         result limit
         clear history
-		export history
+        export history
+        change render font
+        recommend hanazono font for windows (http://www.fonts.jp/hanazono/)
 
 Kanji part:
+    radicals selection for search
     use RADKFILE/KRADFILE?
-    radicals search/selection, radical display
-    components? (kiten radical file)
     kana/romaji conversion (search bar)?
     links to words containing/starting with/ending with
 
 Test:
-    ucs=3468 (and many more): no font (on windows) (external bug?)

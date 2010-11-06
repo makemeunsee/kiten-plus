@@ -20,6 +20,7 @@ public:
 
 public slots:
     void search(const QString &);
+    void searchRadical(const QString &);
 
 protected:
     void changeEvent(QEvent *e);
@@ -29,6 +30,8 @@ private:
     void updateLabel(QLabel *l, QString s);
     Ui::KanjiDetails *ui;
     MainWindow *searchWindow;
+
+    QFont hanazono;
 };
 
 #endif // KANJIDETAILS_H

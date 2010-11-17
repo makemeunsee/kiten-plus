@@ -91,9 +91,8 @@ void RadicalSelectionForm::setKanjiDB(const KanjiDB &kanjiDB)
             radButtonsByStrokes[strokes] = new QList<QPushButton *>;
         }
         radButtonsByStrokes[strokes]->append(p);
-        radLayout->addWidget(p);
-        ui->indexButton->setChecked(true);
     }
     kanjiDBSet = true;
+    ui->indexButton->toggle();
 }
 

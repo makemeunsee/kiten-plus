@@ -15,7 +15,9 @@ SOURCES += main.cpp \
     resultsbuffer.cpp \
     searchthread.cpp \
     searchcompleter.cpp \
-    searchlineedit.cpp
+    searchlineedit.cpp \
+    radicalselectionform.cpp \
+    flowlayout.cpp
 HEADERS += mainwindow.h \
     kanjidetails.h \
     tests/kanjidetailsscrollareatestwindow.h \
@@ -26,10 +28,13 @@ HEADERS += mainwindow.h \
     resultsbuffer.h \
     searchthread.h \
     searchcompleter.h \
-    searchlineedit.h
+    searchlineedit.h \
+    radicalselectionform.h \
+    flowlayout.h
 FORMS += kanjidetails.ui \
     readingmeaninggroupwidget.ui \
-    searchbar.ui
+    searchbar.ui \
+    radicalselectionform.ui
 win32 { 
     debug:LIBS += -L../JapaneseDB/debug \
         -lJapaneseDB

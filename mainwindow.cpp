@@ -100,6 +100,8 @@ void MainWindow::open(const QString &fileName)
         file.close();
     }
 
+    searchBar->radicalSelectionForm()->setKanjiDB(kanjidic);
+
     historyFilename = fileName + ".history";
     QFile historyFile(historyFilename);
     if (historyFile.open(QIODevice::ReadOnly)) {

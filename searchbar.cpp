@@ -4,13 +4,15 @@
 
 SearchBar::SearchBar(History &h, MainWindow *parent) :
     QWidget(parent),
-    ui(new Ui::SearchBar)
+    ui(new Ui::SearchBar),
+    radForm(new RadicalSelectionForm(this))
 {
     ui->setupUi(this);
     searchWindow = parent;
     connect(ui->searchLine, SIGNAL(returnPressed()), this, SLOT(search()));
     connect(ui->backButton, SIGNAL(clicked()), searchWindow, SLOT(back()));
     connect(ui->forthButton, SIGNAL(clicked()), searchWindow, SLOT(forth()));
+    connect(ui->radButton, SIGNAL(clicked()), this, SLOT(showRadDialog()));
     ui->backButton->setShortcut(QKeySequence(Qt::ALT + Qt::Key_Left));
     ui->forthButton->setShortcut(QKeySequence(Qt::ALT + Qt::Key_Right));
     backIcon = QIcon("icons/left.png");
@@ -25,6 +27,11 @@ SearchBar::SearchBar(History &h, MainWindow *parent) :
 SearchBar::~SearchBar()
 {
     delete ui;
+}
+
+void SearchBar::showRadDialog()
+{
+    radForm->show();
 }
 
 void SearchBar::search()
@@ -77,6 +84,11 @@ void SearchBar::lock(bool lock)
     ui->forthButton->setEnabled(!lock);
     ui->searchLine->setEnabled(!lock);
 //    ui->stopButton->setEnabled(lock);
+}
+
+RadicalSelectionForm *SearchBar::radicalSelectionForm()
+{
+    return radForm;
 }
 
 //const QPushButton *SearchBar::stopButton()

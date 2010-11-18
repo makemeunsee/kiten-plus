@@ -25,6 +25,7 @@ public:
 //    const QPushButton *stopButton();
     void lock(bool);
     RadicalSelectionForm *radicalSelectionForm();
+    void movePopup(QMoveEvent *);
 
 public slots:
     void search();

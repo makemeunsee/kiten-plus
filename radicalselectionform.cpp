@@ -2,17 +2,14 @@
 #include "ui_radicalselectionform.h"
 #include "../JapaneseDB/radicals.h"
 
-#include <iostream>
-
-using namespace std;
-
-RadicalSelectionForm::RadicalSelectionForm(QWidget *parent) :
-    QDialog(parent),
+RadicalSelectionForm::RadicalSelectionForm(QWidget *radButton, QWidget *parent) :
+    QWidget(parent),
     ui(new Ui::RadicalSelectionForm),
-    kanjiDBSet(false)
+    kanjiDBSet(false),
+    radButtonRef(radButton)
 {
     ui->setupUi(this);
-    setWindowTitle(tr("Radical selection"));
+    setWindowFlags(Qt::ToolTip);
     radLayout = new FlowLayout(ui->radicalContainer, 0, 0, 0);
     ui->radicalContainer->setLayout(radLayout);
     font.setPointSize(12);
@@ -43,6 +40,27 @@ RadicalSelectionForm::~RadicalSelectionForm()
         delete l;
     }
     radButtonsByStrokes.clear();
+}
+
+void RadicalSelectionForm::moveEvent()
+{
+    putInPlace();
+}
+
+void RadicalSelectionForm::moveEvent(QMoveEvent *)
+{
+    putInPlace();
+}
+
+void RadicalSelectionForm::showEvent(QShowEvent *)
+{
+    putInPlace();
+}
+
+void RadicalSelectionForm::putInPlace()
+{
+    QPoint p = radButtonRef->mapToGlobal(QPoint(0, radButtonRef->height()));
+    setGeometry(p.x(), p.y(), width(), height());
 }
 
 const QPushButton *RadicalSelectionForm::searchButton() const

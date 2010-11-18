@@ -4,10 +4,10 @@
 
 SearchBar::SearchBar(History &h, MainWindow *parent) :
     QWidget(parent),
-    ui(new Ui::SearchBar),
-    radForm(new RadicalSelectionForm(this))
+    ui(new Ui::SearchBar)
 {
     ui->setupUi(this);
+    radForm = new RadicalSelectionForm(ui->radButton, this);
     searchWindow = parent;
     connect(ui->searchLine, SIGNAL(returnPressed()), this, SLOT(search()));
     connect(ui->backButton, SIGNAL(clicked()), searchWindow, SLOT(back()));
@@ -30,9 +30,20 @@ SearchBar::~SearchBar()
     delete ui;
 }
 
+void SearchBar::movePopup(QMoveEvent *)
+{
+    radForm->moveEvent();
+}
+
+
 void SearchBar::showRadDialog()
 {
-    radForm->show();
+    static bool visible = false;
+    if(visible)
+        radForm->hide();
+    else
+        radForm->show();
+    visible = !visible;
 }
 
 void SearchBar::searchRad()

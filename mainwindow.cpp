@@ -40,7 +40,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
- {
+{
     QFile historyFile(historyFilename);
     if (historyFile.open(QIODevice::WriteOnly)) {
         history.write(historyFile);
@@ -50,7 +50,12 @@ void MainWindow::closeEvent(QCloseEvent *event)
         //TODO log: history unwritable
     }
     QMainWindow::closeEvent(event);
- }
+}
+
+void MainWindow::moveEvent(QMoveEvent *e)
+{
+    searchBar->movePopup(e);
+}
 
 void MainWindow::open(const QString &fileName)
 {

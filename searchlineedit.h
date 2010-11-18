@@ -14,6 +14,7 @@ public:
 
     void setKeywordCompleter(SearchCompleter *c);
     void setHistoryCompleter(QCompleter *c);
+    void setHistoryMode();
 
 public slots:
     void insertCompletion(const QString& completion);

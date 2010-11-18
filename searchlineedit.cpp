@@ -43,6 +43,12 @@ void SearchLineEdit::insertCompletion(const QString& completion)
     }
 }
 
+void SearchLineEdit::setHistoryMode()
+{
+    keyMode = false;
+    historyMode = true;
+}
+
 void SearchLineEdit::keyPressEvent(QKeyEvent *e)
 {
     if ((historyC && historyC->popup()->isVisible()) || (keyC && keyC->popup()->isVisible())) {
@@ -64,10 +70,7 @@ void SearchLineEdit::keyPressEvent(QKeyEvent *e)
     bool isKeywordShortcut = (e->modifiers() == Qt::NoModifier) && (e->key() == Qt::Key_Up); // up
     bool isNotHandledKey = e->key() == Qt::Key_Enter || e->key() == Qt::Key_Return || e->key() == Qt::Key_Escape;
     if(!isHistoryShortcut && !isKeywordShortcut)
-    {
         QLineEdit::keyPressEvent(e);
-
-    }
 
     QString completionPrefix = text();
     if(!isHistoryShortcut && !isKeywordShortcut && (isNotHandledKey || e->text().isEmpty() || completionPrefix.length() < 1))

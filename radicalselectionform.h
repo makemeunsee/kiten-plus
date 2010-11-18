@@ -1,7 +1,7 @@
 #ifndef RADICALSELECTIONFORM_H
 #define RADICALSELECTIONFORM_H
 
-#include <QDialog>
+#include <QWidget>
 #include <QMap>
 #include <QPushButton>
 #include <QLabel>
@@ -12,28 +12,42 @@ namespace Ui {
     class RadicalSelectionForm;
 }
 
-class RadicalSelectionForm : public QDialog
+class RadicalSelectionForm : public QWidget
 {
     Q_OBJECT
 
 public:
-    explicit RadicalSelectionForm(QWidget *parent = 0);
+    explicit RadicalSelectionForm(QWidget *radButton, QWidget *parent = 0);
     ~RadicalSelectionForm();
     void setKanjiDB(const KanjiDB &kanjiDB);
+    const QPushButton *searchButton() const;
+    void moveEvent();
 
 public slots:
     void sortRadicalsByIndex(bool);
+    void limitToRad(bool);
+    QList<QString> selectedComponents() const;
+
+protected:
+    virtual void moveEvent(QMoveEvent *);
+    virtual void showEvent(QShowEvent *);
 
 private:
     void clearLayout();
+    void putInPlace();
 
     Ui::RadicalSelectionForm *ui;
     bool kanjiDBSet;
     QFont font;
+    QFont strokeFont;
+    QColor strokeBackground;
+    QPalette strokePalette;
     FlowLayout *radLayout;
     QMap<unsigned int, QPushButton *> radButtonsById;
     QMap<unsigned int, QList<QPushButton *> *> radButtonsByStrokes;
-    QMap<unsigned int, QLabel *> strokeStones;
+    QMap<unsigned int, QWidget *> strokeStones;
+
+    QWidget *radButtonRef;
 };
 
 #endif // RADICALSELECTIONFORM_H

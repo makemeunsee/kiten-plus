@@ -35,6 +35,7 @@ public slots:
 
 protected:
     virtual void closeEvent(QCloseEvent *event);
+    virtual void moveEvent(QMoveEvent *);
 
 private:
     void clearPreviousSearch();

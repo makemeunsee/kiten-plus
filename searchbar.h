@@ -25,11 +25,13 @@ public:
 //    const QPushButton *stopButton();
     void lock(bool);
     RadicalSelectionForm *radicalSelectionForm();
+    void movePopup(QMoveEvent *);
 
 public slots:
     void search();
     void updateBackAndForth();
     void showRadDialog();
+    void searchRad();
 
 protected:
     void changeEvent(QEvent *e);

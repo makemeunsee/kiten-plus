@@ -36,10 +36,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     // debug popup info
     //connect(searchThread, SIGNAL(threadInfo(QString)), this, SLOT(popUpInfo(QString)));
     searchBar->setFocus();
+    move(320,240);
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
- {
+{
     QFile historyFile(historyFilename);
     if (historyFile.open(QIODevice::WriteOnly)) {
         history.write(historyFile);
@@ -49,7 +50,12 @@ void MainWindow::closeEvent(QCloseEvent *event)
         //TODO log: history unwritable
     }
     QMainWindow::closeEvent(event);
- }
+}
+
+void MainWindow::moveEvent(QMoveEvent *e)
+{
+    searchBar->movePopup(e);
+}
 
 void MainWindow::open(const QString &fileName)
 {

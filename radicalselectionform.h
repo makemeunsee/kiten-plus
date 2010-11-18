@@ -30,10 +30,13 @@ private:
     Ui::RadicalSelectionForm *ui;
     bool kanjiDBSet;
     QFont font;
+    QFont strokeFont;
+    QColor strokeBackground;
+    QPalette strokePalette;
     FlowLayout *radLayout;
     QMap<unsigned int, QPushButton *> radButtonsById;
     QMap<unsigned int, QList<QPushButton *> *> radButtonsByStrokes;
-    QMap<unsigned int, QLabel *> strokeStones;
+    QMap<unsigned int, QWidget *> strokeStones;
 };
 
 #endif // RADICALSELECTIONFORM_H

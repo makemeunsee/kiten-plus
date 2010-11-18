@@ -20,9 +20,12 @@ public:
     explicit RadicalSelectionForm(QWidget *parent = 0);
     ~RadicalSelectionForm();
     void setKanjiDB(const KanjiDB &kanjiDB);
+    const QPushButton *searchButton() const;
 
 public slots:
     void sortRadicalsByIndex(bool);
+    void limitToRad(bool);
+    QList<QString> selectedComponents() const;
 
 private:
     void clearLayout();

@@ -15,34 +15,14 @@
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
-    <widget class="QLabel" name="sortLabel">
+    <widget class="QLabel" name="selectLabel">
      <property name="text">
-      <string>Sort by</string>
+      <string>Select components</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="1">
-    <widget class="QRadioButton" name="indexButton">
-     <property name="text">
-      <string>index</string>
-     </property>
-     <attribute name="buttonGroup">
-      <string>sortGroup</string>
-     </attribute>
-    </widget>
-   </item>
-   <item row="0" column="2">
-    <widget class="QRadioButton" name="strokesButton">
-     <property name="text">
-      <string>strokes</string>
-     </property>
-     <attribute name="buttonGroup">
-      <string>sortGroup</string>
-     </attribute>
-    </widget>
-   </item>
-   <item row="0" column="3">
-    <spacer name="sortSpacer">
+   <item row="0" column="3" colspan="3">
+    <spacer name="topSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -54,21 +34,61 @@
      </property>
     </spacer>
    </item>
-   <item row="2" column="3">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="standardButtons">
-      <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+   <item row="1" column="0" colspan="6">
+    <widget class="QWidget" name="radicalContainer" native="true"/>
+   </item>
+   <item row="2" column="4">
+    <widget class="QPushButton" name="searchButton">
+     <property name="text">
+      <string>&amp;Search</string>
      </property>
     </widget>
    </item>
-   <item row="1" column="0" colspan="4">
-    <widget class="QWidget" name="radicalContainer" native="true"/>
+   <item row="2" column="5">
+    <spacer name="spacerBottom1">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::Fixed</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="2" column="3">
+    <spacer name="spacerBottom2">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>40</width>
+       <height>20</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="1">
+    <widget class="QCheckBox" name="onlyRadBox">
+     <property name="text">
+      <string>Limit to classical radicals</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QCheckBox" name="sortBox">
+     <property name="text">
+      <string>Sort by index</string>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>
  <resources/>
  <connections/>
- <buttongroups>
-  <buttongroup name="sortGroup"/>
- </buttongroups>
 </ui>

@@ -13,6 +13,7 @@ SearchBar::SearchBar(History &h, MainWindow *parent) :
     connect(ui->backButton, SIGNAL(clicked()), searchWindow, SLOT(back()));
     connect(ui->forthButton, SIGNAL(clicked()), searchWindow, SLOT(forth()));
     connect(ui->radButton, SIGNAL(clicked()), this, SLOT(showRadDialog()));
+    connect(radForm->searchButton(), SIGNAL(clicked()), this, SLOT(searchRad()));
     ui->backButton->setShortcut(QKeySequence(Qt::ALT + Qt::Key_Left));
     ui->forthButton->setShortcut(QKeySequence(Qt::ALT + Qt::Key_Right));
     backIcon = QIcon("icons/left.png");
@@ -32,6 +33,23 @@ SearchBar::~SearchBar()
 void SearchBar::showRadDialog()
 {
     radForm->show();
+}
+
+void SearchBar::searchRad()
+{
+    ui->searchLine->setHistoryMode();
+    ui->searchLine->clear();
+    QString searchQuery("");
+    foreach(QString comp, radForm->selectedComponents())
+    {
+        searchQuery.append(KanjiDB::radicalKey);
+        searchQuery.append(comp);
+        searchQuery.append("&");
+    }
+    if(searchQuery.length() > 1)
+        searchQuery.remove(searchQuery.length()-1, 1);
+    ui->searchLine->setText(searchQuery);
+    search();
 }
 
 void SearchBar::search()

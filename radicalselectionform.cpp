@@ -22,7 +22,12 @@ RadicalSelectionForm::RadicalSelectionForm(QWidget *parent) :
     strokePalette = QApplication::palette();
     strokePalette.setCurrentColorGroup(QPalette::Active);
     strokePalette.setColor(QPalette::Window, strokeBackground);
-    connect(ui->strokesButton, SIGNAL(toggled(bool)), this, SLOT(sortRadicalsByIndex(bool)));
+    connect(ui->onlyRadBox, SIGNAL(toggled(bool)), this, SLOT(limitToRad(bool)));
+    ui->onlyRadBox->setCheckState(Qt::Checked);
+    //removed next line once components (radk/krad) are supported
+    ui->onlyRadBox->setEnabled(false);
+    ui->sortBox->setCheckState(Qt::Checked);
+    connect(ui->sortBox, SIGNAL(toggled(bool)), this, SLOT(sortRadicalsByIndex(bool)));
 }
 
 RadicalSelectionForm::~RadicalSelectionForm()
@@ -40,6 +45,32 @@ RadicalSelectionForm::~RadicalSelectionForm()
     radButtonsByStrokes.clear();
 }
 
+const QPushButton *RadicalSelectionForm::searchButton() const
+{
+    return ui->searchButton;
+}
+
+QList<QString> RadicalSelectionForm::selectedComponents() const
+{
+    QList<QString> result;
+    QMapIterator<unsigned int, QPushButton *> i(radButtonsById);
+    while(i.hasNext())
+    {
+        QPushButton *button = i.next().value();
+        if(button->isChecked())
+            result.append(button->text());
+    }
+    return result;
+}
+
+void RadicalSelectionForm::limitToRad(bool b)
+{
+    if(!b)
+        ui->sortBox->setCheckState(Qt::Unchecked);
+    ui->sortBox->setEnabled(b);
+    //more stuff to do once krad/radk supported
+}
+
 void RadicalSelectionForm::sortRadicalsByIndex(bool b)
 {
     if(!kanjiDBSet)
@@ -47,6 +78,10 @@ void RadicalSelectionForm::sortRadicalsByIndex(bool b)
     clearLayout();
     if(b)
     {
+        QMapIterator<unsigned int, QPushButton *> i(radButtonsById);
+        while(i.hasNext())
+            radLayout->addWidget(i.next().value());
+    } else {
         QMapIterator<unsigned int, QList<QPushButton *> *> i(radButtonsByStrokes);
         while(i.hasNext())
         {
@@ -56,10 +91,6 @@ void RadicalSelectionForm::sortRadicalsByIndex(bool b)
             foreach(QPushButton *p, *i.value())
                 radLayout->addWidget(p);
         }
-    } else {
-        QMapIterator<unsigned int, QPushButton *> i(radButtonsById);
-        while(i.hasNext())
-           radLayout->addWidget(i.next().value());
     }
 }
 
@@ -111,5 +142,5 @@ void RadicalSelectionForm::setKanjiDB(const KanjiDB &kanjiDB)
         radButtonsByStrokes[strokes]->append(p);
     }
     kanjiDBSet = true;
-    ui->strokesButton->toggle();
+    ui->sortBox->setCheckState(Qt::Unchecked);
 }

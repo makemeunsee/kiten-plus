@@ -17,7 +17,8 @@ SOURCES += main.cpp \
     searchcompleter.cpp \
     searchlineedit.cpp \
     radicalselectionform.cpp \
-    flowlayout.cpp
+    flowlayout.cpp \
+    checkablelabel.cpp
 HEADERS += mainwindow.h \
     kanjidetails.h \
     tests/kanjidetailsscrollareatestwindow.h \
@@ -30,7 +31,8 @@ HEADERS += mainwindow.h \
     searchcompleter.h \
     searchlineedit.h \
     radicalselectionform.h \
-    flowlayout.h
+    flowlayout.h \
+    checkablelabel.h
 FORMS += kanjidetails.ui \
     readingmeaninggroupwidget.ui \
     searchbar.ui \

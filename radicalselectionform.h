@@ -7,6 +7,7 @@
 #include <QLabel>
 #include "flowlayout.h"
 #include "../JapaneseDB/kanjidb.h"
+#include "checkablelabel.h"
 
 namespace Ui {
     class RadicalSelectionForm;
@@ -22,11 +23,12 @@ public:
     void setKanjiDB(const KanjiDB &kanjiDB);
     const QPushButton *searchButton() const;
     void moveEvent();
+    QList<QString> selectedComponents() const;
 
 public slots:
     void sortRadicalsByIndex(bool);
     void limitToRad(bool);
-    QList<QString> selectedComponents() const;
+    void checkedSlot(bool, const QString &);
 
 protected:
     virtual void moveEvent(QMoveEvent *);
@@ -43,8 +45,8 @@ private:
     QColor strokeBackground;
     QPalette strokePalette;
     FlowLayout *radLayout;
-    QMap<unsigned int, QPushButton *> radButtonsById;
-    QMap<unsigned int, QList<QPushButton *> *> radButtonsByStrokes;
+    QMap<unsigned int, CheckableLabel *> radButtonsById;
+    QMap<unsigned int, QList<CheckableLabel *> *> radButtonsByStrokes;
     QMap<unsigned int, QWidget *> strokeStones;
 
     QWidget *radButtonRef;

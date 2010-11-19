@@ -2,6 +2,10 @@
 #include "ui_radicalselectionform.h"
 #include "../JapaneseDB/radicals.h"
 
+#include <iostream>
+
+using namespace std;
+
 RadicalSelectionForm::RadicalSelectionForm(QWidget *radButton, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::RadicalSelectionForm),
@@ -9,7 +13,7 @@ RadicalSelectionForm::RadicalSelectionForm(QWidget *radButton, QWidget *parent) 
     radButtonRef(radButton)
 {
     ui->setupUi(this);
-    setWindowFlags(Qt::ToolTip);
+    setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
     radLayout = new FlowLayout(ui->radicalContainer, 0, 0, 0);
     ui->radicalContainer->setLayout(radLayout);
     font.setPointSize(12);
@@ -30,12 +34,12 @@ RadicalSelectionForm::RadicalSelectionForm(QWidget *radButton, QWidget *parent) 
 RadicalSelectionForm::~RadicalSelectionForm()
 {
     delete ui;
-    foreach(QPushButton *p, radButtonsById.values())
+    foreach(CheckableLabel *p, radButtonsById.values())
     {
         delete p;
     }
     radButtonsById.clear();
-    foreach(QList<QPushButton *> *l, radButtonsByStrokes.values())
+    foreach(QList<CheckableLabel *> *l, radButtonsByStrokes.values())
     {
         delete l;
     }
@@ -71,10 +75,10 @@ const QPushButton *RadicalSelectionForm::searchButton() const
 QList<QString> RadicalSelectionForm::selectedComponents() const
 {
     QList<QString> result;
-    QMapIterator<unsigned int, QPushButton *> i(radButtonsById);
+    QMapIterator<unsigned int, CheckableLabel *> i(radButtonsById);
     while(i.hasNext())
     {
-        QPushButton *button = i.next().value();
+        CheckableLabel *button = i.next().value();
         if(button->isChecked())
             result.append(button->text());
     }
@@ -96,28 +100,37 @@ void RadicalSelectionForm::sortRadicalsByIndex(bool b)
     clearLayout();
     if(b)
     {
-        QMapIterator<unsigned int, QPushButton *> i(radButtonsById);
+        QMapIterator<unsigned int, CheckableLabel *> i(radButtonsById);
         while(i.hasNext())
+        {
             radLayout->addWidget(i.next().value());
+            i.value()->show();
+        }
     } else {
-        QMapIterator<unsigned int, QList<QPushButton *> *> i(radButtonsByStrokes);
+        QMapIterator<unsigned int, QList<CheckableLabel *> *> i(radButtonsByStrokes);
         while(i.hasNext())
         {
             i.next();
             radLayout->addWidget(strokeStones[i.key()]);
             strokeStones[i.key()]->layout()->itemAt(0)->widget()->show();
-            foreach(QPushButton *p, *i.value())
+            foreach(CheckableLabel *p, *i.value())
+            {
                 radLayout->addWidget(p);
+                p->show();
+            }
         }
     }
 }
 
 void RadicalSelectionForm::clearLayout()
 {
-    QMapIterator<unsigned int, QPushButton *> i(radButtonsById);
+    QMapIterator<unsigned int, CheckableLabel *> i(radButtonsById);
     while(i.hasNext())
+    {
        radLayout->removeWidget(i.next().value());
-    QMapIterator<unsigned int, QList<QPushButton *> *> i2(radButtonsByStrokes);
+       i.value()->hide();
+   }
+    QMapIterator<unsigned int, QList<CheckableLabel *> *> i2(radButtonsByStrokes);
     while(i2.hasNext())
     {
         i2.next();
@@ -126,20 +139,24 @@ void RadicalSelectionForm::clearLayout()
     }
 }
 
+void RadicalSelectionForm::checkedSlot(bool b, const QString &s)
+{
+    cout << s.toStdString() << " checked: " << b << endl;
+}
+
 void RadicalSelectionForm::setKanjiDB(const KanjiDB &kanjiDB)
 {
     kanjiDBSet = false;
     for(unsigned int i = 0; i < radicalsSize; ++i)
     {
         QString rad = radicals[i];
-        QPushButton *p = new QPushButton(rad, this);
-        p->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
-        p->setFixedSize(23, 23);
-        p->setCheckable(true);
-        p->setFlat(true);
-        p->setFont(font);
-        p->setToolTip("n."+QString::number(i+1));
-        radButtonsById.insert(i, p);
+        CheckableLabel *cl = new CheckableLabel(rad, this);
+        cl->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
+        cl->setAlignment(Qt::AlignCenter);
+        cl->setFixedSize(23, 23);
+        cl->setFont(font);
+        cl->setToolTip("n."+QString::number(i+1));
+        radButtonsById.insert(i, cl);
         unsigned char strokes = kanjiDB.getByUnicode(rad.at(0).unicode())->getStrokeCount();
         if(radButtonsByStrokes[strokes] == 0)
         {
@@ -155,9 +172,9 @@ void RadicalSelectionForm::setKanjiDB(const KanjiDB &kanjiDB)
             w->setLayout(flow);
             flow->addWidget(l);
             strokeStones.insert(strokes, w);
-            radButtonsByStrokes[strokes] = new QList<QPushButton *>;
+            radButtonsByStrokes[strokes] = new QList<CheckableLabel *>;
         }
-        radButtonsByStrokes[strokes]->append(p);
+        radButtonsByStrokes[strokes]->append(cl);
     }
     kanjiDBSet = true;
     ui->sortBox->setCheckState(Qt::Unchecked);

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # -------------------------------------------------
 # Project created by QtCreator 2010-08-18T10:31:57
 # -------------------------------------------------
@@ -16,6 +17,9 @@ SOURCES += main.cpp \
     searchthread.cpp \
     searchcompleter.cpp \
     searchlineedit.cpp \
+    radicalselectionform.cpp \
+    flowlayout.cpp \
+    checkablelabel.cpp
     preferencesdialog.cpp
 HEADERS += mainwindow.h \
     kanjidetails.h \
@@ -28,10 +32,14 @@ HEADERS += mainwindow.h \
     searchthread.h \
     searchcompleter.h \
     searchlineedit.h \
+    radicalselectionform.h \
+    flowlayout.h \
+    checkablelabel.h
     preferencesdialog.h
 FORMS += kanjidetails.ui \
     readingmeaninggroupwidget.ui \
     searchbar.ui \
+    radicalselectionform.ui
     preferencesdialog.ui
 win32 { 
     debug:LIBS += -L../JapaneseDB/debug \

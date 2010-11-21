@@ -357,7 +357,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Radical (KanXi):</string>
+          <string>Radical (classic):</string>
          </property>
         </widget>
        </item>

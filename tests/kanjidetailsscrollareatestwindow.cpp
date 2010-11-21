@@ -7,7 +7,6 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QPushButton>
-#include <iostream>
 
 KanjiDetailsScrollAreaTestWindow::KanjiDetailsScrollAreaTestWindow(QWidget *parent)
     : QMainWindow(parent)

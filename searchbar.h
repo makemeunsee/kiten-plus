@@ -6,6 +6,7 @@
 #include <QShortcut>
 #include "searchcompleter.h"
 #include "history.h"
+#include "radicalselectionform.h"
 
 namespace Ui {
     class SearchBar;
@@ -23,10 +24,14 @@ public:
     void setText(const QString &);
 //    const QPushButton *stopButton();
     void lock(bool);
+    RadicalSelectionForm *radicalSelectionForm();
+    void movePopup(QMoveEvent *);
 
 public slots:
     void search();
     void updateBackAndForth();
+    void showRadDialog();
+    void searchRad();
 
 protected:
     void changeEvent(QEvent *e);
@@ -37,6 +42,7 @@ private:
     QShortcut *back;
     QShortcut *forth;
     SearchCompleter *completer;
+    RadicalSelectionForm *radForm;
     QIcon backIcon, forthIcon;
 };
 

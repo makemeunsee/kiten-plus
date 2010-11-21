@@ -33,6 +33,7 @@ public slots:
 protected:
     virtual void moveEvent(QMoveEvent *);
     virtual void showEvent(QShowEvent *);
+    virtual void closeEvent(QCloseEvent *);
 
 private:
     void clearLayout();

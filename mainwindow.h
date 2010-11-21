@@ -8,6 +8,7 @@
 #include "../JapaneseDB/kanjidb.h"
 #include "searchthread.h"
 #include "history.h"
+#include "preferencesdialog.h"
 
 class Kanji;
 class SearchBar;
@@ -32,6 +33,7 @@ public slots:
     void search(const QString &);
     void done(QString *, KanjiSet *);
     void popUpInfo(QString);
+    void showPrefs();
 
 protected:
     virtual void closeEvent(QCloseEvent *event);
@@ -47,6 +49,7 @@ private:
     History history;
     QString historyFilename;
 
+    PreferencesDialog *prefDial;
     SearchThread *searchThread;
     SearchBar *searchBar;
     QQueue<QWidget *> resultWidgets;

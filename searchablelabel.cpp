@@ -9,12 +9,12 @@ SearchableLabel::SearchableLabel(const QString &s, QWidget *parent) : QLabel(s, 
 {
 }
 
-void SearchableLabel::enterEvent(QEvent *e)
+void SearchableLabel::enterEvent(QEvent *)
 {
     setForegroundRole(QPalette::Link);
 }
 
-void SearchableLabel::leaveEvent(QEvent *e)
+void SearchableLabel::leaveEvent(QEvent *)
 {
     setForegroundRole(QPalette::Text);
 }

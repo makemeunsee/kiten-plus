@@ -10,6 +10,7 @@ class CheckableLabel : public QLabel
 public:
     explicit CheckableLabel(const QString &text, QWidget *parent = 0, Qt::WindowFlags f = 0);
     bool isChecked();
+    void setChecked(bool);
 
 protected:
     virtual void mousePressEvent(QMouseEvent *ev);
@@ -22,6 +23,7 @@ signals:
 public slots:
 
 private:
+    void toggle();
     bool clickingOnMe;
     bool checked;
     QPalette palette;

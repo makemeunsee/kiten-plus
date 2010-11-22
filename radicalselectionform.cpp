@@ -2,10 +2,6 @@
 #include "ui_radicalselectionform.h"
 #include "../JapaneseDB/radicals.h"
 
-#include <iostream>
-
-using namespace std;
-
 RadicalSelectionForm::RadicalSelectionForm(QWidget *radButton, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::RadicalSelectionForm),
@@ -46,6 +42,14 @@ RadicalSelectionForm::~RadicalSelectionForm()
     radButtonsByStrokes.clear();
 }
 
+void RadicalSelectionForm::keyPressEvent(QKeyEvent *e)
+{
+    if(e->key() == Qt::Key_Escape && isVisible())
+        hide();
+    else
+        QWidget::keyPressEvent(e);
+}
+
 void RadicalSelectionForm::closeEvent(QCloseEvent *e)
 {
     e->ignore();
@@ -63,7 +67,21 @@ void RadicalSelectionForm::moveEvent(QMoveEvent *)
 
 void RadicalSelectionForm::showEvent(QShowEvent *)
 {
+    emit shown(true);
     putInPlace();
+}
+
+void RadicalSelectionForm::hideEvent(QHideEvent *)
+{
+    emit shown(false);
+    clearSelection();
+}
+
+void RadicalSelectionForm::clearSelection()
+{
+    QMapIterator<unsigned int, CheckableLabel *> i(radButtonsById);
+    while(i.hasNext())
+        i.next().value()->setChecked(false);
 }
 
 void RadicalSelectionForm::putInPlace()
@@ -75,6 +93,11 @@ void RadicalSelectionForm::putInPlace()
 const QPushButton *RadicalSelectionForm::searchButton() const
 {
     return ui->searchButton;
+}
+
+const QPushButton *RadicalSelectionForm::searchAndCloseButton() const
+{
+    return ui->searchAndCloseButton;
 }
 
 QList<QString> RadicalSelectionForm::selectedComponents() const
@@ -143,11 +166,6 @@ void RadicalSelectionForm::clearLayout()
         strokeStones[i2.key()]->layout()->itemAt(0)->widget()->hide();
         radLayout->removeWidget(strokeStones[i2.key()]);
     }
-}
-
-void RadicalSelectionForm::checkedSlot(bool b, const QString &s)
-{
-    cout << s.toStdString() << " checked: " << b << endl;
 }
 
 void RadicalSelectionForm::setKanjiDB(const KanjiDB &kanjiDB)

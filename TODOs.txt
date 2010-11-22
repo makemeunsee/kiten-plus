@@ -4,6 +4,7 @@ C++ knowledge:
 Global:
     proper versioning
     portable version (including kanjidic2, edict (zipped?), licenses)
+    kradk license (same as edict/kanjidic2) http://www.edrdg.org/edrdg/licence.html
     logging handling
     edict panel/tab
     i18n
@@ -16,8 +17,7 @@ Global:
         recommend hanazono font for windows (http://www.fonts.jp/hanazono/)
 
 Kanji part:
-    radicals selection for search
-    use RADKFILE/KRADFILE?
+    use RADKFILE/KRADFILE
     kana/romaji conversion (search bar)?
     links to words containing/starting with/ending with
 

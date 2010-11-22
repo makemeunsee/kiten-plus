@@ -19,6 +19,7 @@
 #include <QDataStream>
 
 const int MainWindow::searchLimit = 20;
+const QString MainWindow::historyFilename("kitenplus.history");
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
@@ -42,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    QFile historyFile(historyFilename);
+    QFile historyFile(historyFullPath);
     if (historyFile.open(QIODevice::WriteOnly)) {
         history.write(historyFile);
         historyFile.close();
@@ -58,65 +59,51 @@ void MainWindow::moveEvent(QMoveEvent *e)
     searchBar->movePopup(e);
 }
 
-void MainWindow::open(const QString &fileName)
+void MainWindow::setUserResourceDir(const QString &dirname)
 {
-    bool dataRead = false;
-    QString indexName = fileName + ".index";
-    QFile index(indexName);
-    if (index.open(QIODevice::ReadOnly)) {
-        if(kanjidic.readIndex(&index))
-            dataRead = true;
-        else
-        {
-            //TODO log: index unreadable
-        }
-        index.close();
-    } else
+    resourceDir = QDir(dirname);
+    readResources();
+}
+
+void MainWindow::readResources()
+{
+    QDir portableDir = QDir::currentPath();
+
+    int kanjidicState = kanjidic.readResources(portableDir);
+    if(kanjidicState == KanjiDB::noDataRead)
     {
-        //TODO log: no index found
+        //TODO log not portable mode
+        kanjidicState = kanjidic.readResources(resourceDir);
+    } else {
+        resourceDir = portableDir;
     }
 
-    if(!dataRead)
+    if(kanjidicState == KanjiDB::noDataRead)
+        QMessageBox::warning(this, tr("Kanjidic resources"),
+                          tr("Unable to read resources. No kanji data will be available.\nError message:\n%1")
+                          .arg(kanjidic.errorString()));
+    else
     {
-        QFile file(fileName);
-        if (!file.open(QIODevice::Text | QIODevice::ReadOnly)) {
-            QMessageBox::warning(this, tr("Kanjidic file"),
-                              tr("Cannot read file %1:\n%2.")
-                              .arg(fileName)
-                              .arg(file.errorString()));
-            return;
-        }
-
-        if (kanjidic.readKanjiDic(&file))
-        {
-            statusBar()->showMessage(tr("File loaded"), 2000);
-            if(!index.open(QIODevice::WriteOnly))
-            {
-                //TODO log: no index could be written
-            } else
-            {
-                kanjidic.writeIndex(&index);
-                index.close();
-            }
-        }
-        else
-            QMessageBox::warning(this, tr("Kanjidic file"),
-                              tr("Cannot read kanjidic file %1:\n%2.")
-                              .arg(fileName)
+        if(kanjidicState == KanjiDB::baseDataRead)
+            QMessageBox::warning(this, tr("Kanjidic resources"),
+                              tr("Unable to read some resources, some radical functionalities will be missing.\nError message:\n%1")
                               .arg(kanjidic.errorString()));
-        file.close();
-    }
+        else if(kanjidicState == KanjiDB::allDataReadButNotSaved)
+            QMessageBox::warning(this, tr("Kanjidic resources"),
+                              tr("Unable to save resource indexes. Error message:\n%1")
+                              .arg(kanjidic.errorString()));
 
-    searchBar->radicalSelectionForm()->setKanjiDB(kanjidic);
-
-    historyFilename = fileName + ".history";
-    QFile historyFile(historyFilename);
-    if (historyFile.open(QIODevice::ReadOnly)) {
-        history.read(historyFile);
-        historyFile.close();
-    } else
-    {
-        //TODO log: no history found
+        statusBar()->showMessage(tr("File loaded"), 2000);
+        searchBar->radicalSelectionForm()->setKanjiDB(kanjidic);
+        QFile historyFile(resourceDir.absolutePath().append("/").append(historyFilename));
+        historyFullPath = historyFile.fileName();
+        if (historyFile.open(QIODevice::ReadOnly)) {
+            history.read(historyFile);
+            historyFile.close();
+        } else
+        {
+            //TODO log: no history found
+        }
     }
 
 }

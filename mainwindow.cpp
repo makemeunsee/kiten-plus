@@ -22,6 +22,7 @@ const int MainWindow::searchLimit = 20;
 
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
+    prefDial = new PreferencesDialog(this);
     icon = QIcon("icons/katen.png");
     setWindowIcon(icon);
     buffer = new ResultsBuffer(history);
@@ -134,8 +135,15 @@ void MainWindow::createWidgets()
     searchBar = new SearchBar(history, this);
     connect(buffer, SIGNAL(changed()), searchBar, SLOT(updateBackAndForth()));
 
+    QPushButton *preferences = new QPushButton("P");
+    connect(preferences, SIGNAL(clicked()), this, SLOT(showPrefs()));
+
+    QHBoxLayout *upperLayout = new QHBoxLayout();
+    upperLayout->addWidget(searchBar);
+    upperLayout->addWidget(preferences);
+
     QVBoxLayout *mainLayout = new QVBoxLayout();
-    mainLayout->addWidget(searchBar);
+    mainLayout->addLayout(upperLayout);
     mainLayout->addWidget(area);
     QWidget *centralWidget = new QWidget;
     centralWidget->setLayout(mainLayout);
@@ -235,6 +243,10 @@ void MainWindow::forth()
     showSearchResults(*buffer->getCurrentRequest(), *buffer->getCurrentResults());
 }
 
+void MainWindow::showPrefs()
+{
+    prefDial->show();
+}
 
 ResultsBuffer *MainWindow::resultsBuffer()
 {

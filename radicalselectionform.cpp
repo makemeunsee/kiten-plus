@@ -13,11 +13,11 @@ RadicalSelectionForm::RadicalSelectionForm(QWidget *radButton, QWidget *parent) 
     radButtonRef(radButton)
 {
     ui->setupUi(this);
-    setWindowFlags(Qt::Window | Qt::FramelessWindowHint);
+    setWindowFlags(Qt::Tool | Qt::FramelessWindowHint);
     radLayout = new FlowLayout(ui->radicalContainer, 0, 0, 0);
     ui->radicalContainer->setLayout(radLayout);
     font.setPointSize(12);
-    strokeFont.setPointSize(10);
+    strokeFont.setPointSize(9);
     strokeFont.setBold(true);
     strokeBackground.setRgb(180, 180, 180);
     strokePalette = QApplication::palette();
@@ -44,6 +44,11 @@ RadicalSelectionForm::~RadicalSelectionForm()
         delete l;
     }
     radButtonsByStrokes.clear();
+}
+
+void RadicalSelectionForm::closeEvent(QCloseEvent *e)
+{
+    e->ignore();
 }
 
 void RadicalSelectionForm::moveEvent()
@@ -120,6 +125,7 @@ void RadicalSelectionForm::sortRadicalsByIndex(bool b)
             }
         }
     }
+    adjustSize();
 }
 
 void RadicalSelectionForm::clearLayout()

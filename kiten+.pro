@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     searchlineedit.cpp \
     radicalselectionform.cpp \
     flowlayout.cpp \
-    checkablelabel.cpp
+    checkablelabel.cpp \
+    preferencesdialog.cpp
 HEADERS += mainwindow.h \
     kanjidetails.h \
     tests/kanjidetailsscrollareatestwindow.h \
@@ -32,11 +33,13 @@ HEADERS += mainwindow.h \
     searchlineedit.h \
     radicalselectionform.h \
     flowlayout.h \
-    checkablelabel.h
+    checkablelabel.h \
+    preferencesdialog.h
 FORMS += kanjidetails.ui \
     readingmeaninggroupwidget.ui \
     searchbar.ui \
-    radicalselectionform.ui
+    radicalselectionform.ui \
+    preferencesdialog.ui
 win32 { 
     debug:LIBS += -L../JapaneseDB/debug \
         -lJapaneseDB

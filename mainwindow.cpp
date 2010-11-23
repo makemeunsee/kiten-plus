@@ -11,6 +11,7 @@
 #include <QScrollArea>
 #include "../JapaneseDB/kanjidb.h"
 #include "../JapaneseDB/kanji.h"
+#include "../JapaneseDB/radicals.h"
 #include "resultsbuffer.h"
 #include "kanjidetails.h"
 #include "searchbar.h"
@@ -107,30 +108,27 @@ void MainWindow::readResources()
         }
     }
 
-    QString cat;
-    KanjiSetConstIterator iter(kanjidic.getAllKanjis());
-    while(iter.hasNext())
-        cat.append(QString::number(iter.next().value()->getUnicode())).append(" ").append(iter.value()->getLiteral()).append("\r\n");
-    QFile *tmp = new QFile("out_radicals");
-    tmp->open(QIODevice::WriteOnly);
-    QTextStream *stream = new QTextStream(tmp);
-    stream->setCodec(QTextCodec::codecForName("UTF-8"));
-    *stream << cat;
-    tmp->close();
-    delete tmp;
-    delete stream;
-    cat = QString();
-    iter = KanjiSetConstIterator(kanjidic.getAllComponents());
-    while(iter.hasNext())
-        cat.append(QString::number(iter.next().value()->getUnicode())).append(" ").append(iter.value()->getLiteral()).append("\r\n");
-    tmp = new QFile("out_components");
-    tmp->open(QIODevice::WriteOnly);
-    stream = new QTextStream(tmp);
-    stream->setCodec(QTextCodec::codecForName("UTF-8"));
-    *stream << cat;
-    tmp->close();
-    delete tmp;
-    delete stream;
+
+    QFile tmp1("out_components");
+    tmp1.open(QIODevice::WriteOnly);
+    QTextStream stream1(&tmp1);
+    stream1.setCodec(QTextCodec::codecForName("UTF-8"));
+    //KanjiSet test;
+    foreach(Kanji *k, kanjidic.getAllComponents())
+//        test.insert(k->getUnicode(), k);
+//    foreach(Kanji *k, test)
+        stream1 << QString::number(k->getUnicode()) << " " << k->getLiteral() << endl;
+    tmp1.close();
+
+    QFile tmp2("out_radicals");
+    tmp2.open(QIODevice::WriteOnly);
+    QTextStream stream2(&tmp2);
+    stream2.setCodec(QTextCodec::codecForName("UTF-8"));
+    for(int i = 0; i < Radicals::radicalsSize; ++i)
+        stream2 << QString::number(Radicals::radicals[i].at(0).unicode()) << " " << Radicals::radicals[i].at(0) << endl;
+//    foreach(Kanji *k, kanjidic.getAllRadicals())
+//        stream2 << QString::number(k->getUnicode()) << " " << k->getLiteral() << endl;
+    tmp2.close();
 }
 
 void MainWindow::createWidgets()

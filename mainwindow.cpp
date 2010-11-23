@@ -16,7 +16,8 @@
 #include "searchbar.h"
 #include "ui_searchbar.h"
 #include <QMessageBox>
-#include <QDataStream>
+#include <QTextStream>
+#include <QTextCodec>
 
 const int MainWindow::searchLimit = 20;
 const QString MainWindow::historyFilename("kitenplus.history");
@@ -106,6 +107,30 @@ void MainWindow::readResources()
         }
     }
 
+    QString cat;
+    KanjiSetConstIterator iter(kanjidic.getAllKanjis());
+    while(iter.hasNext())
+        cat.append(QString::number(iter.next().value()->getUnicode())).append(" ").append(iter.value()->getLiteral()).append("\r\n");
+    QFile *tmp = new QFile("out_radicals");
+    tmp->open(QIODevice::WriteOnly);
+    QTextStream *stream = new QTextStream(tmp);
+    stream->setCodec(QTextCodec::codecForName("UTF-8"));
+    *stream << cat;
+    tmp->close();
+    delete tmp;
+    delete stream;
+    cat = QString();
+    iter = KanjiSetConstIterator(kanjidic.getAllComponents());
+    while(iter.hasNext())
+        cat.append(QString::number(iter.next().value()->getUnicode())).append(" ").append(iter.value()->getLiteral()).append("\r\n");
+    tmp = new QFile("out_components");
+    tmp->open(QIODevice::WriteOnly);
+    stream = new QTextStream(tmp);
+    stream->setCodec(QTextCodec::codecForName("UTF-8"));
+    *stream << cat;
+    tmp->close();
+    delete tmp;
+    delete stream;
 }
 
 void MainWindow::createWidgets()

@@ -18,8 +18,6 @@ KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB &kanjiDB) :
     ui->literalLabel->setFont(hanazono);
     //std::cout << QFontInfo(ui->literalLabel->font()).exactMatch() << std::endl;
 
-    bool radicals = kanjiDB.getRadicalsMap().size() > 0;
-
     ui->literalLabel->setText(k->getLiteral());
     ui->strokeCountLabel->setText(QString::number(k->getStrokeCount()));
 
@@ -47,13 +45,7 @@ KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB &kanjiDB) :
     }
     if(k->getClassicalRadical() > 0)
     {
-        unsigned char classRad = k->getClassicalRadical();
-        QString s;
-        if(radicals)
-            s = kanjiDB.getRadicalsMap()[classRad]->getLiteral();
-        else
-            s = QString::number(classRad);
-        updateLabel(ui->radClasLabel, s);
+        updateLabel(ui->radClasLabel, kanjiDB.getRadicalById(k->getClassicalRadical())->getLiteral());
         connect(ui->radClasLabel, SIGNAL(mouseClicked(const QString &)), this, SLOT(searchRadical(const QString &)));
     }
     else

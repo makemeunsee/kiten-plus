@@ -171,17 +171,26 @@ void RadicalSelectionForm::clearLayout()
 void RadicalSelectionForm::setKanjiDB(const KanjiDB &kanjiDB)
 {
     kanjiDBSet = false;
-    for(unsigned int i = 0; i < radicalsSize; ++i)
+    for(unsigned int i = 0; i < Radicals::radicalsSize; ++i)
     {
-        QString rad = radicals[i];
+        const Kanji *radical = kanjiDB.getRadicalById(i+1);
+        QString rad = radical->getLiteral();
         CheckableLabel *cl = new CheckableLabel(rad, this);
         cl->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         cl->setAlignment(Qt::AlignCenter);
         cl->setFixedSize(23, 23);
         cl->setFont(font);
-        cl->setToolTip("n."+QString::number(i+1));
+        QString s_tooltip = "n." + QString::number(i+1);
+        const QSet<Unicode> &variants = radical->getUnicodeVariants();
+        if(variants.size() > 0)
+        {
+            s_tooltip.append("\n").append(tr("Variants:"));
+            foreach(Unicode u, variants)
+                s_tooltip.append(" ").append(kanjiDB.getRadicalVariant(u)->getLiteral());
+        }
+        cl->setToolTip(s_tooltip);
         radButtonsById.insert(i, cl);
-        unsigned char strokes = kanjiDB.getByUnicode(rad.at(0).unicode())->getStrokeCount();
+        unsigned char strokes = radical->getStrokeCount();
         if(radButtonsByStrokes[strokes] == 0)
         {
             QLabel *l = new QLabel(QString::number(strokes), this);

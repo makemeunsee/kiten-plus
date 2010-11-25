@@ -25,7 +25,7 @@ public:
     MainWindow(QWidget *parent = 0);
     const ResultsBuffer *resultsBuffer() const;
     ResultsBuffer *resultsBuffer();
-    void open(const QString &);
+    void setUserResourceDir(const QString &);
 
 public slots:
     void back();
@@ -44,11 +44,15 @@ private:
     void showSearchResults(const QString &, const KanjiSet &);
     void createWidgets();
     void lockGui(bool);
+    void readResources();
 
     KanjiDB kanjidic;
     ResultsBuffer *buffer;
     History history;
-    QString historyFilename;
+    QString historyFullPath;
+    QDir resourceDir;
+
+    static const QString historyFilename;
 
     PreferencesDialog *prefDial;
     SearchThread *searchThread;

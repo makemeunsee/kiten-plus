@@ -22,20 +22,26 @@ public:
     ~RadicalSelectionForm();
     void setKanjiDB(const KanjiDB &kanjiDB);
     const QPushButton *searchButton() const;
+    const QPushButton *searchAndCloseButton() const;
     void moveEvent();
     QList<QString> selectedComponents() const;
 
 public slots:
     void sortRadicalsByIndex(bool);
     void limitToRad(bool);
-    void checkedSlot(bool, const QString &);
+
+signals:
+    void shown(bool);
 
 protected:
     virtual void moveEvent(QMoveEvent *);
     virtual void showEvent(QShowEvent *);
     virtual void closeEvent(QCloseEvent *);
+    virtual void hideEvent(QHideEvent *);
+    virtual void keyPressEvent(QKeyEvent *);
 
 private:
+    void clearSelection();
     void clearLayout();
     void putInPlace();
 

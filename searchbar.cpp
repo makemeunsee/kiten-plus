@@ -12,8 +12,10 @@ SearchBar::SearchBar(History &h, MainWindow *parent) :
     connect(ui->searchLine, SIGNAL(returnPressed()), this, SLOT(search()));
     connect(ui->backButton, SIGNAL(clicked()), searchWindow, SLOT(back()));
     connect(ui->forthButton, SIGNAL(clicked()), searchWindow, SLOT(forth()));
-    connect(ui->radButton, SIGNAL(clicked()), this, SLOT(showRadDialog()));
+    connect(ui->radButton, SIGNAL(toggled(bool)), this, SLOT(showRadDialog(bool)));
+    connect(radForm, SIGNAL(shown(bool)), ui->radButton, SLOT(setChecked(bool)));
     connect(radForm->searchButton(), SIGNAL(clicked()), this, SLOT(searchRad()));
+    connect(radForm->searchAndCloseButton(), SIGNAL(clicked()), this, SLOT(searchRadAndClose()));
     ui->backButton->setShortcut(QKeySequence(Qt::ALT + Qt::Key_Left));
     ui->forthButton->setShortcut(QKeySequence(Qt::ALT + Qt::Key_Right));
     backIcon = QIcon("icons/left.png");
@@ -35,15 +37,17 @@ void SearchBar::movePopup(QMoveEvent *)
     radForm->moveEvent();
 }
 
-
-void SearchBar::showRadDialog()
+void SearchBar::keyPressEvent(QKeyEvent *e)
 {
-    static bool visible = false;
-    if(visible)
-        radForm->hide();
+    if(e->key() == Qt::Key_Escape && radForm->isVisible())
+        ui->radButton->toggle();
     else
-        radForm->show();
-    visible = !visible;
+        QWidget::keyPressEvent(e);
+}
+
+void SearchBar::showRadDialog(bool show)
+{
+    radForm->setVisible(show);
 }
 
 void SearchBar::searchRad()
@@ -61,6 +65,13 @@ void SearchBar::searchRad()
         searchQuery.remove(searchQuery.length()-1, 1);
     ui->searchLine->setText(searchQuery);
     search();
+}
+
+void SearchBar::searchRadAndClose()
+{
+    searchRad();
+    if(radForm->isVisible())
+        ui->radButton->toggle();
 }
 
 void SearchBar::search()

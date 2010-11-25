@@ -30,11 +30,13 @@ public:
 public slots:
     void search();
     void updateBackAndForth();
-    void showRadDialog();
+    void showRadDialog(bool);
     void searchRad();
+    void searchRadAndClose();
 
 protected:
-    void changeEvent(QEvent *e);
+    virtual void changeEvent(QEvent *);
+    virtual void keyPressEvent(QKeyEvent *);
 
 private:
     Ui::SearchBar *ui;

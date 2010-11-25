@@ -21,6 +21,7 @@ public:
 public slots:
     void search(const QString &);
     void searchRadical(const QString &);
+    void searchComponent(const QString &);
 
 protected:
     void changeEvent(QEvent *e);

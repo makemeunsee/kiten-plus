@@ -28,17 +28,28 @@ void CheckableLabel::mouseReleaseEvent(QMouseEvent *)
     if(clickingOnMe)
     {
         clickingOnMe = false;
-        checked = !checked;
-        if(checked)
-            palette.setColor(QPalette::Window, checkedColor);
-        else
-            palette.setColor(QPalette::Window, uncheckedColor);
-        setPalette(palette);
-        emit checkedSignal(checked);
+        toggle();
     }
+}
+
+void CheckableLabel::toggle()
+{
+    checked = !checked;
+    if(checked)
+        palette.setColor(QPalette::Window, checkedColor);
+    else
+        palette.setColor(QPalette::Window, uncheckedColor);
+    setPalette(palette);
+    emit checkedSignal(checked);
 }
 
 bool CheckableLabel::isChecked()
 {
     return checked;
+}
+
+void CheckableLabel::setChecked(bool b)
+{
+    if(b != checked)
+        toggle();
 }

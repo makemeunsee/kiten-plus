@@ -46,6 +46,7 @@ KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB &kanjiDB) :
     if(k->getClassicalRadical() > 0)
     {
         updateLabel(ui->radClasLabel, kanjiDB.getRadicalById(k->getClassicalRadical())->getLiteral());
+        ui->radClasLabel->setToolTip("n."+QString::number(k->getClassicalRadical()));
         connect(ui->radClasLabel, SIGNAL(mouseClicked(const QString &)), this, SLOT(searchRadical(const QString &)));
     }
     else
@@ -90,6 +91,14 @@ KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB &kanjiDB) :
         }
         s_names.resize(s_names.size()-1);;
         updateLabel(ui->nameRadLabel, s_names);
+    }
+
+    foreach(Unicode u, k->getComponents())
+    {
+        SearchableLabel *l = new SearchableLabel(kanjiDB.getComponent(u)->getLiteral());
+        l->setTextInteractionFlags(Qt::TextSelectableByMouse | Qt::LinksAccessibleByMouse);
+        connect(l, SIGNAL(mouseClicked(const QString &)), this, SLOT(searchComponent(const QString &)));
+        ui->componentsLayout->insertWidget(0, l);
     }
 
     updateLabel(ui->ucsLabel, QString::number(k->getUnicode(), 16));
@@ -147,6 +156,12 @@ void KanjiDetails::searchRadical(const QString &s)
 {
     searchWindow->search(QString("radical=")+s);
 }
+
+void KanjiDetails::searchComponent(const QString &s)
+{
+    searchWindow->search(QString("component=")+s);
+}
+
 
 void KanjiDetails::changeEvent(QEvent *e)
 {

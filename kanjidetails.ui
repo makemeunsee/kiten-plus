@@ -76,7 +76,20 @@
      <item>
       <layout class="QHBoxLayout" name="componentsLayout">
        <item>
-        <spacer name="componentsSpacer">
+        <spacer name="componentSpacerLeft">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <spacer name="componentSpacerRight">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
          </property>

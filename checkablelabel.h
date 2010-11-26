@@ -11,6 +11,7 @@ public:
     explicit CheckableLabel(const QString &text, QWidget *parent = 0, Qt::WindowFlags f = 0);
     bool isChecked();
     void setChecked(bool);
+    void setIconTooltip(const QString &);
 
 protected:
     virtual void mousePressEvent(QMouseEvent *ev);
@@ -29,7 +30,6 @@ private:
     QPalette palette;
     QColor checkedColor;
     QColor uncheckedColor;
-
 };
 
 #endif // CHECKABLELABEL_H

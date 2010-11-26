@@ -19,7 +19,9 @@ SOURCES += main.cpp \
     radicalselectionform.cpp \
     flowlayout.cpp \
     checkablelabel.cpp \
-    preferencesdialog.cpp
+    preferencesdialog.cpp \
+    partselectionform.cpp \
+    componentselectionform.cpp
 HEADERS += mainwindow.h \
     kanjidetails.h \
     tests/kanjidetailsscrollareatestwindow.h \
@@ -34,12 +36,15 @@ HEADERS += mainwindow.h \
     radicalselectionform.h \
     flowlayout.h \
     checkablelabel.h \
-    preferencesdialog.h
+    preferencesdialog.h \
+    partselectionform.h \
+    componentselectionform.h
 FORMS += kanjidetails.ui \
     readingmeaninggroupwidget.ui \
     searchbar.ui \
     radicalselectionform.ui \
-    preferencesdialog.ui
+    preferencesdialog.ui \
+    componentselectionform.ui
 win32 { 
     debug:LIBS += -L../JapaneseDB/debug \
         -lJapaneseDB

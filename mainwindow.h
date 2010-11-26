@@ -61,6 +61,7 @@ private:
     QVBoxLayout *resultLayout;
 
     QIcon icon;
+    QIcon prefIcon;
 
     static const int searchLimit;
 };

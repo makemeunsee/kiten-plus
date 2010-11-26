@@ -53,3 +53,8 @@ void CheckableLabel::setChecked(bool b)
     if(b != checked)
         toggle();
 }
+
+void CheckableLabel::setIconTooltip(const QString &s)
+{
+    //TODO
+}

@@ -1,62 +1,39 @@
 #ifndef RADICALSELECTIONFORM_H
 #define RADICALSELECTIONFORM_H
 
-#include <QWidget>
-#include <QMap>
-#include <QPushButton>
-#include <QLabel>
-#include "flowlayout.h"
-#include "../JapaneseDB/kanjidb.h"
+#include "partselectionform.h"
 #include "checkablelabel.h"
 
 namespace Ui {
     class RadicalSelectionForm;
 }
 
-class RadicalSelectionForm : public QWidget
+class RadicalSelectionForm : public PartSelectionForm
 {
     Q_OBJECT
 
 public:
-    explicit RadicalSelectionForm(QWidget *radButton, QWidget *parent = 0);
-    ~RadicalSelectionForm();
-    void setKanjiDB(const KanjiDB &kanjiDB);
-    const QPushButton *searchButton() const;
-    const QPushButton *searchAndCloseButton() const;
-    void moveEvent();
-    QList<QString> selectedComponents() const;
+    explicit RadicalSelectionForm(QPushButton *triggerButton, QWidget *parent = 0);
+    virtual ~RadicalSelectionForm();
+    virtual void setKanjiDB(const KanjiDB &);
+    virtual const QPushButton *searchButton() const;
+    virtual const QPushButton *searchAndCloseButton() const;
+    virtual QList<QString> selectedComponents() const;
+    virtual const QString &getSearchKey() const;
 
 public slots:
     void sortRadicalsByIndex(bool);
     void limitToRad(bool);
 
-signals:
-    void shown(bool);
-
 protected:
-    virtual void moveEvent(QMoveEvent *);
-    virtual void showEvent(QShowEvent *);
-    virtual void closeEvent(QCloseEvent *);
-    virtual void hideEvent(QHideEvent *);
-    virtual void keyPressEvent(QKeyEvent *);
+    virtual void clearSelection();
+    virtual void clearLayout();
 
 private:
-    void clearSelection();
-    void clearLayout();
-    void putInPlace();
-
     Ui::RadicalSelectionForm *ui;
-    bool kanjiDBSet;
-    QFont font;
-    QFont strokeFont;
-    QColor strokeBackground;
-    QPalette strokePalette;
-    FlowLayout *radLayout;
     QMap<unsigned int, CheckableLabel *> radButtonsById;
     QMap<unsigned int, QList<CheckableLabel *> *> radButtonsByStrokes;
-    QMap<unsigned int, QWidget *> strokeStones;
-
-    QWidget *radButtonRef;
+    FlowLayout *radLayout;
 };
 
 #endif // RADICALSELECTIONFORM_H

@@ -8,14 +8,19 @@ SearchBar::SearchBar(History &h, MainWindow *parent) :
 {
     ui->setupUi(this);
     radForm = new RadicalSelectionForm(ui->radButton, this);
+    compForm = new ComponentSelectionForm(ui->compButton, this);
     searchWindow = parent;
     connect(ui->searchLine, SIGNAL(returnPressed()), this, SLOT(search()));
     connect(ui->backButton, SIGNAL(clicked()), searchWindow, SLOT(back()));
     connect(ui->forthButton, SIGNAL(clicked()), searchWindow, SLOT(forth()));
     connect(ui->radButton, SIGNAL(toggled(bool)), this, SLOT(showRadDialog(bool)));
+    connect(ui->compButton, SIGNAL(toggled(bool)), this, SLOT(showCompDialog(bool)));
     connect(radForm, SIGNAL(shown(bool)), ui->radButton, SLOT(setChecked(bool)));
     connect(radForm->searchButton(), SIGNAL(clicked()), this, SLOT(searchRad()));
     connect(radForm->searchAndCloseButton(), SIGNAL(clicked()), this, SLOT(searchRadAndClose()));
+    connect(compForm, SIGNAL(shown(bool)), ui->compButton, SLOT(setChecked(bool)));
+    connect(compForm->searchButton(), SIGNAL(clicked()), this, SLOT(searchComp()));
+    connect(compForm->searchAndCloseButton(), SIGNAL(clicked()), this, SLOT(searchCompAndClose()));
     ui->backButton->setShortcut(QKeySequence(Qt::ALT + Qt::Key_Left));
     ui->forthButton->setShortcut(QKeySequence(Qt::ALT + Qt::Key_Right));
     backIcon = QIcon("icons/left.png");
@@ -35,12 +40,18 @@ SearchBar::~SearchBar()
 void SearchBar::movePopup(QMoveEvent *)
 {
     radForm->moveEvent();
+    compForm->moveEvent();
 }
 
 void SearchBar::keyPressEvent(QKeyEvent *e)
 {
-    if(e->key() == Qt::Key_Escape && radForm->isVisible())
-        ui->radButton->toggle();
+    if(e->key() == Qt::Key_Escape)
+    {
+        if(radForm->isVisible())
+            ui->radButton->toggle();
+        if(compForm->isVisible())
+            ui->compButton->toggle();
+    }
     else
         QWidget::keyPressEvent(e);
 }
@@ -50,14 +61,29 @@ void SearchBar::showRadDialog(bool show)
     radForm->setVisible(show);
 }
 
+void SearchBar::showCompDialog(bool show)
+{
+    compForm->setVisible(show);
+}
+
 void SearchBar::searchRad()
+{
+    search(radForm);
+}
+
+void SearchBar::searchComp()
+{
+    search(compForm);
+}
+
+void SearchBar::search(const PartSelectionForm *form)
 {
     ui->searchLine->setHistoryMode();
     ui->searchLine->clear();
-    QString searchQuery("");
-    foreach(QString comp, radForm->selectedComponents())
+    QString searchQuery;
+    foreach(QString comp, form->selectedComponents())
     {
-        searchQuery.append(KanjiDB::radicalKey);
+        searchQuery.append(form->getSearchKey());
         searchQuery.append(comp);
         searchQuery.append("&");
     }
@@ -69,9 +95,19 @@ void SearchBar::searchRad()
 
 void SearchBar::searchRadAndClose()
 {
-    searchRad();
-    if(radForm->isVisible())
-        ui->radButton->toggle();
+    searchAndCloseForm(radForm);
+}
+
+void SearchBar::searchCompAndClose()
+{
+    searchAndCloseForm(compForm);
+}
+
+void SearchBar::searchAndCloseForm(PartSelectionForm *form)
+{
+    search(form);
+    if(form->isVisible())
+        form->getButtonRef()->toggle();
 }
 
 void SearchBar::search()
@@ -123,15 +159,14 @@ void SearchBar::lock(bool lock)
     ui->backButton->setEnabled(!lock);
     ui->forthButton->setEnabled(!lock);
     ui->searchLine->setEnabled(!lock);
-//    ui->stopButton->setEnabled(lock);
 }
 
-RadicalSelectionForm *SearchBar::radicalSelectionForm()
+PartSelectionForm *SearchBar::radicalSelectionForm()
 {
     return radForm;
 }
 
-//const QPushButton *SearchBar::stopButton()
-//{
-//    return ui->stopButton;
-//}
+PartSelectionForm *SearchBar::componentSelectionForm()
+{
+    return compForm;
+}

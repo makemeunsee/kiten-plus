@@ -27,6 +27,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
 {
     prefDial = new PreferencesDialog(this);
     icon = QIcon("icons/katen.png");
+    prefIcon = QIcon("icons/tool.png");
     setWindowIcon(icon);
     buffer = new ResultsBuffer(history);
     createWidgets();
@@ -97,6 +98,7 @@ void MainWindow::readResources()
 
         statusBar()->showMessage(tr("File loaded"), 2000);
         searchBar->radicalSelectionForm()->setKanjiDB(kanjidic);
+        searchBar->componentSelectionForm()->setKanjiDB(kanjidic);
         QFile historyFile(resourceDir.absolutePath().append("/").append(historyFilename));
         historyFullPath = historyFile.fileName();
         if (historyFile.open(QIODevice::ReadOnly)) {
@@ -145,7 +147,7 @@ void MainWindow::createWidgets()
     searchBar = new SearchBar(history, this);
     connect(buffer, SIGNAL(changed()), searchBar, SLOT(updateBackAndForth()));
 
-    QPushButton *preferences = new QPushButton("P");
+    QPushButton *preferences = new QPushButton(prefIcon, "");
     connect(preferences, SIGNAL(clicked()), this, SLOT(showPrefs()));
 
     QHBoxLayout *upperLayout = new QHBoxLayout();

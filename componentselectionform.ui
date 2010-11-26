@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>RadicalSelectionForm</class>
- <widget class="QWidget" name="RadicalSelectionForm">
+ <class>ComponentSelectionForm</class>
+ <widget class="QWidget" name="ComponentSelectionForm">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -11,17 +11,17 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Radical search</string>
+   <string>Component search</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="0" column="0">
     <widget class="QLabel" name="selectLabel">
      <property name="text">
-      <string>Select radical</string>
+      <string>Select component</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="3" colspan="5">
+   <item row="0" column="1" colspan="7">
     <spacer name="topSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -35,21 +35,7 @@
     </spacer>
    </item>
    <item row="1" column="0" colspan="8">
-    <widget class="QWidget" name="radicalContainer" native="true"/>
-   </item>
-   <item row="0" column="1">
-    <widget class="QCheckBox" name="onlyRadBox">
-     <property name="text">
-      <string>Limit to classical radicals</string>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="2">
-    <widget class="QCheckBox" name="sortBox">
-     <property name="text">
-      <string>Sort by index</string>
-     </property>
-    </widget>
+    <widget class="QWidget" name="componentContainer" native="true"/>
    </item>
    <item row="2" column="0" colspan="8">
     <layout class="QHBoxLayout" name="bottomLayout">

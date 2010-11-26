@@ -145,8 +145,50 @@
        <height>31</height>
       </size>
      </property>
+     <property name="toolTip">
+      <string>Radical selection</string>
+     </property>
      <property name="text">
-      <string>Rad</string>
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>icons/rad.png</normaloff>icons/rad.png</iconset>
+     </property>
+     <property name="checkable">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QPushButton" name="compButton">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>31</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>31</width>
+       <height>31</height>
+      </size>
+     </property>
+     <property name="toolTip">
+      <string>Component selection</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset>
+       <normaloff>icons/comp.png</normaloff>icons/comp.png</iconset>
      </property>
      <property name="checkable">
       <bool>true</bool>

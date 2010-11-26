@@ -98,7 +98,7 @@ KanjiDetails::KanjiDetails(MainWindow *parent, Kanji *k, KanjiDB &kanjiDB) :
         SearchableLabel *l = new SearchableLabel(kanjiDB.getComponent(u)->getLiteral());
         l->setTextInteractionFlags(Qt::TextSelectableByMouse | Qt::LinksAccessibleByMouse);
         connect(l, SIGNAL(mouseClicked(const QString &)), this, SLOT(searchComponent(const QString &)));
-        ui->componentsLayout->insertWidget(0, l);
+        ui->componentsLayout->insertWidget(1, l);
     }
 
     updateLabel(ui->ucsLabel, QString::number(k->getUnicode(), 16));

@@ -58,11 +58,15 @@ void SearchBar::keyPressEvent(QKeyEvent *e)
 
 void SearchBar::showRadDialog(bool show)
 {
+    if(compForm->isVisible())
+        compForm->setVisible(false);
     radForm->setVisible(show);
 }
 
 void SearchBar::showCompDialog(bool show)
 {
+    if(radForm->isVisible())
+        radForm->setVisible(false);
     compForm->setVisible(show);
 }
 

@@ -32,6 +32,10 @@ protected:
     virtual void clearSelection() = 0;
     virtual void clearLayout() = 0;
     virtual void putInPlace();
+    virtual void mouseMoveEvent(QMouseEvent *);
+    virtual void mousePressEvent(QMouseEvent *);
+    virtual void mouseReleaseEvent(QMouseEvent *);
+    virtual QRect bottomRightCorner();
 
     bool kanjiDBSet;
     QFont font;
@@ -40,6 +44,8 @@ protected:
     QPalette strokePalette;
     QMap<unsigned int, QWidget *> strokeStones;
     QPushButton *triggerButtonRef;
+    bool clickingOnMe;
+    QPoint lastPoint;
 };
 
 #endif // PARTSELECTIONFORM_H
